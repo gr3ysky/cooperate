@@ -13,6 +13,7 @@
                 <div class="col-sm-10">
                     <form:input cssClass="form-control" type="email" path="email"/>
                     <form:errors path="email"/>
+
                 </div>
             </div>
             <div class="form-group">
