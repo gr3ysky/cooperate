@@ -1,0 +1,96 @@
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#login-form{
+   margin: 0 auto;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists
+   will truncate terms that are too long to fit in the left column
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+div[role='row'] div:last-child,tr[role='row'] td:last-child {
+    text-align: center;
+}
+div[role='row'] div:last-child button.btn ,tr[role='row'] td:last-child button.btn{
+    margin: 5px 5px 0;
+}
+
+.toolbar-container {
+    margin: 5px 10px;
+}
+/*.jqx-input:hover,.jqx-input:focus {
+    border: 1px solid #1FAEFF;
+}*/
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -ms-animation: spin .7s infinite linear;
+    -webkit-animation: spinw .7s infinite linear;
+    -moz-animation: spinm .7s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spinw {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spinm {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+.margin-bottom-10{
+    margin-bottom:10px;
+}
+.ks-autocomplete {
+    display: inline-block !important;
+}
+
+.autoCompleteListItem a{
+    cursor: pointer;
+    text-decoration: none !important;
+}
+.autoCompleteListItem a:hover {
+    background-color: #e9f7fe;
+}
+/*grid row custom background colors*/
+.grid-custom-row-color-red > [role='gridcell']{
+    background-color: rgba(231, 76, 60,.4);
+}
+
+.grid-custom-row-color-yellow > [role='gridcell']{
+    background-color:rgba(244, 166, 42, .4);
+}
