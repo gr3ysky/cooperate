@@ -1,17 +1,13 @@
 package demo.web.core;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 @EnableWebMvc
 @ControllerAdvice
 public class GlobalErrorHandler  implements HandlerExceptionResolver {
@@ -50,5 +46,5 @@ public class GlobalErrorHandler  implements HandlerExceptionResolver {
     protected enum ResponseType{
         Html,
         Json
-    };
+    }
 }

@@ -1,10 +1,12 @@
 package demo.web.viewmodels;
 
+import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class LoginModel {
     @NotNull
+    @Resource(name = "messages", mappedName = "label.email")
     private String email;
     @NotNull
     @Size(min=6)

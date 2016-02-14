@@ -10,7 +10,7 @@ public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET,produces = "text/html")
     public ModelAndView index(){
         ModelAndView model= new ModelAndView("home/index");
-        model.addObject("a","b");
+        model.addObject("a", "yiğit");
         return model;
     }
 }

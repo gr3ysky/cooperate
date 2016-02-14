@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <!-- Labels -->
+    <entry key="label.email">Email</entry>
+    <entry key="label.password">Şifre</entry>
+    <entry key="label.rememberMe">Beni Hatırla</entry>
+    <entry key="label.signIn">Giriş Yap</entry>
+    <!-- Page descriptions -->
+    <entry key="page.description.login.index">Lütfen email ve şifrenizi giriniz.</entry>
+</properties>
