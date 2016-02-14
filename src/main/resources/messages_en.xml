@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <!-- Labels -->
+    <entry key="label.email">Email</entry>
+    <entry key="label.password">Password</entry>
+    <entry key="label.rememberMe">Remember Me</entry>
+    <entry key="label.signIn">Sign In</entry>
+    <!-- Page descriptions -->
+    <entry key="page.description.login.index">Please provide ur email and password.</entry>
+    <!--Errors-->
+    <entry key="error.loginfailed">Login failed!</entry>
+</properties>

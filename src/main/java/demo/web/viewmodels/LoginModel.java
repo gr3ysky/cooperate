@@ -1,14 +1,21 @@
 package demo.web.viewmodels;
 
+import org.hibernate.validator.constraints.Email;
+
+import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class LoginModel {
     @NotNull
+    @Email
+    @Resource(name = "messages", mappedName = "label.email")
     private String email;
     @NotNull
     @Size(min=6)
+    @Resource(name = "messages", mappedName = "label.password")
     private String password;
+    @Resource(name = "messages", mappedName = "label.rememberMe")
     private Boolean rememberMe;
 
     public Boolean getRememberMe() {
