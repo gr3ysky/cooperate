@@ -1,9 +1,8 @@
 # Intellij
 .idea/
 *.iml
-*.iws
 
-# Maven
+
 web/WEB-INF/appsettings.config
 target/
 out/
