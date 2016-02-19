@@ -3,7 +3,7 @@ package demo.app.data.read;
 /**
  * Created by taner on 19.02.2016.
  */
-class SqlParameterDefination {
+class SqlParameterDefinition {
     private String parameterName;
     private int ordinal;
     private String type;
