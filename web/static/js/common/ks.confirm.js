@@ -44,27 +44,26 @@
 
         $modalElem.modal("show");
 
-    }
-
+    };;
 
 
     //Private fonksiyonlar
     function GetTemplate(params) {
         return '<div class="modal-dialog modal-sm">'
-                + '<div class="modal-content">'
-                    + '<div class="modal-header">'
-                        + '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
-                        + '<h4 class="modal-title" id="myModalLabel">' + params.title + '</h4>'
-                    + '</div>'
-              + '<div class="modal-body">'
-              + params.message
-              + '</div>'
-              + '<div class="modal-footer">'
-              + '<button type="button" id="cancelButton" class="btn btn-default" data-dismiss="modal">' + params.cancelText + '</button>'
-              + '<button type="button" id="confirmButton" class="btn btn-primary">' + params.confirmText + '</button>'
-              + '</div>'
-          + '</div>'
-         + '</div>';
+            + '<div class="modal-content">'
+            + '<div class="modal-header">'
+            + '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+            + '<h4 class="modal-title" id="myModalLabel">' + params.title + '</h4>'
+            + '</div>'
+            + '<div class="modal-body">'
+            + params.message
+            + '</div>'
+            + '<div class="modal-footer">'
+            + '<button type="button" id="cancelButton" class="btn btn-default" data-dismiss="modal">' + params.cancelText + '</button>'
+            + '<button type="button" id="confirmButton" class="btn btn-primary">' + params.confirmText + '</button>'
+            + '</div>'
+            + '</div>'
+            + '</div>';
     }
 }(KS));
 

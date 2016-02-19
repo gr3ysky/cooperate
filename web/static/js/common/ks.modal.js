@@ -1,5 +1,4 @@
-﻿
-(function (mdl) {
+﻿(function (mdl) {
     mdl.Modal = {};
 
     mdl.Modal.Instance = {};
@@ -9,8 +8,10 @@
         var params = {
             width: options.width || 800,
             height: options.height || 450,
-            beforeOpen: options.beforeOpen || function () { },
-            onComplete: options.onComplete || function () { },
+            beforeOpen: options.beforeOpen || function () {
+            },
+            onComplete: options.onComplete || function () {
+            },
             onClose: function (modalId) {
                 if (options.onClose)
                     options.onClose();
@@ -35,8 +36,13 @@
             }
             if (params.width && params.width != -1) {
                 $("[id^=KSModal] .modal-dialog:first", $modalWrapper).last().width(params.width);
-                $("[id^=KSModal] .modal-dialog:first .modal-content", $modalWrapper).last().css({ "max-height": params.height });
-                $("[id^=KSModal] .modal-dialog:first .modal-content:last .modal-body .modal-content-wrap", $modalWrapper).css({ "max-height": params.height - 151, "overflow-y": "auto", "overflow-x": "hidden" }); /*65px header + 56px footer for the modal +30padding*/
+                $("[id^=KSModal] .modal-dialog:first .modal-content", $modalWrapper).last().css({"max-height": params.height});
+                $("[id^=KSModal] .modal-dialog:first .modal-content:last .modal-body .modal-content-wrap", $modalWrapper).css({
+                    "max-height": params.height - 151,
+                    "overflow-y": "auto",
+                    "overflow-x": "hidden"
+                });
+                /*65px header + 56px footer for the modal +30padding*/
             }
 
 
@@ -54,11 +60,11 @@
 
     mdl.Modal.Close = function (modalId) {
         mdl.Modal.Instance.modal('hide');
-    }
+    };;
 
     mdl.Modal.Add = function (obj) {
         KS.Modals.push(obj);
-    }
+    };;
     mdl.Modal.RemoveLast = function () {
         var lastIndex = KS.Modals.length - 1;
         if (lastIndex == -1) return;

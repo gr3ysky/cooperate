@@ -13,10 +13,10 @@
             isFormData = true;
             ctype = false;
         }
-        console.log("isformData",isFormData)
+        console.log("isformData", isFormData);;
         console.log(data);
         $.ajax(url, {
-            processData: isFormData==true? false:true,
+            processData: isFormData == true ? false : true,
             data: data,
             global: true,
             type: 'POST',
@@ -102,7 +102,7 @@
         $obj.prepend("<i class='fa fa-refresh fa-spin'></i>");
         obj.disabled = true;
 
-    }
+    };;
     ks.Ajax.RemoveLoading = function (obj) {
         var $obj = $(obj);
         //if (!$obj.is("button")) return;
@@ -127,7 +127,7 @@
                 ks.PageMessage.Clear();
             });
         }, 4000);
-    }
+    };;
 
     ks.PageMessage.Clear = function () {
         $("#page-message-wrap").html("").removeClass("not-empty").addClass("empty").addClass("hide");
@@ -139,22 +139,22 @@
     var toastrOptions = {
         positionClass: "toast-top-right",
         "preventDuplicates": true
-    }
+    };;
     ks.Success = function (message, title, options) {
         toastr.success(message, title, extendedOptions(options));
-    }
+    };;
 
     ks.Warning = function (message, title, options) {
         toastr.warning(message, title, extendedOptions(options));
-    }
+    };;
 
     ks.Info = function (message, title, options) {
         toastr.info(message, title, extendedOptions(options));
-    }
+    };;
 
     ks.Error = function (message, title, options) {
         toastr.error(message, title, extendedOptions(options));
-    }
+    };;
 
     function extendedOptions(options) {
         if (options) {
@@ -205,7 +205,7 @@
         }
         return data;
 
-    }
+    };;
 
     ks.PopupConfirm = function (message, title, confirmFunc) {
 
@@ -215,15 +215,15 @@
             confirmFunc: confirmFunc
 
         });
-    }
+    };;
     ks.ParseDate = function (strDate) {
         if (strDate) {
             var from = strDate.split(".");
             f = new Date(from[2].substring(0, 4), from[1] - 1, from[0]);
             return f;
         }
-    }
-    ks.FormatDateToString = function(date) {
+    };;
+    ks.FormatDateToString = function (date) {
         var dd = date.getDate();
         var mm = date.getMonth() + 1; //January is 0!
         var yyyy = date.getFullYear();
@@ -237,13 +237,13 @@
         }
 
         return dd + '.' + mm + '.' + yyyy;
-        
+
     };
     ks.InitPage = function () {
-      
 
-        $("select[multiple]").chosen({ width: '100%' });
-       // $('#jqxNumberInput').jqxNumberInput({ max:99999.99, min:0 });
+
+        $("select[multiple]").chosen({width: '100%'});
+        // $('#jqxNumberInput').jqxNumberInput({ max:99999.99, min:0 });
         // $(".numericInput").each(function (i, e) {
         //     console.log(e);
         //     //The field must be a number hatası için silindi.
@@ -252,13 +252,13 @@
         //     var min=$(e).data("val-range-min");
         //     if (min) {
         //         $.extend(opts, { min: min });
-                
+
         //     }
         //     var max=$(e).data("val-range-max");
         //     if (max){
         //         $.extend(opts, { max: max });
         //     }
-        
+
         //     $(e).jqxNumberInput(opts);
         //});
     }
@@ -299,7 +299,8 @@
             resultsBgColor: '#fff',
             resultsBorderColor: ' #c0c0c0',
             resultsMaxHeigth: "120px",
-            afterSelect: function () { }
+            afterSelect: function () {
+            }
         };
         var $this = $(this);
         var isWaiting = false;
@@ -335,6 +336,7 @@
             $resultWrap.remove();
             $this.next('.autoCompleteLoading').hide();
         }
+
         function search() {
             if (isWaiting == false) {
                 clearTimeout(timeOut);
@@ -342,7 +344,7 @@
             }
             removeResultsWrap();
             isWaiting = false;
-            $.extend(defaults.data, { searchText: $this.val() });
+            $.extend(defaults.data, {searchText: $this.val()});
             $this.next('.autoCompleteLoading').show();
             var request = $.ajax({
                 url: url,
@@ -358,10 +360,12 @@
                 $this.next('.autoCompleteLoading').hide();
             });
         }
+
         function showResults(json) {
             prepareResultsWrapper(json);
 
         }
+
         function prepareResultsWrapper(json) {
             var html = "<div class='autoCompleteResultsWrap' style='position:absolute; display:none; padding:5px; z-index:1000; border-radius:2px;'>";
             var liHtml = "<ul class='autoCompleteResultList'>";
@@ -407,6 +411,7 @@
 
             $resultWrap.slideDown();
         }
+
         function selectItem(e) {
             $this.val($(e).html());
             var control = $("#" + controlId);

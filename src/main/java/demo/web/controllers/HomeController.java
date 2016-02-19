@@ -12,9 +12,9 @@ public class HomeController {
     @Autowired
     private Mediator _mediator;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET,produces = "text/html")
-    public ModelAndView index(){
-        ModelAndView model= new ModelAndView("home/index");
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "text/html")
+    public ModelAndView index() {
+        ModelAndView model = new ModelAndView("home/index");
         model.addObject("a", "yiğit");
         _mediator.send(new TestCommand(5));
         TestResponse response = _mediator.request(new TestRequest());

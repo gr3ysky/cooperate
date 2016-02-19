@@ -12,7 +12,7 @@ public class LoginModel {
     @Resource(name = "messages", mappedName = "label.email")
     private String email;
     @NotNull
-    @Size(min=6)
+    @Size(min = 6)
     @Resource(name = "messages", mappedName = "label.password")
     private String password;
     @Resource(name = "messages", mappedName = "label.rememberMe")

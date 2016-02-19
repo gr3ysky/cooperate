@@ -1,12 +1,12 @@
 ﻿/// <reference path="ks.base.js" />
 /// <reference path="ks.common.js" />
 
-(function(form) {
+(function (form) {
     form.Serialize = function (formId) {
         var $form = $("#" + formId);
-        var object; 
+        var object;
         if ($form.attr("enctype") == "multipart/form-data") {
-            var formData= new FormData();
+            var formData = new FormData();
             if (formData) {
                 ///---- başlangıç
                 var input, inputName, inputVal;
@@ -27,8 +27,8 @@
                                 formData.append(inputName, inputVal);
                                 break;
                             case 'file':
-                                console.log(console.log(input))
-                                if(document.getElementById(input.prop('id')).files[0]!==undefined)
+                                console.log(console.log(input));;
+                                if (document.getElementById(input.prop('id')).files[0] !== undefined)
                                     formData.append(inputName, document.getElementById(input.prop('id')).files[0]);
                                 break;
                             case 'password':
@@ -82,17 +82,17 @@
                 return formData;
                 ///---- bitiş
             }
-        } 
-       object = {};
+        }
+        object = {};
         var input, inputName, inputVal;
-        $("#"+formId).find('input').each(function () {
+        $("#" + formId).find('input').each(function () {
             input = $(this);
             inputName = input.prop('name');
             inputVal = input.val();
             if (inputName != "") {
                 switch (input.prop('type')) {
                     case 'hidden':
-                        if(input.prop('id'))
+                        if (input.prop('id'))
                             if (inputName && inputName != "") {
                                 object[inputName] = inputVal;
                                 break;
@@ -126,7 +126,7 @@
                 }
             }
         });
-        $("#"+formId).find('textarea').each(function () {
+        $("#" + formId).find('textarea').each(function () {
             input = $(this);
             inputName = input.prop('name');
             inputVal = input.val();
@@ -135,7 +135,7 @@
             }
         });
 
-        $("#"+formId).find('select').each(function () {
+        $("#" + formId).find('select').each(function () {
             input = $(this);
             inputName = input.prop('name');
             inputVal = input.val();
@@ -148,7 +148,7 @@
                 object[inputName] = inputVal;
             }
         });
-        console.log(object)
+        console.log(object);;
         if (object != {}) {
             return object;
         } else {
@@ -156,7 +156,7 @@
         }
 
     };
-    form.InitFilterForm = function (formId) {    
+    form.InitFilterForm = function (formId) {
         $("#" + formId).find("input,select,textarea,option").each(function (i, e) {
             $(e).attr("id", "Filter_" + $(e).attr("id"));
             $(e).attr("name", "Filter." + $(e).attr("name"));
@@ -185,7 +185,7 @@
             KS.Ajax.RemoveLoading(btn);
         }
 
-    }
+    };;
     form.Init = function (formId) {
     }
 

@@ -5,9 +5,9 @@
     Login
 </title>
 <body>
-    <div id="login-form" class="row">
+<div id="login-form" class="row">
     <div class="col-lg-push-4 col-xs-12 col-lg-3">
-<form:form modelAttribute="login" action="login" method="post" class="form-horizontal">
+        <form:form modelAttribute="login" action="login" method="post" class="form-horizontal">
             <div class="form-group">
                 <label for="email" class="col-sm-2 control-label"><spring:message code="label.email"/></label>
                 <div class="col-sm-10">

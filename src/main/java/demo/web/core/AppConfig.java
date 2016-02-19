@@ -8,9 +8,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 @EnableWebMvc
 public class AppConfig extends WebMvcConfigurerAdapter {
-   @Override
+    @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-       configurer.enable();
+        configurer.enable();
     }
 
 
