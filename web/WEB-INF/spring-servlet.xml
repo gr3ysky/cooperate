@@ -4,8 +4,8 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-    <context:component-scan base-package="demo.web.controllers"/>
-    <context:component-scan base-package="demo.infrastructure.mediation"/>
+    <context:component-scan base-package="cooperate.web.controllers"/>
+    <context:component-scan base-package="cooperate.infrastructure.mediation"/>
     <mvc:annotation-driven>
         <!-- register custom converter that returns UTF-8 encoded response-body by defualt -->
         <mvc:message-converters register-defaults="true">
@@ -20,7 +20,7 @@
         <property name="suffix" value=".jsp"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
     </bean>
-    <bean class="demo.web.core.GlobalErrorHandler "/>
+    <bean class="cooperate.web.core.GlobalErrorHandler "/>
     <bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -29,7 +29,7 @@
         <property name="cacheSeconds" value="0"/>
         <property name="fileEncodings" value="UTF-8"/>
     </bean>
-    <bean id="mediator" class="demo.infrastructure.mediation.Mediator"></bean>
+    <bean id="mediator" class="cooperate.infrastructure.mediation.Mediator"></bean>
     <bean id="localeResolver"
           class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
         <property name="defaultLocale" value="tr"/>
