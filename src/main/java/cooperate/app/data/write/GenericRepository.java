@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class Repository<T extends EntityBase> {
+public class GenericRepository<T extends EntityBase> {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -16,7 +16,7 @@ public class Repository<T extends EntityBase> {
     }
 
     private T findOne(String id) {
-        return (T) getCurrentSession().get(entityClass, id);
+        return getCurrentSession().get(entityClass, id);
     }
 
     public void create(T entity) {

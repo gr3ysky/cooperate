@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 public class LoginRequestHandler implements IHandleRequest<LoginRequest, LoginResponse> {
     @Autowired
     private UserReadRepository userReadRepository;
-
     public LoginResponse Handle(LoginRequest request) throws Exception {
         LoginDto dto = userReadRepository.login(request.getEmail(), request.getPassword());
         LoginResponse response = new LoginResponse();

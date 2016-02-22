@@ -1,17 +1,18 @@
-package cooperate.app.business.user;
+package cooperate.app.entity;
 
 import cooperate.app.business.base.EntityBase;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 @Table(appliesTo = "User")
 public class User extends EntityBase {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long UserId;
     private String FullName;
     private String Email;

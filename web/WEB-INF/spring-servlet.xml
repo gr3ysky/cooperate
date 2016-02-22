@@ -52,13 +52,16 @@
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
+        <property name="entityInterceptor">
+            <bean class="cooperate.app.data.write.PublishEventsInterceptor"></bean>
+        </property>
         <property name="annotatedPackages">
             <list>
                 <value>cooperate.app.data.write</value>
                 <value>cooperate.app.data.read</value>
             </list>
         </property>
-        <property name="packagesToScan" value="cooperate.app.business">
+        <property name="packagesToScan" value="cooperate.app.entity">
 
         </property>
         <property name="hibernateProperties">

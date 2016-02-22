@@ -1,8 +1,8 @@
 package cooperate.web.controllers;
 
+import cooperate.app.business.UserService;
 import cooperate.app.business.login.LoginRequest;
 import cooperate.app.business.login.LoginResponse;
-import cooperate.app.business.login.LoginService;
 import cooperate.web.viewmodels.LoginModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import java.util.Locale;
 @Controller
 public class LoginController extends BaseController {
     @Autowired
-    private LoginService loginService;
+    private UserService loginService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET, produces = "text/html")
     public ModelAndView login() {
