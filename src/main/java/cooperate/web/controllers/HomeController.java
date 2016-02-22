@@ -13,7 +13,7 @@ public class HomeController {
     private Mediator _mediator;
 
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = "text/html")
-    public ModelAndView index() {
+    public ModelAndView index() throws Exception {
         ModelAndView model = new ModelAndView("home/index");
         model.addObject("a", "yiğit");
         _mediator.send(new TestCommand(5));

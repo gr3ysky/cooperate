@@ -2,10 +2,8 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-    <context:component-scan base-package="cooperate.web.controllers"/>
-    <context:component-scan base-package="cooperate.infrastructure.mediation"/>
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
     <mvc:annotation-driven>
         <!-- register custom converter that returns UTF-8 encoded response-body by defualt -->
         <mvc:message-converters register-defaults="true">
@@ -29,7 +27,7 @@
         <property name="cacheSeconds" value="0"/>
         <property name="fileEncodings" value="UTF-8"/>
     </bean>
-    <bean id="mediator" class="cooperate.infrastructure.mediation.Mediator"></bean>
+    <!--<bean id="mediator" class="cooperate.infrastructure.mediation.Mediator"></bean>-->
     <bean id="localeResolver"
           class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
         <property name="defaultLocale" value="tr"/>
@@ -41,6 +39,43 @@
             <property name="paramName" value="locale"></property>
         </bean>
     </mvc:interceptors>
+    <!-- Configure annotated beans -->
+    <context:annotation-config/>
+    <tx:annotation-driven/>
 
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/cooperative_db"/>
+        <property name="username" value="root"/>
+        <property name="password" value="tt2006"/>
+    </bean>
 
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="annotatedPackages">
+            <list>
+                <value>cooperate.app.data.write</value>
+                <value>cooperate.app.data.read</value>
+            </list>
+        </property>
+        <property name="packagesToScan" value="cooperate.app.business">
+
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop
+                        key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect
+                </prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <context:component-scan base-package="cooperate.*"/>
+    <!--read repository beans-->
 </beans>

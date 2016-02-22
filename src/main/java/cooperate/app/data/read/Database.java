@@ -3,68 +3,75 @@ package cooperate.app.data.read;
 import org.hibernate.SessionFactory;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.PreDestroy;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Date;
+import java.util.*;
 
-class Database {
+@Repository
+public class Database {
     @Autowired
     private SessionFactory sessionFactory;
     private Connection connection;
     private HashMap<String, Object> outputvalues = new HashMap<String, Object>() {
     };
 
-    Database() {
-        this.connection = getConncetion();
-    }
 
     private static void setParameter(CallableStatement statement, String type, int ordinal, int size, Object value) throws Exception {
-        if (type == "INT" || type == "SMALLINT")
+        type = type.toUpperCase(Locale.ENGLISH);
+        if (type.equals("INT") || type.equals("SMALLINT")) {
             statement.setInt(ordinal, Integer.valueOf(value.toString()));
-        else if (type == "CHARACTER" || type == "VARCHAR" || type == "LONGVARCHAR")
+            return;
+        } else if (type.equals("CHARACTER") || type.equals("VARCHAR") || type.equals("LONGVARCHAR")) {
             statement.setString(ordinal, value.toString());
-        else if (type == "NUMERIC" || type == "DECIMAL")
+            return;
+        } else if (type.equals("NUMERIC") || type.equals("DECIMAL")) {
             statement.setBigDecimal(ordinal, BigDecimal.valueOf(Long.valueOf(value.toString())));
-        else if (type == "BIGINT")
+            return;
+        } else if (type.equals("BIGINT")) {
             statement.setLong(ordinal, Long.valueOf(value.toString()));
-        else if (type == "DATE")
+            return;
+        } else if (type.equals("DATE")) {
             statement.setDate(ordinal, Date.valueOf(value.toString()));
-        if (type == "BIT" && size == 1)
+            return;
+        } else if (type.equals("BIT") && size == 1) {
             statement.setBoolean(ordinal, Boolean.getBoolean(value.toString()));
-        if (type == "TINYINT" && size > 0)
+            return;
+        } else if (type.equals("TINYINT") && size > 0) {
             statement.setByte(ordinal, Byte.parseByte(value.toString()));
+            return;
+        }
         else
             throw new Exception(String.format("Parameter type is not implemented %s", type));
     }
 
     private static JDBCType getDbType(String type) throws Exception {
-        if (type == "INT")
+        type = type.toUpperCase(Locale.ENGLISH);
+        if (type.equals("INT"))
             return JDBCType.INTEGER;
-        else if (type == "SMALLINT")
+        else if (type.equals("SMALLINT"))
             return JDBCType.SMALLINT;
-        else if (type == "CHARACTER")
+        else if (type.equals("CHARACTER"))
             return JDBCType.CHAR;
-        else if (type == "VARCHAR")
+        else if (type.equals("VARCHAR"))
             return JDBCType.VARCHAR;
-        else if (type == "LONGVARCHAR")
+        else if (type.equals("LONGVARCHAR"))
             return JDBCType.LONGNVARCHAR;
-        else if (type == "NUMERIC")
+        else if (type.equals("NUMERIC"))
             return JDBCType.NUMERIC;
-        else if (type == "DECIMAL")
+        else if (type.equals("DECIMAL"))
             return JDBCType.DECIMAL;
-        else if (type == "BIGINT")
+        else if (type.equals("BIGINT"))
             return JDBCType.BIGINT;
-        else if (type == "BIT")
+        else if (type.equals("BIT"))
             return JDBCType.BIT;
-        else if (type == "TINYINT")
+        else if (type.equals("TINYINT"))
             return JDBCType.TINYINT;
-        else if (type == "DATE")
+        else if (type.equals("DATE"))
             return JDBCType.DATE;
         else
             throw new Exception(String.format("Dbtype %s is not implemented.", type));
@@ -79,7 +86,7 @@ class Database {
             sb.append("?,");
         }
         sb.deleteCharAt(sb.length() - 1);
-        sb.append("}");
+        sb.append(")}");
         return sb.toString();
     }
 
@@ -89,7 +96,14 @@ class Database {
             try {
                 Field field = clazz.getDeclaredField(fieldName);
                 field.setAccessible(true);
-                field.set(object, fieldValue);
+                if (field.getType().equals(boolean.class)) {
+                    if (fieldValue.toString().equals("1"))
+                        field.set(object, true);
+                    else
+                        field.set(object, false);
+                } else {
+                    field.set(object, fieldValue);
+                }
                 return true;
             } catch (NoSuchFieldException e) {
                 clazz = clazz.getSuperclass();
@@ -109,12 +123,11 @@ class Database {
     private List<SqlParameterDefinition> getParamterDefinitions(String procedure) throws SQLException {
         String sql = new StringBuilder().append("SELECT PARAMETER_NAME,PARAMETER_MODE, DATA_TYPE,ORDINAL_POSITION,CHARACTER_MAXIMUM_LENGTH")
                 .append(" FROM information_schema.parameters")
-                .append(" WHERE SPECIFIC_NAME = '?' AND ROUTINE_TYPE = 'PROCEDURE'")
+                .append(" WHERE SPECIFIC_NAME ='").append(procedure).append("' AND ROUTINE_TYPE = 'PROCEDURE'")
                 .append(" ORDER BY  ORDINAL_POSITION;").toString();
 
         Connection connection = getConncetion();
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, procedure);
         ResultSet resultSet = statement.executeQuery(sql);
         List<SqlParameterDefinition> parameterDefinationList = new ArrayList<SqlParameterDefinition>();
         while (resultSet.next()) {
@@ -127,7 +140,6 @@ class Database {
             parameterDefinationList.add(sqlParameterDefination);
         }
         resultSet.close();
-        connection.close();
         return parameterDefinationList;
     }
 
@@ -139,7 +151,7 @@ class Database {
         outputvalues = null;
     }
 
-    public <T> T exetuteScalar(String procedure, Object[] parameters) throws Exception {
+    public <T> T exetuteScalar(String procedure, Object... parameters) throws Exception {
         CallableStatement statement = getStatement(procedure, parameters);
         ResultSet rs = statement.executeQuery();
         T t = (T) rs.getObject(0);
@@ -149,7 +161,7 @@ class Database {
         return t;
     }
 
-    public <T> T exetuteReader(Class<T> clazz, String procedure, Object[] parameters) throws Exception {
+    public <T> T exetuteReader(Class<T> clazz, String procedure, Object... parameters) throws Exception {
         CallableStatement statement = getStatement(procedure, parameters);
         ResultSet rs = statement.executeQuery();
         T t = null;
@@ -172,7 +184,7 @@ class Database {
         }
     }
 
-    public <T> List<T> exetuteListReader(Class<T> clazz, String procedure, Object[] parameters) throws Exception {
+    public <T> List<T> exetuteListReader(Class<T> clazz, String procedure, Object... parameters) throws Exception {
         CallableStatement statement = getStatement(procedure, parameters);
         ResultSet rs = statement.executeQuery();
         List<T> list = new ArrayList<T>();
@@ -216,9 +228,9 @@ class Database {
         String type = sqlParameterDefinition.getType();
         int size = sqlParameterDefinition.getSize();
         int ordinal = sqlParameterDefinition.getOrdinal();
-        if (sqlParameterDefinition.getMode() == "IN") {
+        if (sqlParameterDefinition.getMode().equals("IN")) {
             setParameter(statement, type, ordinal, size, value);
-        } else if (sqlParameterDefinition.getMode() == "OUT") {
+        } else if (sqlParameterDefinition.getMode().equals("OUT")) {
             statement.registerOutParameter(sqlParameterDefinition.getOrdinal(), getDbType(type));
         } else { //INOUT
             statement.registerOutParameter(sqlParameterDefinition.getOrdinal(), getDbType(type));
