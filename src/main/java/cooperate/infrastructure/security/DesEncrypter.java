@@ -1,38 +1,46 @@
 package cooperate.infrastructure.security;
 
+import cooperate.infrastructure.constant.CommonConstants;
+
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.util.Base64;
 
 public class DesEncrypter {
-    Cipher ecipher;
+    static String INITIALIZATION_VECTOR = "AODVNUASDNVVAOVF";
 
-    Cipher dcipher;
+    public static String encrypt(String text) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, NoSuchProviderException, InvalidAlgorithmParameterException {
+        Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding", "SunJCE");
+        SecretKeySpec key = new SecretKeySpec(CommonConstants.CyrptoKey.getBytes("UTF-8"), "AES");
+        cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(INITIALIZATION_VECTOR.getBytes("UTF-8")));
+        //must be multiplier of 16
+        int mode16 = text.length() % 16;
+        for (int i = 0; i < 16 - mode16; i++) {
+            text += "\0";
+        }
+        byte[] encrypted = cipher.doFinal(text.getBytes("UTF-8"));
+        byte[] decoded = Base64.getEncoder().encode(encrypted);
 
-    public DesEncrypter(SecretKey key) throws Exception {
-        ecipher = Cipher.getInstance("DES");
-        dcipher = Cipher.getInstance("DES");
-        ecipher.init(Cipher.ENCRYPT_MODE, key);
-        dcipher.init(Cipher.DECRYPT_MODE, key);
+        return new String(decoded, "UTF-8");
+
     }
 
-    public String encrypt(String str) throws Exception {
-        // Encode the string into bytes using utf-8
-        byte[] utf8 = str.getBytes("UTF8");
+    public static String decrypt(String text) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException, NoSuchProviderException, UnsupportedEncodingException, InvalidAlgorithmParameterException {
 
-        // Encrypt
-        byte[] enc = ecipher.doFinal(utf8);
-
-        // Encode bytes to base64 to get a string
-        return new sun.misc.BASE64Encoder().encode(enc);
-    }
-
-    public String decrypt(String str) throws Exception {
-        // Decode base64 to get bytes
-        byte[] dec = new sun.misc.BASE64Decoder().decodeBuffer(str);
-
-        byte[] utf8 = dcipher.doFinal(dec);
-
-        // Decode using utf-8
-        return new String(utf8, "UTF8");
+        byte[] decoded = Base64.getDecoder().decode(text.getBytes());
+        Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding", "SunJCE");
+        SecretKeySpec key = new SecretKeySpec(CommonConstants.CyrptoKey.getBytes("UTF-8"), "AES");
+        cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(INITIALIZATION_VECTOR.getBytes("UTF-8")));
+        String result = new String(cipher.doFinal(decoded), "UTF-8");
+        return result.trim();
     }
 }

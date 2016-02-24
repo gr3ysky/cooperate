@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -58,11 +56,8 @@ public class LoginController extends BaseController {
                 session.setAttribute(SessionConstants.User, login.getLoginDto());
                 if (loginModel.getRememberMe()) {
 
-                    SecretKey key = KeyGenerator.getInstance("DES").generateKey();
-                    DesEncrypter encrypter = new DesEncrypter(key);
-                    String encrypted = encrypter.encrypt(loginModel.getEmail());
+                    String encrypted = DesEncrypter.encrypt(loginModel.getEmail());
                     Cookie rememberMeCookie = new Cookie(SessionConstants.RememberMeCookieName, encrypted);
-                    rememberMeCookie.setSecure(true);
                     rememberMeCookie.setMaxAge(100000);
                     response.addCookie(rememberMeCookie);
                 }

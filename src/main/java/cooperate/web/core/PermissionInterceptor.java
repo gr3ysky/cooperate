@@ -10,15 +10,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Created by taner on 23.02.2016.
- */
 public class PermissionInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     ApplicationContext context;
@@ -27,6 +22,8 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if (request.getServletPath().equals("/login"))
+            return super.preHandle(request, response, handler);
         HandlerMethod handlerMethod = (HandlerMethod) handler;
 
         HasPermission hasPermission = handlerMethod.getMethodAnnotation(HasPermission.class);
@@ -41,12 +38,11 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
                     }
                 }
                 if (authCookie != null) {
-                    SecretKey key = KeyGenerator.getInstance("DES").generateKey();
-                    DesEncrypter encrypter = new DesEncrypter(key);
-                    String email = encrypter.decrypt(authCookie.getValue());
-                    LoginDtoRequest loginDtoRequest = (LoginDtoRequest) context.getBean("loginRequest");
+                    String email = DesEncrypter.decrypt(authCookie.getValue());
+                    LoginDtoRequest loginDtoRequest = (LoginDtoRequest) context.getBean("loginDtoRequest");
                     loginDtoRequest.setEmail(email);
                     loginDto = userService.getUserByEmail(loginDtoRequest);
+                    if (loginDto == null) throw new Exception("UnauthorizedException");
                     request.getSession().setAttribute(SessionConstants.User, loginDto);
                 }
             }

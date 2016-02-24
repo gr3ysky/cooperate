@@ -31,7 +31,7 @@
     <bean id="localeResolver"
           class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
         <property name="defaultLocale" value="tr"/>
-        <property name="cookieName" value="myAppLocaleCookie"></property>
+        <property name="cookieName" value="_locale"></property>
         <property name="cookieMaxAge" value="3600"></property>
     </bean>
     <mvc:interceptors>
@@ -81,14 +81,25 @@
     </bean>
     <context:component-scan base-package="cooperate.*"/>
 
-    <bean id="permissionInterceptor" class="cooperate.web.core.PermissionInterceptor">
-    </bean>
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/static/**"></mvc:exclude-mapping>
+            <bean class="cooperate.web.core.PermissionInterceptor"/>
+        </mvc:interceptor>
+
+
+    </mvc:interceptors>
+
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
         <property name="interceptors">
             <list>
                 <ref bean="permissionInterceptor"/>
             </list>
         </property>
+    </bean>
+
+    <bean id="permissionInterceptor" class="cooperate.web.core.PermissionInterceptor">
     </bean>
 
 
