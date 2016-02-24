@@ -1,6 +1,6 @@
 package cooperate.app.data.write;
 
-import cooperate.app.business.base.EntityBase;
+import cooperate.app.entity.EntityBase;
 import cooperate.infrastructure.mediation.IEvent;
 import cooperate.infrastructure.mediation.Mediator;
 import org.hibernate.EmptyInterceptor;

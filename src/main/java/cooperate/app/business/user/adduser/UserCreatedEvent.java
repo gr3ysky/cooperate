@@ -1,4 +1,4 @@
-package cooperate.app.business.adduser;
+package cooperate.app.business.user.adduser;
 
 import cooperate.app.entity.User;
 import cooperate.infrastructure.mediation.IEvent;

@@ -1,8 +1,10 @@
-package cooperate.app.business;
+package cooperate.app.business.user;
 
-import cooperate.app.business.adduser.AddUserCommand;
-import cooperate.app.business.login.LoginRequest;
-import cooperate.app.business.login.LoginResponse;
+import cooperate.app.business.user.adduser.AddUserCommand;
+import cooperate.app.business.user.login.LoginDto;
+import cooperate.app.business.user.login.LoginDtoRequest;
+import cooperate.app.business.user.login.LoginRequest;
+import cooperate.app.business.user.login.LoginResponse;
 import cooperate.infrastructure.mediation.Mediator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,11 @@ public class UserService {
         LoginResponse response = _mediator.request(request);
         return response;
 
+    }
+
+    @Transactional(readOnly = true)
+    public LoginDto getUserByEmail(LoginDtoRequest request) throws Exception {
+        return _mediator.request(request);
     }
 
     @Transactional

@@ -1,12 +1,18 @@
-package cooperate.app.business.login;
+package cooperate.app.business.user.login;
 
 import cooperate.infrastructure.mediation.IResponse;
 
-/**
- * Created by taner on 21.02.2016.
- */
 public class LoginResponse implements IResponse {
     private boolean IsSuccess;
+    private LoginDto loginDto;
+
+    public LoginDto getLoginDto() {
+        return loginDto;
+    }
+
+    public void setLoginDto(LoginDto loginDto) {
+        this.loginDto = loginDto;
+    }
 
     public boolean isSuccess() {
         return IsSuccess;

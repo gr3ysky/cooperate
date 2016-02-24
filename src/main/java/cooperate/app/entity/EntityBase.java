@@ -1,4 +1,4 @@
-package cooperate.app.business.base;
+package cooperate.app.entity;
 
 import cooperate.infrastructure.mediation.DomainEventCollection;
 

@@ -80,5 +80,16 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <context:component-scan base-package="cooperate.*"/>
-    <!--read repository beans-->
+
+    <bean id="permissionInterceptor" class="cooperate.web.core.PermissionInterceptor">
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="permissionInterceptor"/>
+            </list>
+        </property>
+    </bean>
+
+
 </beans>

@@ -1,4 +1,4 @@
-package cooperate.app.business.adduser;
+package cooperate.app.business.user.adduser;
 
 import cooperate.infrastructure.mediation.ICommand;
 import cooperate.infrastructure.mediation.IHandleCommand;
@@ -13,6 +13,15 @@ public class AddUserCommand implements ICommand {
     private String fullName;
     private String email;
     private String password;
+    private short roleId;
+
+    public short getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(short roleId) {
+        this.roleId = roleId;
+    }
 
     public String getFullName() {
         return fullName;
@@ -41,5 +50,6 @@ public class AddUserCommand implements ICommand {
     public IHandleCommand<AddUserCommand> getHandler() {
         return handler;
     }
+
 
 }

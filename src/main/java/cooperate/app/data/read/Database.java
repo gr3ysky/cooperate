@@ -44,8 +44,7 @@ public class Database {
         } else if (type.equals("TINYINT") && size > 0) {
             statement.setByte(ordinal, Byte.parseByte(value.toString()));
             return;
-        }
-        else
+        } else
             throw new Exception(String.format("Parameter type is not implemented %s", type));
     }
 
@@ -90,8 +89,8 @@ public class Database {
         return sb.toString();
     }
 
-    public static boolean setProperty(Object object, String fieldName, Object fieldValue) {
-        Class<?> clazz = object.getClass();
+    public static boolean setProperty(Class<?> clazz, Object object, String fieldName, Object fieldValue) {
+
         while (clazz != null) {
             try {
                 Field field = clazz.getDeclaredField(fieldName);
@@ -154,10 +153,13 @@ public class Database {
     public <T> T exetuteScalar(String procedure, Object... parameters) throws Exception {
         CallableStatement statement = getStatement(procedure, parameters);
         ResultSet rs = statement.executeQuery();
-        T t = (T) rs.getObject(0);
-        setOutputValues(rs);
-        rs.close();
-        destroy();
+        T t = null;
+        try {
+            t = (T) rs.getObject(0);
+            setOutputValues(rs);
+        } finally {
+            rs.close();
+        }
         return t;
     }
 
@@ -166,13 +168,16 @@ public class Database {
         ResultSet rs = statement.executeQuery();
         T t = null;
         Boolean first = true;
-        while (rs.next() && first) {
-            t = MapObjectFromResultSet(clazz, rs);
-            first = false;
+        try {
+            while (rs.next() && first) {
+                t = MapObjectFromResultSet(clazz, rs);
+                first = false;
+            }
+            setOutputValues(rs);
+        } finally {
+            rs.close();
         }
-        setOutputValues(rs);
-        rs.close();
-        destroy();
+
         return t;
     }
 
@@ -188,12 +193,14 @@ public class Database {
         CallableStatement statement = getStatement(procedure, parameters);
         ResultSet rs = statement.executeQuery();
         List<T> list = new ArrayList<T>();
-        while (rs.next()) {
-            list.add(MapObjectFromResultSet(clazz, rs));
+        try {
+            while (rs.next()) {
+                list.add(MapObjectFromResultSet(clazz, rs));
+            }
+            setOutputValues(rs);
+        } finally {
+            rs.close();
         }
-        setOutputValues(rs);
-        rs.close();
-        destroy();
         return list;
     }
 
@@ -201,17 +208,23 @@ public class Database {
         return outputvalues.get(parameterName);
     }
 
-    private <T> T MapObjectFromResultSet(Class<T> clazz, ResultSet rs) throws SQLException, IllegalAccessException, InstantiationException {
+    private <T> T MapObjectFromResultSet(Class<T> clazz, ResultSet rs) throws IllegalAccessException, InstantiationException {
         T t = clazz.newInstance();
         for (Field field : clazz.getFields()) {
-            if (rs.findColumn(field.getName()) > 0) {
+            try {
                 Object value = rs.getObject(field.getName());
                 if (value != null)
-                    setProperty(t, field.getName(), value);
+                    setProperty(clazz, t, field.getName(), value);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                //TODO: do nothing
             }
+
         }
         return t;
     }
+
 
     private CallableStatement getStatement(String procedure, Object[] parameters) throws Exception {
         List<SqlParameterDefinition> sqlParameterDefinitions = getParamterDefinitions(procedure);

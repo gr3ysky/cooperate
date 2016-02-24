@@ -1,4 +1,4 @@
-package cooperate.app.business.adduser;
+package cooperate.app.business.user.adduser;
 
 import cooperate.infrastructure.mediation.IHandleEvent;
 import org.springframework.stereotype.Component;

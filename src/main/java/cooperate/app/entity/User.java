@@ -1,6 +1,5 @@
 package cooperate.app.entity;
 
-import cooperate.app.business.base.EntityBase;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.Entity;
@@ -16,10 +15,20 @@ public class User extends EntityBase {
     private Long UserId;
     private String FullName;
     private String Email;
-    private String Password;
+    private byte[] Password;
     private java.sql.Timestamp CreateDate;
-    private Long UpdateUser;
+    private long CreateUserId;
+    private Long UpdateUserId;
     private java.sql.Timestamp UpdateDate;
+    private int RoleId;
+
+    public int getRoleId() {
+        return RoleId;
+    }
+
+    public void setRoleId(int roleId) {
+        RoleId = roleId;
+    }
 
     public Long getUserId() {
         return UserId;
@@ -45,11 +54,11 @@ public class User extends EntityBase {
         this.Email = email;
     }
 
-    public String getPassword() {
+    public byte[] getPassword() {
         return Password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(byte[] password) {
         this.Password = password;
     }
 
@@ -62,11 +71,11 @@ public class User extends EntityBase {
     }
 
     public Long getUpdateuser() {
-        return UpdateUser;
+        return UpdateUserId;
     }
 
     public void setUpdateuser(Long updateuser) {
-        this.UpdateUser = updateuser;
+        this.UpdateUserId = updateuser;
     }
 
     public java.sql.Timestamp getUpdatedate() {
@@ -77,4 +86,19 @@ public class User extends EntityBase {
         this.UpdateDate = UpdateDate;
     }
 
+    public long getCreateUserId() {
+        return CreateUserId;
+    }
+
+    public void setCreateUserId(long createUserId) {
+        CreateUserId = createUserId;
+    }
+
+    public Long getUpdateUserId() {
+        return UpdateUserId;
+    }
+
+    public void setUpdateUserId(Long updateUserId) {
+        UpdateUserId = updateUserId;
+    }
 }

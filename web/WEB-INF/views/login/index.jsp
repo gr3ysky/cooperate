@@ -28,7 +28,7 @@
                 <div class="col-sm-offset-2 col-sm-10">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox"> <spring:message code="label.rememberMe"/>
+                            <form:checkbox path="rememberMe"/> <spring:message code="label.rememberMe"/>
                         </label>
                     </div>
                 </div>

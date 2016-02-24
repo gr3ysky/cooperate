@@ -1,4 +1,4 @@
-package cooperate.app.business.login;
+package cooperate.app.business.user.login;
 
 import cooperate.infrastructure.mediation.IHandleRequest;
 import cooperate.infrastructure.mediation.IRequest;
