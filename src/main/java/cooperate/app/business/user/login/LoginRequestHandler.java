@@ -16,11 +16,11 @@ public class LoginRequestHandler implements IHandleRequest<LoginRequest, LoginRe
         LoginDto dto = userReadRepository.getLoginDtobyEmail(request.getEmail());
         if (dto == null)
             throw new Exception("User is not found");
+        dto.setRole();
         LoginResponse response = new LoginResponse();
         response.setLoginDto(dto);
         byte[] passwordHash = SecurityHelper.Encrypt(request.getPassword());
         response.setSuccess(Arrays.equals(passwordHash, dto.Password) ? true : false);
-
         return response;
     }
 }

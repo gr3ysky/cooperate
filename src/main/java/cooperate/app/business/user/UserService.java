@@ -1,5 +1,6 @@
 package cooperate.app.business.user;
 
+import cooperate.app.ServiceBase;
 import cooperate.app.business.user.adduser.AddUserCommand;
 import cooperate.app.business.user.login.LoginDto;
 import cooperate.app.business.user.login.LoginDtoRequest;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UserService {
+public class UserService extends ServiceBase {
     @Autowired
     private Mediator _mediator;
 

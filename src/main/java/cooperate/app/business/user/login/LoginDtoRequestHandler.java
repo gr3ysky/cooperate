@@ -11,6 +11,9 @@ public class LoginDtoRequestHandler implements IHandleRequest<LoginDtoRequest, L
     private UserReadRepository userReadRepository;
 
     public LoginDto Handle(LoginDtoRequest request) throws Exception {
-        return userReadRepository.getLoginDtobyEmail(request.getEmail());
+        LoginDto loginDto = userReadRepository.getLoginDtobyEmail(request.getEmail());
+        loginDto.setRole();
+        return loginDto;
     }
+
 }

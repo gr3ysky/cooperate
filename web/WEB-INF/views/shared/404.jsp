@@ -3,6 +3,5 @@
 <title><spring:message code="title.errorPage"/></title>
 
 <body>
-${message}
+<spring:message code="error.pageNotFound"/>
 </body>
-

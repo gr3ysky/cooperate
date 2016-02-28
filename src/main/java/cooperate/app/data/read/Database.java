@@ -84,12 +84,13 @@ public class Database {
         for (int i = 0; i < parameters.length; i++) {
             sb.append("?,");
         }
-        sb.deleteCharAt(sb.length() - 1);
+        if (parameters.length > 0)
+            sb.deleteCharAt(sb.length() - 1);
         sb.append(")}");
         return sb.toString();
     }
 
-    public static boolean setProperty(Class<?> clazz, Object object, String fieldName, Object fieldValue) {
+    private static boolean setProperty(Class<?> clazz, Object object, String fieldName, Object fieldValue) {
 
         while (clazz != null) {
             try {
@@ -143,14 +144,14 @@ public class Database {
     }
 
     @PreDestroy
-    public void destroy() throws SQLException {
+    protected void destroy() throws SQLException {
         if (connection != null && !connection.isClosed()) {
             connection.close();
         }
         outputvalues = null;
     }
 
-    public <T> T exetuteScalar(String procedure, Object... parameters) throws Exception {
+    protected <T> T exetuteScalar(String procedure, Object... parameters) throws Exception {
         CallableStatement statement = getStatement(procedure, parameters);
         ResultSet rs = statement.executeQuery();
         T t = null;
@@ -159,11 +160,12 @@ public class Database {
             setOutputValues(rs);
         } finally {
             rs.close();
+            destroy();
         }
         return t;
     }
 
-    public <T> T exetuteReader(Class<T> clazz, String procedure, Object... parameters) throws Exception {
+    protected <T> T exetuteReader(Class<T> clazz, String procedure, Object... parameters) throws Exception {
         CallableStatement statement = getStatement(procedure, parameters);
         ResultSet rs = statement.executeQuery();
         T t = null;
@@ -176,6 +178,7 @@ public class Database {
             setOutputValues(rs);
         } finally {
             rs.close();
+            destroy();
         }
 
         return t;
@@ -183,13 +186,16 @@ public class Database {
 
     private void setOutputValues(ResultSet rs) throws SQLException {
         CallableStatement statement = (CallableStatement) rs.getStatement();
+        if (outputvalues == null)
+            outputvalues = new HashMap<String, Object>() {
+            };
         for (Map.Entry<String, Object> entry : outputvalues.entrySet()) {
             String key = entry.getKey();
             entry.setValue(statement.getObject(key));
         }
     }
 
-    public <T> List<T> exetuteListReader(Class<T> clazz, String procedure, Object... parameters) throws Exception {
+    protected <T> List<T> exetuteListReader(Class<T> clazz, String procedure, Object... parameters) throws Exception {
         CallableStatement statement = getStatement(procedure, parameters);
         ResultSet rs = statement.executeQuery();
         List<T> list = new ArrayList<T>();
@@ -200,17 +206,18 @@ public class Database {
             setOutputValues(rs);
         } finally {
             rs.close();
+            destroy();
         }
         return list;
     }
 
-    public Object getOutputValue(String parameterName) {
+    protected Object getOutputValue(String parameterName) {
         return outputvalues.get(parameterName);
     }
 
     private <T> T MapObjectFromResultSet(Class<T> clazz, ResultSet rs) throws IllegalAccessException, InstantiationException {
         T t = clazz.newInstance();
-        for (Field field : clazz.getFields()) {
+        for (Field field : clazz.getDeclaredFields()) {
             try {
                 Object value = rs.getObject(field.getName());
                 if (value != null)

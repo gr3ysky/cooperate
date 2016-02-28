@@ -4,6 +4,7 @@ import cooperate.app.business.user.UserService;
 import cooperate.app.business.user.login.LoginRequest;
 import cooperate.app.business.user.login.LoginResponse;
 import cooperate.infrastructure.constant.SessionConstants;
+import cooperate.infrastructure.enums.Role;
 import cooperate.infrastructure.security.DesEncrypter;
 import cooperate.web.viewmodels.LoginModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +62,12 @@ public class LoginController extends BaseController {
                     rememberMeCookie.setMaxAge(100000);
                     response.addCookie(rememberMeCookie);
                 }
-
-                modelAndView.setViewName("redirect:/");
+                if (login.getLoginDto().Role == Role.SuperUser)
+                    modelAndView.setViewName("redirect:/super-admin");
+                else if (login.getLoginDto().Role == Role.Admin)
+                    modelAndView.setViewName("redirect:/admin");
+                else
+                    modelAndView.setViewName("redirect:/");
             } else {
                 modelAndView.addObject("message", context.getMessage("error.loginfailed", null, Locale.getDefault()));
                 modelAndView.addObject("pageDescription", context.getMessage("page.description.login.index", null, Locale.getDefault()));
