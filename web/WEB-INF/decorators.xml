@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<decorators>
-    <excludes>
-        <pattern>/partial/*</pattern>
-    </excludes>
-    <decorator name="simple" page="/WEB-INF/views/shared/_layout.jsp">
-        <pattern>/*</pattern>
-    </decorator>
-</decorators>

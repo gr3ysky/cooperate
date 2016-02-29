@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+    <content-processor>
+        <tag-rule-bundle class="org.sitemesh.content.tagrules.html.Sm2TagRuleBundle"/>
+    </content-processor>
+    <mapping path="/partial/*" exclude="true"/>
+    <mapping path="/su/*" decorator="/WEB-INF/views/shared/_adminLayout.jsp"/>
+    <mapping path="/*" decorator="/WEB-INF/views/shared/_layout.jsp"/>
+    <mapping path="/admin/*" decorator="/WEB-INF/views/shared/_adminLayout.jsp"/>
+</sitemesh>

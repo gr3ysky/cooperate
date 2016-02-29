@@ -6,5 +6,4 @@ KS.Message = {};
 KS.Common = {};
 KS.Url = {};
 KS.Confirm = {};
-KS.TreeGrid = {};
 KS.Controls = {};

@@ -13,7 +13,6 @@
 
         </session-management>
         <logout logout-success-url="/login" delete-cookies="cooperate_session,cooperate_auth"/>
-
     </http>
 
     <authentication-manager>
