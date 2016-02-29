@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <!-- Labels -->
-    <entry key="label.siteName">Yemek Kooperatifi</entry>
+    <entry key="label.siteName">Yiyecek Kooperatifi</entry>
     <entry key="label.email">Email</entry>
     <entry key="label.password">Şifre</entry>
     <entry key="label.rememberMe">Beni Hatırla</entry>

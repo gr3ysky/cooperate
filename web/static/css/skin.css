@@ -1,0 +1,51 @@
+/* Template Allianz */
+
+body.login {
+    background-color: #2e4260;
+    background-size: 75% 100%;
+    background-image: none;
+    transition: all .5s;
+    position: relative;
+    background-image: url('../img/background.jpg');
+}
+
+body.layout {
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    transition: all .5s;
+    position: relative;
+    background-image: url('../img/background-2.jpg');
+}
+
+body.layout > .container {
+    opacity: .95;
+    transition: opacity .3s;
+}
+
+body.layout > .container:hover {
+    opacity: 1;
+}
+
+body.layout .container .row .well {
+    transition: all .7s;
+}
+
+body.layout .container:hover .row .well {
+    box-shadow: 0 0 70px rgba(1, 1, 1, 0.2);
+}
+
+body.layout .navbar-default {
+    background-color: #325276;
+}
+
+body.layout .navbar-default .navbar-nav > .active > a, body.layout .navbar-default .navbar-nav > .active > a:hover, body.layout .navbar-default .navbar-nav > .active > a:focus, body.layout .navbar-default .navbar-nav > li > a:hover, body.layout .navbar-default .navbar-nav > li > a:focus {
+    background-color: rgba(1, 1, 1, 0.2);
+}
+
+.main-text-color {
+    color: #325276 !important;
+}
+
+.main-bg-color {
+    background-color: #325276 !important;
+}
