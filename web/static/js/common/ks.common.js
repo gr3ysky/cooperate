@@ -13,7 +13,8 @@
             isFormData = true;
             ctype = false;
         }
-        console.log("isformData", isFormData);;
+        console.log("isformData", isFormData);
+        ;
         console.log(data);
         $.ajax(url, {
             processData: isFormData == true ? false : true,
@@ -102,7 +103,8 @@
         $obj.prepend("<i class='fa fa-refresh fa-spin'></i>");
         obj.disabled = true;
 
-    };;
+    };
+    ;
     ks.Ajax.RemoveLoading = function (obj) {
         var $obj = $(obj);
         //if (!$obj.is("button")) return;
@@ -127,7 +129,8 @@
                 ks.PageMessage.Clear();
             });
         }, 4000);
-    };;
+    };
+    ;
 
     ks.PageMessage.Clear = function () {
         $("#page-message-wrap").html("").removeClass("not-empty").addClass("empty").addClass("hide");
@@ -139,22 +142,27 @@
     var toastrOptions = {
         positionClass: "toast-top-right",
         "preventDuplicates": true
-    };;
+    };
+    ;
     ks.Success = function (message, title, options) {
         toastr.success(message, title, extendedOptions(options));
-    };;
+    };
+    ;
 
     ks.Warning = function (message, title, options) {
         toastr.warning(message, title, extendedOptions(options));
-    };;
+    };
+    ;
 
     ks.Info = function (message, title, options) {
         toastr.info(message, title, extendedOptions(options));
-    };;
+    };
+    ;
 
     ks.Error = function (message, title, options) {
         toastr.error(message, title, extendedOptions(options));
-    };;
+    };
+    ;
 
     function extendedOptions(options) {
         if (options) {
@@ -205,7 +213,8 @@
         }
         return data;
 
-    };;
+    };
+    ;
 
     ks.PopupConfirm = function (message, title, confirmFunc) {
 
@@ -215,14 +224,16 @@
             confirmFunc: confirmFunc
 
         });
-    };;
+    };
+    ;
     ks.ParseDate = function (strDate) {
         if (strDate) {
             var from = strDate.split(".");
             f = new Date(from[2].substring(0, 4), from[1] - 1, from[0]);
             return f;
         }
-    };;
+    };
+    ;
     ks.FormatDateToString = function (date) {
         var dd = date.getDate();
         var mm = date.getMonth() + 1; //January is 0!

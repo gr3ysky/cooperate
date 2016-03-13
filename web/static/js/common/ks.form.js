@@ -27,7 +27,8 @@
                                 formData.append(inputName, inputVal);
                                 break;
                             case 'file':
-                                console.log(console.log(input));;
+                                console.log(console.log(input));
+                                ;
                                 if (document.getElementById(input.prop('id')).files[0] !== undefined)
                                     formData.append(inputName, document.getElementById(input.prop('id')).files[0]);
                                 break;
@@ -148,7 +149,8 @@
                 object[inputName] = inputVal;
             }
         });
-        console.log(object);;
+        console.log(object);
+        ;
         if (object != {}) {
             return object;
         } else {
@@ -185,7 +187,8 @@
             KS.Ajax.RemoveLoading(btn);
         }
 
-    };;
+    };
+    ;
     form.Init = function (formId) {
     }
 
