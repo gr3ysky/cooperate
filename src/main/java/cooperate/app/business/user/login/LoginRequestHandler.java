@@ -12,6 +12,7 @@ import java.util.Arrays;
 public class LoginRequestHandler implements IHandleRequest<LoginRequest, LoginResponse> {
     @Autowired
     private UserReadRepository userReadRepository;
+
     public LoginResponse Handle(LoginRequest request) throws Exception {
         LoginDto dto = userReadRepository.getLoginDtobyEmail(request.getEmail());
         if (dto == null)

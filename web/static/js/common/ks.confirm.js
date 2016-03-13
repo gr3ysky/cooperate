@@ -44,7 +44,8 @@
 
         $modalElem.modal("show");
 
-    };;
+    };
+    ;
 
 
     //Private fonksiyonlar

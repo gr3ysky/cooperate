@@ -16,8 +16,21 @@
 
 <div id="page-wrapper">
     <div id="menu">
-
-    </div>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-content">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><spring:message code="label.siteName"/></a>
+                </div>
+                <div class="collapse navbar-collapse" id="menu-content">
+                </div>
+            </div>
+        </nav>
 
     <div class="container">
         <!-- Page Heading -->
@@ -66,7 +79,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         KS.Ajax.Get("/partial/menu", null, function (html) {
-            $("#menu").html(html);
+            $("#menu-content").html(html);
         })
     });
 </script>

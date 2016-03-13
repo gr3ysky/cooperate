@@ -19,7 +19,7 @@ import java.util.Locale;
 @Controller
 public class SuperUserController extends BaseController {
     @HasPermission(to = {PermissionConstants.SystemManagement})
-    @RequestMapping("/su")
+    @RequestMapping("/su/index")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("superuser/index");
         mav.addObject("pageDescription", context.getMessage("page.description.superuser.index", null, Locale.getDefault()));

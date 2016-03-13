@@ -5,18 +5,32 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title><sitemesh:write property='title'/></title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/datatables.bootstrap.css" />"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/bootstrap.min.css" />"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/sb-admin.css" />"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/site.css" />"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/toastr.min.css" />"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/skin.css" />"/>
     <sitemesh:write property='head'/>
 </head>
 <body>
 
 <div id="page-wrapper" class="container">
     <div id="menu">
-
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-content">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><spring:message code="label.siteName"/></a>
+                </div>
+                <div class="collapse navbar-collapse" id="menu-content">
+                    </div>
     </div>
+            </nav>
 
     <div class="container">
         <!-- Page Heading -->
@@ -60,7 +74,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         KS.Ajax.Get("/partial/menu", null, function (html) {
-            $("#menu").html(html);
+            $("#menu-content").html(html);
         })
     });
 </script>

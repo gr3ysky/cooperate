@@ -41,7 +41,8 @@
                         targets: 0
                     },
                     {"visible": getCustomButtonsCount(options) > 0, "targets": [0]}
-                ];;
+                ];
+                ;
             }
         }
 

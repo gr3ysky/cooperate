@@ -60,11 +60,13 @@
 
     mdl.Modal.Close = function (modalId) {
         mdl.Modal.Instance.modal('hide');
-    };;
+    };
+    ;
 
     mdl.Modal.Add = function (obj) {
         KS.Modals.push(obj);
-    };;
+    };
+    ;
     mdl.Modal.RemoveLast = function () {
         var lastIndex = KS.Modals.length - 1;
         if (lastIndex == -1) return;
