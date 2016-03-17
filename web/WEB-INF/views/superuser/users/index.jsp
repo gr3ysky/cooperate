@@ -2,14 +2,12 @@
 <title>Super User</title>
 <body>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
 <form id="frmSearchUsers">
     <div class="form-group col-md-6 col-xs-12 no-padding">
         <div class="col-md-4"><label class="control-label">Ad Soyad</label></div>
         <div class="col-md-8"><input type="text" name="fullname" class="form-control"/></div>
     </div>
 </form>
-
 <div id="test-grid">
     <table style="width:100%" cellpadding="0" cellspacing="0">
         <thead>
@@ -27,7 +25,7 @@
 <content tag="local_script">
     <script>
         $(function () {
-            KS.Grid.Render("#test-grid table", "/su/test", {
+            KS.Grid.Render("#test-grid table", "/su/users/test", {
                 columns: [
                     {data: "fullName"},
                     {data: "email"},
@@ -44,4 +42,5 @@
         });
     </script>
 </content>
+
 

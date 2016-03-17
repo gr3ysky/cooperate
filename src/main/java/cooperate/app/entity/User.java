@@ -21,6 +21,7 @@ public class User extends EntityBase {
     private Long UpdateUserId;
     private java.sql.Timestamp UpdateDate;
     private int RoleId;
+    private boolean IsActive;
 
     public int getRoleId() {
         return RoleId;
@@ -100,5 +101,12 @@ public class User extends EntityBase {
 
     public void setUpdateUserId(Long updateUserId) {
         UpdateUserId = updateUserId;
+    }
+
+    public void setIsActive(boolean active) {
+        IsActive = active;
+    }
+    public boolean getIsActive() {
+       return IsActive;
     }
 }

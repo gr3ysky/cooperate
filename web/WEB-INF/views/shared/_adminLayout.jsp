@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
 <head>
@@ -25,7 +26,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/"><spring:message code="label.siteName"/></a>
+                    <a class="navbar-brand" style="padding:10px 15px;" href="/"><spring:message code="label.siteName"/></a>
                 </div>
                 <div class="collapse navbar-collapse" id="menu-content">
                 </div>

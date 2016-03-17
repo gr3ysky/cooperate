@@ -4,9 +4,33 @@ import java.util.List;
 
 public class ListResponse<T> {
     private List<T> data;
-    private long totalCount;
-    private long filteredCount;
+    private long recordsTotal;
+    private long recordsFiltered;
     private int draw;
+    public int getDraw() {
+        return draw;
+    }
+
+    public void setDraw(int draw) {
+        this.draw = draw;
+    }
+
+    public long getRecordsTotal() {
+        return recordsTotal;
+    }
+
+    public void setRecordsTotal(long recordsTotal) {
+        this.recordsTotal = recordsTotal;
+    }
+
+    public long getRecordsFiltered() {
+        return recordsFiltered;
+    }
+
+    public void setRecordsFiltered(long recordsFiltered) {
+        this.recordsFiltered = recordsFiltered;
+    }
+
 
     public List<T> getData() {
         return data;
@@ -16,27 +40,5 @@ public class ListResponse<T> {
         this.data = data;
     }
 
-    public long getTotalCount() {
-        return totalCount;
-    }
 
-    public void setTotal(long total) {
-        this.totalCount = total;
-    }
-
-    public long getFilteredCount() {
-        return filteredCount;
-    }
-
-    public void setFilteredCount(long filteredCount) {
-        this.filteredCount = filteredCount;
-    }
-
-    public int getDraw() {
-        return draw;
-    }
-
-    public void setDraw(int draw) {
-        this.draw = draw;
-    }
 }

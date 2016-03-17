@@ -14,7 +14,7 @@
                                     <c:if test="${not empty item.icon}">
                                         <i class="glyphicon glyphicon-${item.icon}"></i>
                                     </c:if>
-                                        ${item.name} <span
+                                    <spring:message code="${item.resourceKey}"/>   <span
                                         class="caret"></span></a>
 
                             </c:if>
@@ -23,7 +23,7 @@
                                     <c:if test="${not empty item.icon}">
                                         <i class="glyphicon glyphicon-${item.icon}"></i>
                                     </c:if>
-                                        ${item.name} </a>
+                                    <spring:message code="${item.resourceKey}"/>  </a>
                             </c:if>
                             <c:if test="${not empty item.children}">
                                 <ul class="dropdown-menu">
@@ -33,7 +33,7 @@
                                                 <c:if test="${not empty child.icon}">
                                                     <i class="glyphicon glyphicon-${child.icon}"></i>
                                                 </c:if>
-                                                    ${child.name} </a>
+                                                <spring:message code="${child.resourceKey}"/>  </a>
                                         </li>
                                     </c:forEach>
                                 </ul>

@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 public class MenuController extends BaseController {
@@ -44,30 +43,27 @@ public class MenuController extends BaseController {
         List<MenuDto> parentMenu = new ArrayList<MenuDto>() {
         };
         for (MenuDto dto : menu) {
-            if (dto.getLanguageCode().equals(Locale.getDefault().getCountry())) {
-                if (loginDto != null && dto.getPermissionCode() != null) {
-                    if (dto.getParentMenuId() == 0 && PermissionManager.CheckPermission(loginDto.RoleId, dto.getPermissionCode(), rolePermissionDtos)) {
-                        parentMenu.add(dto);
-                        //menu.remove(parentMenu);
-                    }
-                } else if (dto.getParentMenuId() == 0 && dto.getPermissionCode() == null) {
+            if (loginDto != null && dto.getPermissionCode() != null) {
+                if (dto.getParentMenuId() == 0 && PermissionManager.CheckPermission(loginDto.RoleId, dto.getPermissionCode(), rolePermissionDtos)) {
                     parentMenu.add(dto);
                 }
+            } else if (dto.getParentMenuId() == 0 && dto.getPermissionCode() == null) {
+                parentMenu.add(dto);
             }
         }
         for (MenuDto parent : parentMenu) {
+             ArrayList<MenuDto> childs= new ArrayList<MenuDto>();
             for (MenuDto dto : menu) {
-                if (dto.getLanguageCode().equals(Locale.getDefault().getCountry())) {
-                    parent.setChildren(new ArrayList<MenuDto>());
-                    if (loginDto != null && dto.getPermissionCode() != null) {
-                        if (dto.getParentMenuId() == parent.getMenuId() && PermissionManager.CheckPermission(loginDto.RoleId, dto.getPermissionCode(), rolePermissionDtos)) {
-                            parent.getChildren().add(dto);
-                        }
-                    } else if (dto.getParentMenuId() == parent.getMenuId() && dto.getPermissionCode() == null) {
-                        parent.getChildren().add(dto);
+
+                if (loginDto != null && dto.getPermissionCode() != null) {
+                    if (dto.getParentMenuId() == parent.getMenuId() && PermissionManager.CheckPermission(loginDto.RoleId, dto.getPermissionCode(), rolePermissionDtos)) {
+                        childs.add(dto);
                     }
+                } else if (dto.getParentMenuId() == parent.getMenuId() && dto.getPermissionCode() == null) {
+                    childs.add(dto);
                 }
             }
+            parent.setChildren(childs);
         }
         return parentMenu;
     }

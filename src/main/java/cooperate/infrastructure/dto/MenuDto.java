@@ -8,8 +8,17 @@ public class MenuDto {
     private String icon;
     private String name;
     private String permissionCode;
+
+    public String getResourceKey() {
+        return resourceKey;
+    }
+
+    public void setResourceKey(String resourceKey) {
+        this.resourceKey = resourceKey;
+    }
+
+    private String resourceKey;
     private int parentMenuId;
-    private String languageCode;
     private List<MenuDto> children;
 
     public int getMenuId() {
@@ -58,14 +67,6 @@ public class MenuDto {
 
     public void setParentMenuId(int parentMenuId) {
         this.parentMenuId = parentMenuId;
-    }
-
-    public String getLanguageCode() {
-        return languageCode;
-    }
-
-    public void setLanguageCode(String languageCode) {
-        this.languageCode = languageCode;
     }
 
     public List<MenuDto> getChildren() {

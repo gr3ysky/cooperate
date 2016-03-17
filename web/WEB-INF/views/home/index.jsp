@@ -7,7 +7,6 @@
 <content tag="local_script">
     <script>
         $(function () {
-            KS.Message.Success("", "this is a test message");
         });
     </script>
 </content>

@@ -16,4 +16,14 @@
     <!--Titles-->
     <entry key="title.errorPage">Hata!</entry>
 
+    <!--Menu-->
+    <entry key="menu.systemmanagement">Sistem Yönetimi</entry>
+    <entry key="menu.rolemanagement">Rol Yönetimi</entry>
+    <entry key="menu.productcategories">Ürün Kategorileri</entry>
+    <entry key="menu.definations">Tanımlar</entry>
+    <entry key='menu.packagings'>Paketlemeler</entry>
+    <entry key="menu.productfeatures">Ürün Özellikleri</entry>
+    <entry key="menu.saletypes">Satış Tipleri</entry>
+    <entry key="menu.units">Birimler</entry>
+    <entry key="menu.users">Kullanıcılar</entry>
 </properties>

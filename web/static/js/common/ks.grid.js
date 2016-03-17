@@ -6,37 +6,92 @@
                 url: url,
                 dataSrc: "data",
                 type: "POST",
-                serverSide: true,
-                processing: true,
                 data: getData,
             },
             minCustomButtonCountForMenu: 2,
             deferRender: true,
-            columnDefs: getColumnDefs()
+            processing:true,
+            serverSide: true
+
         };
+
         $.extend(defaults, options);
+        defaults.columns=getColumns();
+       // defaults.columnDefs=getColumnDefs();
+
 
         $(selector).dataTable(defaults);
 
 
-//console.log(options.customButtons);
+        function getColumns(){
+            var columns = [];
+            if (options.customButtons) {
+                var commands={ data: '', defaultContent: '', orderable: false, render: null, visible: true };
+                var buttonscount = getCustomButtonsCount(options);
+                commands.render=function( data, type, row){
+                    var html = "";
+                    if (buttonscount > defaults.minCustomButtonCountForMenu)
+                        html = getCustomButtonsMenuHtml(options, data, type, row);
+                    else html = getCustomButtonsColumnsHtml(options, data, type, row)//getCustomButtonsHtml(options,data,type,row);
+                    return html;
+                }
+                columns.push(commands);
+            }
+            for (var i = 0; i < options.columns.length; i++) {
+                var tableColumn = { data: '', defaultContent: '', orderable: true, render: null, visible: true };
+                var column = options.columns[i];
+                if (column.data != undefined)
+                    tableColumn.data = column.data;
 
-        if (options.customButtons) {
+                if (column.html != undefined)
+                    tableColumn.defaultContent = column.html;
+                if (column.orderable != undefined)
+                    tableColumn.orderable = column.orderable;
+                if (column.type == 'date') {
+                    var format = column.format ? column.format : 'dd.mm.yyyy';
+                    tableColumn.render = function (data) {
+                        if (data) {
+                            var date = new Date(data);
+                            return date.format(format);
+                        }
+                        else
+                            return '';
+                    }
+                }
+                if (column.type == 'hidden') {
+                    tableColumn.visible = false;
+                }
+                if (column.type == 'bool') {
+                    tableColumn.render = function (data) { console.log("bool",data); return data == true ? 'Evet' : 'Hayır'; }
+                }
+                if (column.type == 'checkbox') {
+                    tableColumn.render = function (data) { return '<input type="checkbox" disabled ' + (data == true ? 'checked="checked"' : '') + ' />'; }
+                }
+                if (column.type == 'link') {
+                    var _a = '<a href=' + column.href + ' onClick="' + (column.onClick ? 'KS.Table.processRowFunc(\'' + column.onClick + '\',this)' : '') + '">' + column.text + '</a>';
+                    tableColumn.defaultContent = _a;
+                }
+                else if (column.href != undefined) {
+                    var urlattr = 'href="' + column.href + '" ' + (column.target != undefined ? 'target="' + column.target + '"' : '');
+                    tableColumn.render = function (data) { return '<a ' + urlattr + '>' + data + '</a>'; }
+                }
+                if (column.type == 'button') {
+                    tableColumn.defaultContent = '<button type="button" class="btn btn-success" onClick="KS.Table.processRowFunc(\'' + column.onClick + '\',this)">' + column.text + '</button>';
+                }
 
+                columns.push(tableColumn);
+            }
+            console.log(columns)
+            return columns;
         }
 
+
         function getColumnDefs() {
-            console.log("getColumnDefs");
             if (options.customButtons) {
                 return [
                     {
                         render: function (data, type, row) {
-                            var buttonscount = getCustomButtonsCount(options);
-                            var html = "";
-                            if (buttonscount > defaults.minCustomButtonCountForMenu)
-                                html = getCustomButtonsMenuHtml(options, data, type, row);
-                            else html = getCustomButtonsColumnsHtml(options, data, type, row)//getCustomButtonsHtml(options,data,type,row);
-                            return html;
+
                         },
                         targets: 0
                     },
@@ -61,12 +116,19 @@
         }
 
         function getData(d) {
+            console.log(d);
+            var data={
+                draw: d.draw,
+                pageSize: d.length,
+                start: d.start,
+                orderColumn: d.columns[d.order[0].column].data,
+                orderDir: d.order[0].dir
+            };
             if (options.filterForm) {
-                var $form = $("#" + options.filterForm);
-                $.extend(d, $form.serialize());
+                $.extend(data, KS.Form.Serialize(options.filterForm));
             }
-            $.extend(d, {"_csrf": $("input[name='_csrf']").val()});
-            return d;
+            return $.extend({},data, {"_csrf": $("input[name='_csrf']").val()});
+
         }
 
         function getCustomButtonsColumnsHtml(options, data, type, row) {
@@ -108,14 +170,34 @@
 
         function getInColumnButtonHtml(button, data, type, row) {
             var columnData = extractAllButtonData(button.columnData, row, button.data);
+            if(button.buttonType == grid.ButtonTypes.Enable && row.isActive!=undefined){
+                if(row.isActive==true){
+                    button.type="danger";
+                }
+                else{
+                    button.type="success";
+                }
+            }
             var html = '<a class="btn btn-circle btn-xs btn-' + button.type + '"';
             html += " data-params='" + JSON.stringify(columnData) + "' ";
             html += " data-url='" + button.url + "' ";
             if (button.onclick) {
                 html += " onclick='" + button.onclick + "' ";
+                if (button.icon) {
+                    html += "title='"+button.text+"' ";
+                }
             }
             html += ">";
             if (button.icon) {
+                if(button.buttonType == grid.ButtonTypes.Enable && row.isActive!=undefined){
+                    if(row.isActive==true){
+                        html += "<span class='glyphicon glyphicon-remove'></span>";
+                    }
+                    else{
+                        html += "<span class='glyphicon glyphicon-ok'></span>";
+                    }
+                }
+                else
                 html += "<span class='glyphicon glyphicon-" + button.icon + "'></span>";
             }
             html += "</a>";
@@ -133,13 +215,21 @@
             }
             html += ">";
             if (button.icon) {
-                html += "<span class=glyphicon glyphicon-" + button.icon + "'></span>";
+                if(button.buttonType == grid.ButtonTypes.Enable && row.isActive!=undefined){
+                    if(row.isActive==true){
+                        html += "<span class='glyphicon glyphicon-remove'></span>&nbsp; Pasif Yap";
+                    }
+                    else{
+                        html += "<span class='glyphicon glyphicon-ok'></span>&nbsp; Aktif Yap";
+                    }
+                }
+                else
+                html += "<span class='glyphicon glyphicon-" + button.icon + "'></span>&nbsp;";
             }
-            if (button.text) {
+            if (button.text && button.buttonType != grid.ButtonTypes.Enable) {
                 html += button.text;
             }
             html += "</a>";
-            button.rendered = true;
             return html;
         }
 
@@ -176,6 +266,7 @@
         this.url = url;
         this.text = text;
         this.onclick = onclick;
+        this.buttonType=buttonType;
         this.includeInMenu = includeInMenu;
         if (buttonType == grid.ButtonTypes.Create) {
             if (!icon) {

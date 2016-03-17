@@ -15,4 +15,15 @@
     <entry key="error.pageNotFound">Requested page is not found.</entry>
     <!--Titles-->
     <entry key="title.errorPage">Error!</entry>
+
+    <!--Menu-->
+    <entry key="menu.systemmanagement">System Management</entry>
+    <entry key="menu.rolemanagement">Roles</entry>
+    <entry key="menu.productcategories">Product Categories</entry>
+    <entry key="menu.definations">Definations</entry>
+    <entry key='menu.packagings'>Packagings</entry>
+    <entry key="menu.productfeatures">Product Features</entry>
+    <entry key="menu.saletypes">Sale Types</entry>
+    <entry key="menu.units">Units</entry>
+    <entry key="menu.users">Users</entry>
 </properties>

@@ -1,20 +1,20 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title><sitemesh:write property='title'/></title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/datatables.bootstrap.css" />"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/bootstrap.min.css" />"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/site.css" />"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/toastr.min.css" />"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/skin.css" />"/>
     <sitemesh:write property='head'/>
 </head>
-<body>
+<body class="layout">
 
-<div id="page-wrapper" class="container">
+<div id="page-wrapper">
     <div id="menu">
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
@@ -25,7 +25,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/"><spring:message code="label.siteName"/></a>
+                    <a class="navbar-brand" style="padding:10px 15px;" href="/"><spring:message code="label.siteName"/></a>
                 </div>
                 <div class="collapse navbar-collapse" id="menu-content">
                     </div>
