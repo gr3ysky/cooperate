@@ -14,7 +14,6 @@ import java.util.List;
 public class MenuService extends ServiceBase {
     @Autowired
     MenuReadRepository menuReadRepository;
-
     @Transactional
     @Cacheable(value = "menuDtos")
     public List<MenuDto> getMenu() throws Exception {

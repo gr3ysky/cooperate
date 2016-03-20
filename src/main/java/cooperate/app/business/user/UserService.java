@@ -1,11 +1,16 @@
 package cooperate.app.business.user;
 
 import cooperate.app.ServiceBase;
+import cooperate.app.business.user.ListUsers.ListUsersRequestHandler;
 import cooperate.app.business.user.adduser.AddUserCommand;
 import cooperate.app.business.user.login.LoginDto;
 import cooperate.app.business.user.login.LoginDtoRequest;
 import cooperate.app.business.user.login.LoginRequest;
 import cooperate.app.business.user.login.LoginResponse;
+import cooperate.infrastructure.dto.ListRequest;
+import cooperate.infrastructure.dto.ListResponse;
+import cooperate.infrastructure.dto.UserDto;
+import cooperate.infrastructure.dto.UserFilterDto;
 import cooperate.infrastructure.mediation.Mediator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +37,11 @@ public class UserService extends ServiceBase {
     public void AddUser(AddUserCommand command) throws Exception {
         _mediator.send(command);
 
+    }
+
+    @Transactional
+    public ListResponse<UserDto> ListUsers(ListRequest<UserFilterDto, UserDto> request) throws Exception {
+        request.setHandler((ListUsersRequestHandler) context.getBean("listUsersRequestHandler"));
+        return _mediator.request(request);
     }
 }

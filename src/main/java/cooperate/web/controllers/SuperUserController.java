@@ -1,7 +1,5 @@
 package cooperate.web.controllers;
 
-import cooperate.app.business.user.login.LoginDto;
-import cooperate.app.entity.User;
 import cooperate.infrastructure.constant.PermissionConstants;
 import cooperate.infrastructure.dto.ListResponse;
 import cooperate.infrastructure.dto.UserDto;
@@ -38,7 +36,7 @@ public class SuperUserController extends BaseController {
         response.setRecordsTotal(1);
         List<UserDto> data = new ArrayList<UserDto>();
         UserDto dto = new UserDto();
-        dto.setUserId((long) 1);
+        dto.setUserId(1);
         dto.setFullName("taner");
         dto.setEmail("taneryigit@boun.edu.tr");
         dto.setIsActive(true);

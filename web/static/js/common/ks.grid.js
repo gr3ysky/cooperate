@@ -1,4 +1,7 @@
 (function (grid) {
+    grid.Search = function (selector) {
+        $(selector).dataTable().api().draw();
+    };
     grid.Render = function (selector, url, options) {
         $(selector).addClass("table table-striped table-bordered table-hover table-responsive");
         var defaults = {
@@ -11,8 +14,18 @@
             minCustomButtonCountForMenu: 2,
             deferRender: true,
             processing:true,
-            serverSide: true
-
+            serverSide: true,
+            bFilter: false,
+            createdRow: function (row, data, index) {
+                if (options.createdRow) {
+                    options.createdRow(row, data, index);
+                }
+                $('thead th', selector).each(function (i, e) {
+                    if ($(e).hasClass('hidden-xs')) {
+                        $('td', row).eq(i).addClass('hidden-xs');
+                    }
+                });
+            }
         };
 
         $.extend(defaults, options);

@@ -1,16 +1,25 @@
 package cooperate.infrastructure.dto;
 
 public class UserDto {
-    private Long UserId;
+    private int UserId;
     private String FullName;
     private String Email;
     private boolean IsActive;
+    private String roleName;
 
-    public Long getUserId() {
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public int getUserId() {
         return UserId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         UserId = userId;
     }
 
@@ -37,6 +46,5 @@ public class UserDto {
     public void setIsActive(boolean active) {
         IsActive = active;
     }
-
 
 }

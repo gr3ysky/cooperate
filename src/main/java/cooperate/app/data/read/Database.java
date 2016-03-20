@@ -1,5 +1,6 @@
 package cooperate.app.data.read;
 
+import cooperate.infrastructure.dto.NotMapped;
 import org.hibernate.SessionFactory;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,12 @@ public class Database {
     private HashMap<String, Object> outputvalues = new HashMap<String, Object>() {
     };
 
-
     private static void setParameter(CallableStatement statement, String type, int ordinal, int size, Object value) throws Exception {
         type = type.toUpperCase(Locale.ENGLISH);
+        if (value == null) {
+            statement.setNull(ordinal, getDbType(type));
+            return;
+        }
         if (type.equals("INT") || type.equals("SMALLINT")) {
             statement.setInt(ordinal, Integer.valueOf(value.toString()));
             return;
@@ -38,8 +42,8 @@ public class Database {
         } else if (type.equals("DATE")) {
             statement.setDate(ordinal, Date.valueOf(value.toString()));
             return;
-        } else if (type.equals("BIT") && size == 1) {
-            statement.setBoolean(ordinal, Boolean.getBoolean(value.toString()));
+        } else if (type.equals("BIT") && size == 0) {
+            statement.setBoolean(ordinal, Boolean.parseBoolean(value.toString().equals("1") ? "true" : "false"));
             return;
         } else if (type.equals("TINYINT") && size > 0) {
             statement.setByte(ordinal, Byte.parseByte(value.toString()));
@@ -48,30 +52,30 @@ public class Database {
             throw new Exception(String.format("Parameter type is not implemented %s", type));
     }
 
-    private static JDBCType getDbType(String type) throws Exception {
+    private static int getDbType(String type) throws Exception {
         type = type.toUpperCase(Locale.ENGLISH);
         if (type.equals("INT"))
-            return JDBCType.INTEGER;
+            return Types.INTEGER;
         else if (type.equals("SMALLINT"))
-            return JDBCType.SMALLINT;
+            return Types.SMALLINT;
         else if (type.equals("CHARACTER"))
-            return JDBCType.CHAR;
+            return Types.CHAR;
         else if (type.equals("VARCHAR"))
-            return JDBCType.VARCHAR;
+            return Types.VARCHAR;
         else if (type.equals("LONGVARCHAR"))
-            return JDBCType.LONGNVARCHAR;
+            return Types.LONGNVARCHAR;
         else if (type.equals("NUMERIC"))
-            return JDBCType.NUMERIC;
+            return Types.NUMERIC;
         else if (type.equals("DECIMAL"))
-            return JDBCType.DECIMAL;
+            return Types.DECIMAL;
         else if (type.equals("BIGINT"))
-            return JDBCType.BIGINT;
+            return Types.BIGINT;
         else if (type.equals("BIT"))
-            return JDBCType.BIT;
+            return Types.BIT;
         else if (type.equals("TINYINT"))
-            return JDBCType.TINYINT;
+            return Types.TINYINT;
         else if (type.equals("DATE"))
-            return JDBCType.DATE;
+            return Types.DATE;
         else
             throw new Exception(String.format("Dbtype %s is not implemented.", type));
     }
@@ -96,14 +100,7 @@ public class Database {
             try {
                 Field field = clazz.getDeclaredField(fieldName);
                 field.setAccessible(true);
-                if (field.getType().equals(boolean.class)) {
-                    if (fieldValue.toString().equals("1"))
-                        field.set(object, true);
-                    else
-                        field.set(object, false);
-                } else {
-                    field.set(object, fieldValue);
-                }
+                field.set(object, fieldValue);
                 return true;
             } catch (NoSuchFieldException e) {
                 clazz = clazz.getSuperclass();
@@ -112,6 +109,12 @@ public class Database {
             }
         }
         return false;
+    }
+
+    protected Object SetNull(int val) {
+        if (val == -1)
+            return null;
+        return val;
     }
 
     private Connection getConncetion() {
@@ -148,7 +151,6 @@ public class Database {
         if (connection != null && !connection.isClosed()) {
             connection.close();
         }
-        outputvalues = null;
     }
 
     protected <T> T exetuteScalar(String procedure, Object... parameters) throws Exception {
@@ -185,10 +187,8 @@ public class Database {
     }
 
     private void setOutputValues(ResultSet rs) throws SQLException {
+        if (outputvalues == null) return;
         CallableStatement statement = (CallableStatement) rs.getStatement();
-        if (outputvalues == null)
-            outputvalues = new HashMap<String, Object>() {
-            };
         for (Map.Entry<String, Object> entry : outputvalues.entrySet()) {
             String key = entry.getKey();
             entry.setValue(statement.getObject(key));
@@ -201,7 +201,9 @@ public class Database {
         List<T> list = new ArrayList<T>();
         try {
             while (rs.next()) {
-                list.add(MapObjectFromResultSet(clazz, rs));
+                T t = MapObjectFromResultSet(clazz, rs);
+                if (t != null)
+                    list.add(t);
             }
             setOutputValues(rs);
         } finally {
@@ -216,14 +218,18 @@ public class Database {
     }
 
     private <T> T MapObjectFromResultSet(Class<T> clazz, ResultSet rs) throws IllegalAccessException, InstantiationException {
-        T t = clazz.newInstance();
+        T t = null;
         for (Field field : clazz.getDeclaredFields()) {
             try {
+                if (t == null)
+                    t = clazz.newInstance();
+                if (field.getDeclaredAnnotation(NotMapped.class) != null) continue;
                 Object value = rs.getObject(field.getName());
                 if (value != null)
                     setProperty(clazz, t, field.getName(), value);
             } catch (SQLException e) {
                 e.printStackTrace();
+                return null;
             } finally {
                 //TODO: do nothing
             }
@@ -252,11 +258,18 @@ public class Database {
             setParameter(statement, type, ordinal, size, value);
         } else if (sqlParameterDefinition.getMode().equals("OUT")) {
             statement.registerOutParameter(sqlParameterDefinition.getOrdinal(), getDbType(type));
+            AddOutputParameter(sqlParameterDefinition.getParameterName());
         } else { //INOUT
             statement.registerOutParameter(sqlParameterDefinition.getOrdinal(), getDbType(type));
             setParameter(statement, type, ordinal, size, value);
-            outputvalues.put(sqlParameterDefinition.getParameterName(), null);
+            AddOutputParameter(sqlParameterDefinition.getParameterName());
         }
+    }
+
+    private void AddOutputParameter(String parameter) {
+        if (outputvalues == null)
+            outputvalues = new HashMap<String, Object>();
+        outputvalues.put(parameter, null);
     }
 
 }

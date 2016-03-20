@@ -12,7 +12,7 @@ import javax.persistence.Id;
 public class User extends EntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long UserId;
+    private int UserId;
     private String FullName;
     private String Email;
     private byte[] Password;
@@ -31,11 +31,11 @@ public class User extends EntityBase {
         RoleId = roleId;
     }
 
-    public Long getUserId() {
+    public int getUserId() {
         return UserId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.UserId = userId;
     }
 
@@ -103,10 +103,11 @@ public class User extends EntityBase {
         UpdateUserId = updateUserId;
     }
 
+    public boolean getIsActive() {
+        return IsActive;
+    }
+
     public void setIsActive(boolean active) {
         IsActive = active;
-    }
-    public boolean getIsActive() {
-       return IsActive;
     }
 }

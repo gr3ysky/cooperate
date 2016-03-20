@@ -1,8 +1,10 @@
 package cooperate.infrastructure.dto;
 
+import cooperate.infrastructure.mediation.IResponse;
+
 import java.util.List;
 
-public class ListResponse<T> {
+public class ListResponse<T> implements IResponse {
     private List<T> data;
     private long recordsTotal;
     private long recordsFiltered;

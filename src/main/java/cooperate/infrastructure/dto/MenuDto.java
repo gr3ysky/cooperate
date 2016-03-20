@@ -8,6 +8,10 @@ public class MenuDto {
     private String icon;
     private String name;
     private String permissionCode;
+    private String resourceKey;
+    private int parentMenuId;
+    @NotMapped
+    private List<MenuDto> children;
 
     public String getResourceKey() {
         return resourceKey;
@@ -16,10 +20,6 @@ public class MenuDto {
     public void setResourceKey(String resourceKey) {
         this.resourceKey = resourceKey;
     }
-
-    private String resourceKey;
-    private int parentMenuId;
-    private List<MenuDto> children;
 
     public int getMenuId() {
         return menuId;

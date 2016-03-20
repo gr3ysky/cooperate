@@ -1,9 +1,11 @@
 package cooperate.app.business.user.login;
 
+import cooperate.infrastructure.dto.NotMapped;
 import cooperate.infrastructure.enums.Role;
 import cooperate.infrastructure.mediation.IResponse;
 
 public class LoginDto implements IResponse {
+    @NotMapped
     public boolean IsSuccess;
     public long UserId;
     public String Fullname;
@@ -11,6 +13,7 @@ public class LoginDto implements IResponse {
     public int RoleId;
     public String RoleName;
     public String RoleCode;
+    @NotMapped
     public Role Role;
 
     public void setRole() {

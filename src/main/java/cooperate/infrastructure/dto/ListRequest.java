@@ -1,14 +1,17 @@
 package cooperate.infrastructure.dto;
 
 
-public class ListRequest<T> {
+import cooperate.infrastructure.mediation.IHandleRequest;
+import cooperate.infrastructure.mediation.IRequest;
+
+public class ListRequest<T, TResponse> implements IRequest<ListRequest<T, TResponse>, ListResponse<TResponse>> {
     private int draw;
     private int pageSize;
     private int start;
     private String orderColumn;
     private String orderDir;
     private T filter;
-
+    private IHandleRequest<ListRequest<T, TResponse>, ListResponse<TResponse>> handler;
     public int getDraw() {
         return draw;
     }
@@ -55,5 +58,13 @@ public class ListRequest<T> {
 
     public void setFilter(T filter) {
         this.filter = filter;
+    }
+
+    public IHandleRequest<ListRequest<T, TResponse>, ListResponse<TResponse>> getHandler() {
+        return handler;
+    }
+
+    public void setHandler(IHandleRequest<ListRequest<T, TResponse>, ListResponse<TResponse>> handler) {
+        this.handler = handler;
     }
 }
