@@ -3,6 +3,7 @@ package cooperate.infrastructure.dto;
 public class SelectListItem {
     private String value;
     private String text;
+    @NotMapped
     private Boolean isSelected;
 
     public String getValue() {

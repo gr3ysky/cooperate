@@ -13,7 +13,7 @@
             },
             minCustomButtonCountForMenu: 2,
             deferRender: true,
-            processing:true,
+            processing: true,
             serverSide: true,
             bFilter: false,
             createdRow: function (row, data, index) {
@@ -25,23 +25,70 @@
                         $('td', row).eq(i).addClass('hidden-xs');
                     }
                 });
-            }
+                $('td [data-toggle="tooltip"]', row).tooltip()
+            },
+            dom: hasHeaderButtons(options.customButtons) ? '<"toolbar">frtip' : '',
         };
 
-        $.extend(defaults, options);
-        defaults.columns=getColumns();
-       // defaults.columnDefs=getColumnDefs();
+        function hasHeaderButtons(buttons) {
+            var returnVal = false;
+            if (buttons) {
+                for (var i = 0; i < options.customButtons.length; i++) {
+                    if (options.customButtons[i].button.showInHeader === true) {
+                        returnVal = true;
+                        break;
+                    }
+                }
 
+            }
+            return returnVal;
+        }
+
+        $.extend(defaults, options);
+        defaults.columns = getColumns();
 
         $(selector).dataTable(defaults);
 
+        if (hasHeaderButtons(options.customButtons) == true) {
+            var html = "<div class='btn-group' role='group'>"
+            html += getHeaderButtonsHtml(options.customButtons)
+            html += "</div>"
+            $("div.toolbar").html(html);
+        }
 
-        function getColumns(){
+        function getHeaderButtonsHtml(buttons) {
+            var html = "";
+            for (var i = 0; i < options.customButtons.length; i++) {
+                if (options.customButtons[i].button.showInHeader === true) {
+                    var button = options.customButtons[i].button;
+                    var columnData = extractAllButtonData(null, null, button.data);
+                    html = '<a class="btn btn-xs btn-' + button.type + '"';
+                    html += " data-params='" + JSON.stringify(columnData) + "' ";
+                    html += " data-url='" + button.url + "' ";
+                    if (button.onclick) {
+                        html += " onclick='" + button.onclick + "' ";
+                    }
+                    html += ">";
+                    if (button.icon) {
+                        html += "<span class='glyphicon glyphicon-" + button.icon + "'></span>&nbsp;";
+                    }
+                    if (button.text) {
+                        html += button.text;
+                    }
+                    html += "</a>";
+
+                }
+            }
+            return html;
+        }
+
+
+        function getColumns() {
             var columns = [];
             if (options.customButtons) {
-                var commands={ data: '', defaultContent: '', orderable: false, render: null, visible: true };
+                var commands = {data: '', defaultContent: '', orderable: false, render: null, visible: true};
                 var buttonscount = getCustomButtonsCount(options);
-                commands.render=function( data, type, row){
+                commands.render = function (data, type, row) {
                     var html = "";
                     if (buttonscount > defaults.minCustomButtonCountForMenu)
                         html = getCustomButtonsMenuHtml(options, data, type, row);
@@ -51,7 +98,7 @@
                 columns.push(commands);
             }
             for (var i = 0; i < options.columns.length; i++) {
-                var tableColumn = { data: '', defaultContent: '', orderable: true, render: null, visible: true };
+                var tableColumn = {data: '', defaultContent: '', orderable: true, render: null, visible: true};
                 var column = options.columns[i];
                 if (column.data != undefined)
                     tableColumn.data = column.data;
@@ -75,10 +122,15 @@
                     tableColumn.visible = false;
                 }
                 if (column.type == 'bool') {
-                    tableColumn.render = function (data) { console.log("bool",data); return data == true ? 'Evet' : 'Hayır'; }
+                    tableColumn.render = function (data) {
+                        console.log("bool", data);
+                        return data == true ? 'Evet' : 'Hayır';
+                    }
                 }
                 if (column.type == 'checkbox') {
-                    tableColumn.render = function (data) { return '<input type="checkbox" disabled ' + (data == true ? 'checked="checked"' : '') + ' />'; }
+                    tableColumn.render = function (data) {
+                        return '<input type="checkbox" disabled ' + (data == true ? 'checked="checked"' : '') + ' />';
+                    }
                 }
                 if (column.type == 'link') {
                     var _a = '<a href=' + column.href + ' onClick="' + (column.onClick ? 'KS.Table.processRowFunc(\'' + column.onClick + '\',this)' : '') + '">' + column.text + '</a>';
@@ -86,7 +138,9 @@
                 }
                 else if (column.href != undefined) {
                     var urlattr = 'href="' + column.href + '" ' + (column.target != undefined ? 'target="' + column.target + '"' : '');
-                    tableColumn.render = function (data) { return '<a ' + urlattr + '>' + data + '</a>'; }
+                    tableColumn.render = function (data) {
+                        return '<a ' + urlattr + '>' + data + '</a>';
+                    }
                 }
                 if (column.type == 'button') {
                     tableColumn.defaultContent = '<button type="button" class="btn btn-success" onClick="KS.Table.processRowFunc(\'' + column.onClick + '\',this)">' + column.text + '</button>';
@@ -130,7 +184,7 @@
 
         function getData(d) {
             console.log(d);
-            var data={
+            var data = {
                 draw: d.draw,
                 pageSize: d.length,
                 start: d.start,
@@ -140,7 +194,7 @@
             if (options.filterForm) {
                 $.extend(data, KS.Form.Serialize(options.filterForm));
             }
-            return $.extend({},data, {"_csrf": $("input[name='_csrf']").val()});
+            return $.extend({}, data, {"_csrf": $("input[name='_csrf']").val()});
 
         }
 
@@ -183,12 +237,12 @@
 
         function getInColumnButtonHtml(button, data, type, row) {
             var columnData = extractAllButtonData(button.columnData, row, button.data);
-            if(button.buttonType == grid.ButtonTypes.Enable && row.isActive!=undefined){
-                if(row.isActive==true){
-                    button.type="danger";
+            if (button.buttonType == grid.ButtonTypes.Enable && row.isActive != undefined) {
+                if (row.isActive == true) {
+                    button.type = "warning";
                 }
-                else{
-                    button.type="success";
+                else {
+                    button.type = "success";
                 }
             }
             var html = '<a class="btn btn-circle btn-xs btn-' + button.type + '"';
@@ -196,22 +250,25 @@
             html += " data-url='" + button.url + "' ";
             if (button.onclick) {
                 html += " onclick='" + button.onclick + "' ";
-                if (button.icon) {
-                    html += "title='"+button.text+"' ";
-                }
             }
-            html += ">";
+            if (button.text && button.buttonType !== grid.ButtonTypes.Enable) {
+                html += "data-toggle='tooltip' data-placement='top' title='" + button.text + "' ";
+                html += ">";
+            }
+
             if (button.icon) {
-                if(button.buttonType == grid.ButtonTypes.Enable && row.isActive!=undefined){
-                    if(row.isActive==true){
+                if (button.buttonType == grid.ButtonTypes.Enable && row.isActive != undefined) {
+                    if (row.isActive == true) {
+                        html += "data-toggle='tooltip' data-placement='top' title='" + 'Pasif Yap' + "'> ";
                         html += "<span class='glyphicon glyphicon-remove'></span>";
                     }
-                    else{
+                    else {
+                        html += "data-toggle='tooltip' data-placement='top' title='" + 'Aktif Yap' + "'> ";
                         html += "<span class='glyphicon glyphicon-ok'></span>";
                     }
                 }
                 else
-                html += "<span class='glyphicon glyphicon-" + button.icon + "'></span>";
+                    html += "<span class='glyphicon glyphicon-" + button.icon + "'></span>";
             }
             html += "</a>";
             button.rendered = true;
@@ -228,16 +285,16 @@
             }
             html += ">";
             if (button.icon) {
-                if(button.buttonType == grid.ButtonTypes.Enable && row.isActive!=undefined){
-                    if(row.isActive==true){
+                if (button.buttonType == grid.ButtonTypes.Enable && row.isActive != undefined) {
+                    if (row.isActive == true) {
                         html += "<span class='glyphicon glyphicon-remove'></span>&nbsp; Pasif Yap";
                     }
-                    else{
+                    else {
                         html += "<span class='glyphicon glyphicon-ok'></span>&nbsp; Aktif Yap";
                     }
                 }
                 else
-                html += "<span class='glyphicon glyphicon-" + button.icon + "'></span>&nbsp;";
+                    html += "<span class='glyphicon glyphicon-" + button.icon + "'></span>&nbsp;";
             }
             if (button.text && button.buttonType != grid.ButtonTypes.Enable) {
                 html += button.text;
@@ -279,14 +336,14 @@
         this.url = url;
         this.text = text;
         this.onclick = onclick;
-        this.buttonType=buttonType;
+        this.buttonType = buttonType;
         this.includeInMenu = includeInMenu;
         if (buttonType == grid.ButtonTypes.Create) {
             if (!icon) {
                 this.icon = "plus";
             }
             if (!type) {
-                this.type = "info";
+                this.type = "success";
             }
             if (!showInHeader) {
                 this.showInHeader = true;

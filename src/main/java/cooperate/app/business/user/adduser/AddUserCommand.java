@@ -13,13 +13,13 @@ public class AddUserCommand implements ICommand {
     private String fullName;
     private String email;
     private String password;
-    private short roleId;
+    private int roleId;
 
-    public short getRoleId() {
+    public int getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(short roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 

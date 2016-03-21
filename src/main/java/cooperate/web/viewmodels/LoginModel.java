@@ -19,8 +19,6 @@ public class LoginModel {
     private Boolean rememberMe;
 
     public Boolean getRememberMe() {
-        if (rememberMe == null)
-            return false;
         return rememberMe;
     }
 

@@ -15,7 +15,7 @@ public class GenericRepository<T extends EntityBase> {
         this.entityClass = tEntityClass;
     }
 
-    private T findOne(String id) {
+    public T findOne(String id) {
         return getCurrentSession().get(entityClass, id);
     }
 

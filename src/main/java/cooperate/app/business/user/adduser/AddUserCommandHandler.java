@@ -15,6 +15,7 @@ public class AddUserCommandHandler implements IHandleCommand<AddUserCommand> {
     @Autowired
     private UserRepository userRepository;
 
+
     public void Handle(AddUserCommand command) {
         User user = new User();
         user.setEmail(command.getEmail());

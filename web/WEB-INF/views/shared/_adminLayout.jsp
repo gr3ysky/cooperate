@@ -40,9 +40,9 @@
 
 
                 <div class="col-lg-12 hidden-sm hidden-xs no-margin no-padding">
-                    <h1>
+                    <h3>
                         <sitemesh:write property='title' default="Website"/>
-                    </h1>
+                    </h3>
                     <h5 class="text-muted">${pageDescription} </h5>
 
                 </div>
@@ -54,6 +54,7 @@
                 </div>
                 <div class="clearfix"></div>
                 <hr>
+                <sitemesh:write property="page.page_header"/>
                 <div id="page-content">
                     <sitemesh:write property='body'/>
                 </div>

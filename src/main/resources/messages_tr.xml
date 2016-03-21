@@ -7,15 +7,31 @@
     <entry key="label.password">Şifre</entry>
     <entry key="label.rememberMe">Beni Hatırla</entry>
     <entry key="label.signIn">Giriş Yap</entry>
+    <entry key="label.fullName">Ad Soyad</entry>
+    <entry key="label.isActive">Aktif mi?</entry>
+    <entry key="label.search">Ara</entry>
+    <entry key="label.save">Kaydet</entry>
+    <entry key="label.update">Güncelle</entry>
+    <entry key="label.delete">Sil</entry>
+    <entry key="label.setEnabled">Aktif Yap</entry>
+    <entry key="label.setDispabled">Pasif Yap</entry>
+    <entry key="label.new">Yeni</entry>
+    <entry key="label.role">Rol</entry>
+    <entry key="label.operation">İşlem</entry>
+    <entry key="label.all">Tümü</entry>
+    <entry key="label.yes">Evet</entry>
+    <entry key="label.no">Hayır</entry>
     <!-- Page descriptions -->
     <entry key="page.description.login.index">Lütfen email ve şifrenizi giriniz.</entry>
     <entry key="page.description.superuser.index">Siteyi buradan yönetebilirsiniz.</entry>
     <!--Errors-->
     <entry key="error.loginfailed">Giriş başarısız!</entry>
+    <entry key="error.emailExits">%s emaili kullanılıyor.</entry>
     <entry key="error.pageNotFound">Aradığınız sayfa bulunamadı!</entry>
     <!--Titles-->
     <entry key="title.errorPage">Hata!</entry>
-
+    <entry key="title.user.index">Kullanıcı Listesi</entry>
+    <entry key="title.user.create">Yeni Kullanıcı Kaydetme</entry>
     <!--Menu-->
     <entry key="menu.systemmanagement">Sistem Yönetimi</entry>
     <entry key="menu.rolemanagement">Rol Yönetimi</entry>
@@ -26,4 +42,14 @@
     <entry key="menu.saletypes">Satış Tipleri</entry>
     <entry key="menu.units">Birimler</entry>
     <entry key="menu.users">Kullanıcılar</entry>
+
+    <!--Permission-->
+    <entry key="permission.user.index">Kullanıcı Listeleme</entry>
+    <entry key="permission.user.create">Kullanıcı Ekleme</entry>
+    <entry key="permission.user.update">Kullanıcı Güncelleme</entry>
+    <entry key="permission.user.delete">Kullanıcı Silme</entry>
+    <entry key="permission.user.enable">Kullanıcı Aktifleştirme/Pasifleştirme</entry>
+    <!--Messages-->
+    <entry key="message.userAdded">Kullanıcı eklendi.</entry>
+
 </properties>

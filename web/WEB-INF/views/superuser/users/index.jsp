@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<title>Super User</title>
+<title><spring:message code="title.user.index"/></title>
 <body>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 <div class="panel panel-default">
@@ -17,16 +19,16 @@
                     <div class="col-md-4"><label class="control-label">Aktif Mi</label></div>
                     <div class="col-md-8">
                         <select name="isActive" id="IsActive">
-                            <option value="-1">Tümü</option>
-                            <option value="1">Evet</option>
-                            <option value="0">Hayır</option>
+                            <option value="-1"><spring:message code="label.all"/></option>
+                            <option value="1"><spring:message code="label.yes"/></option>
+                            <option value="0"><spring:message code="label.no"/></option>
                         </select>
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="col-md-4">
-                        <btn class="btn btn-success" onclick="KS.Grid.Search('#test-grid table');"><i
-                                class="glyphicon glyphicon-search"></i> &nbsp; Ara
+                        <btn class="btn btn-primary btn-sm" onclick="KS.Grid.Search('#test-grid table');"><i
+                                class="glyphicon glyphicon-search"></i> &nbsp; <spring:message code="label.search"/>
                         </btn>
                     </div>
 
@@ -42,10 +44,14 @@
         <thead>
         <tr>
             <th>İşlem</th>
-            <th>Ad Soyad</th>
-            <th class="hidden-xs">Email</th>
-            <th class="hidden-xs">Rol</th>
-            <th>Aktif mi?</th>
+            <th><spring:message
+                    code="label.operation"/></th>
+            <th class="hidden-xs"><spring:message
+                    code="label.email"/></th>
+            <th class="hidden-xs"><spring:message
+                    code="label.role"/></th>
+            <th><spring:message
+                    code="label.isActive"/></th>
         </tr>
         </thead>
     </table>
@@ -53,8 +59,10 @@
 </body>
 
 <content tag="local_script">
+    <script type="text/javascript" src="<c:url value="/static/js/view/user.js" />"></script>
     <script>
         $(function () {
+
             KS.Grid.Render("#test-grid table", "/su/users/test", {
                 columns: [
                     {data: "fullName"},
@@ -64,9 +72,9 @@
                 ],
                 filterForm:"frmSearchUsers",
                 customButtons: [
-                    {button: new KS.Grid.Button(KS.Grid.ButtonTypes.Create, {"UserId": 1}, "su/user/create", null, "Yeni")},
-                    {button: new KS.Grid.Button(KS.Grid.ButtonTypes.Enable, {"UserId": 1}, "su/user/enable", ["Fullname"], "Aktifleştir")},
-                    {button: new KS.Grid.Button(KS.Grid.ButtonTypes.Update, {"UserId": 1}, "su/user/update", ["Fullname"], "Güncelle")},
+                    {button: new KS.Grid.Button(KS.Grid.ButtonTypes.Create, null, "/su/users/create", null, "<spring:message code="label.new"/>", "User.openCreate(this);")},
+                    {button: new KS.Grid.Button(KS.Grid.ButtonTypes.Enable, null, "/su/users/enable", ["userId"], "<spring:message code="label.setEnabled"/>")},
+                    {button: new KS.Grid.Button(KS.Grid.ButtonTypes.Update, null, "/su/users/update", ["userId"], "<spring:message code="label.update"/>")},
                 ]
             });
 

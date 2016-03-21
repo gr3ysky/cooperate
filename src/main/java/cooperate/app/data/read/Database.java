@@ -153,12 +153,13 @@ public class Database {
         }
     }
 
-    protected <T> T exetuteScalar(String procedure, Object... parameters) throws Exception {
+    protected <T> T exetuteScalar(Class<T> clazz, String procedure, Object... parameters) throws Exception {
         CallableStatement statement = getStatement(procedure, parameters);
         ResultSet rs = statement.executeQuery();
         T t = null;
         try {
-            t = (T) rs.getObject(0);
+            rs.next();
+            t = clazz.cast(rs.getObject(1));
             setOutputValues(rs);
         } finally {
             rs.close();
@@ -186,12 +187,18 @@ public class Database {
         return t;
     }
 
-    private void setOutputValues(ResultSet rs) throws SQLException {
+    private void setOutputValues(ResultSet rs) {
         if (outputvalues == null) return;
-        CallableStatement statement = (CallableStatement) rs.getStatement();
-        for (Map.Entry<String, Object> entry : outputvalues.entrySet()) {
-            String key = entry.getKey();
-            entry.setValue(statement.getObject(key));
+        try {
+            CallableStatement statement = (CallableStatement) rs.getStatement();
+            for (Map.Entry<String, Object> entry : outputvalues.entrySet()) {
+                String key = entry.getKey();
+                entry.setValue(statement.getObject(key));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            //do nothing
         }
     }
 

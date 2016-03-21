@@ -1,12 +1,15 @@
 package cooperate.web.controllers;
 
+import cooperate.app.business.role.RoleService;
 import cooperate.app.business.user.UserService;
+import cooperate.app.business.user.adduser.AddUserCommand;
 import cooperate.infrastructure.constant.PermissionConstants;
 import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
 import cooperate.infrastructure.dto.UserDto;
 import cooperate.infrastructure.dto.UserFilterDto;
 import cooperate.web.core.HasPermission;
+import cooperate.web.viewmodels.UserEditModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,15 +19,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.Locale;
+
 @Controller
 public class SuUsersController extends BaseController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RoleService roleService;
 
     @HasPermission(to = {PermissionConstants.UserIndex})
     @RequestMapping("/su/users")
@@ -33,6 +41,7 @@ public class SuUsersController extends BaseController {
         mav.addObject("pageDescription", context.getMessage("page.description.superuser.index", null, Locale.getDefault()));
         return mav;
     }
+
     @HasPermission(to = {PermissionConstants.UserIndex})
     @RequestMapping(value = "/su/users/test")
     public ResponseEntity<ListResponse<UserDto>> test(@Valid @ModelAttribute("request") ListRequest<UserFilterDto, UserDto> request, @ModelAttribute("filter") UserFilterDto filter, BindingResult result) throws Exception {
@@ -43,4 +52,36 @@ public class SuUsersController extends BaseController {
         return new ResponseEntity<ListResponse<UserDto>>(response, httpHeaders, HttpStatus.OK);
 
     }
+
+    @HasPermission(to = {PermissionConstants.UserCreate})
+    @RequestMapping(value = "/su/users/create")
+    public ModelAndView create() throws Exception {
+        ModelAndView mav = new ModelAndView("superuser/users/create");
+        mav.addObject("user", new UserEditModel());
+        mav.addObject("roles", roleService.getRolesList());
+        return mav;
+    }
+
+    @HasPermission(to = {PermissionConstants.UserCreate})
+    @RequestMapping(value = "/su/users/creteUser", method = RequestMethod.POST, produces = "text/html")
+    public ModelAndView createUser(@Valid @ModelAttribute("user") UserEditModel userEditModel, BindingResult result) throws Exception {
+        ModelAndView mav = new ModelAndView("/superuser/users/create");
+        mav.addObject("roles", roleService.getRolesList());
+        if (result.hasErrors()) {
+            mav.addObject("user", userEditModel);
+            return mav;
+        }
+        AddUserCommand command = (AddUserCommand) context.getBean("addUserCommand");
+        command.setFullName(userEditModel.getFullName());
+        command.setPassword(userEditModel.getPassword());
+        command.setEmail(userEditModel.getEmail());
+        command.setRoleId(userEditModel.getRoleId());
+        userService.AddUser(command);
+        mav.addObject("message", context.getMessage("message.userAdded", null, Locale.getDefault()));
+        mav.addObject("isSuccess", true);
+        return mav;
+    }
+
+
+
 }

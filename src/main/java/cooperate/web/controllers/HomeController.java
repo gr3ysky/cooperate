@@ -21,12 +21,7 @@ public class HomeController extends BaseController {
         model.addObject("a", RequestContextHolder.currentRequestAttributes().getSessionId());
         model.addObject("User", session.getAttribute("taner"));
 
-       /* AddUserCommand command=(AddUserCommand)context.getBean("addUserCommand");
-        command.setFullName("Taner Yiğit");
-        command.setPassword("123456");
-        command.setEmail("taneryigit@live.com");
-        command.setRoleId((short) 1);
-        _service.AddUser(command);*/
+
         return model;
     }
 }

@@ -37,4 +37,8 @@ public class UserReadRepository extends Database {
         users.setRecordsTotal((Long) getOutputValue("p_total"));
         return users;
     }
+
+    public boolean emailExists(String email) throws Exception {
+        return exetuteScalar(Boolean.class, "p_exists_email", email);
+    }
 }
