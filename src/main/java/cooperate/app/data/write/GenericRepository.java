@@ -4,7 +4,9 @@ import cooperate.app.entity.EntityBase;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class GenericRepository<T extends EntityBase> {
 
     @Autowired
@@ -15,7 +17,7 @@ public class GenericRepository<T extends EntityBase> {
         this.entityClass = tEntityClass;
     }
 
-    public T findOne(String id) {
+    private T findOne(String id) {
         return getCurrentSession().get(entityClass, id);
     }
 

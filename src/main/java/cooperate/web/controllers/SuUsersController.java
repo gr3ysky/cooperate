@@ -2,6 +2,7 @@ package cooperate.web.controllers;
 
 import cooperate.app.business.role.RoleService;
 import cooperate.app.business.user.UserService;
+import cooperate.app.business.user.activateUser.ActivateUserCommand;
 import cooperate.app.business.user.adduser.AddUserCommand;
 import cooperate.infrastructure.constant.PermissionConstants;
 import cooperate.infrastructure.dto.ListRequest;
@@ -9,6 +10,7 @@ import cooperate.infrastructure.dto.ListResponse;
 import cooperate.infrastructure.dto.UserDto;
 import cooperate.infrastructure.dto.UserFilterDto;
 import cooperate.web.core.HasPermission;
+import cooperate.web.viewmodels.AjaxResponse;
 import cooperate.web.viewmodels.UserEditModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -78,8 +81,23 @@ public class SuUsersController extends BaseController {
         command.setRoleId(userEditModel.getRoleId());
         userService.AddUser(command);
         mav.addObject("message", context.getMessage("message.userAdded", null, Locale.getDefault()));
-        mav.addObject("isSuccess", true);
+        mav.addObject("status", "success");
         return mav;
+    }
+
+
+    @HasPermission(to = {PermissionConstants.UserIndex})
+    @RequestMapping(value = "/su/users/enable", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<AjaxResponse> enable(@RequestParam int userId) throws Exception {
+
+        ActivateUserCommand command = (ActivateUserCommand) context.getBean("activateUserCommand");
+        command.setUserId(userId);
+        command.setUpdateUserId(getSessionUser().UserId);
+        userService.ActivateUser(command);
+        AjaxResponse response = getAjaxResponse("message.genericSuccess", "success");
+        final HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<AjaxResponse>(response, httpHeaders, HttpStatus.OK);
     }
 
 

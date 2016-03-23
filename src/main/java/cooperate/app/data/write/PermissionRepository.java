@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class PermissionRepository extends GenericRepository<Permission> {
-    public void PermissionRepository() {
+    public PermissionRepository() {
         setClazz(Permission.class);
     }
 }

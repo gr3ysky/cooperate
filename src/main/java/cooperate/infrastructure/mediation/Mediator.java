@@ -11,11 +11,11 @@ public class Mediator implements IMediator {
         return (TResponse) handler.Handle(request);
     }
 
-    public <TEvent extends IEvent> void publish(TEvent event) {
+    public <TEvent extends IEvent> void publish(TEvent event) throws Exception {
         event.getHandler().Handle(event);
     }
 
-    public <TCommand extends ICommand> void send(TCommand command) {
+    public <TCommand extends ICommand> void send(TCommand command) throws Exception {
         command.getHandler().Handle(command);
     }
 }

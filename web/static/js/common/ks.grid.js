@@ -183,7 +183,6 @@
         }
 
         function getData(d) {
-            console.log(d);
             var data = {
                 draw: d.draw,
                 pageSize: d.length,

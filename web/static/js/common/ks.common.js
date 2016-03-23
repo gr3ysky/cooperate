@@ -8,37 +8,46 @@
             $('#shader').fadeIn();
         }
         var isFormData = false;
-        var ctype = 'application/x-www-form-urlencoded; charset=UTF-8';
         if (data instanceof FormData) {
             isFormData = true;
             ctype = false;
         }
-        console.log("isformData", isFormData);
-        ;
-        console.log(data);
+
+
         $.ajax(url, {
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Accept', 'application/json');
+                // xhr.setRequestHeader(  'Content-Type', 'application/json' );
+                xhr.setRequestHeader("X-CSRF-TOKEN", $("input[name='_csrf']").val());
+            },
             processData: isFormData == true ? false : true,
             data: data,
             global: true,
             type: 'POST',
             dataType: "json",
-            traditional: true,
-            contentType: ctype,
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             cache: false,
             error: function (jqXHR, textStatus, errorThrown) {
-                var json = jqXHR;
+                var json = {};
                 try {
                     json = JSON.parse(jqXHR.responseText);
                 } catch (e) {
+                    if (jqXHR.status == 404) {
+                        json.message = "İçerik bulunamadı";
+                    }
+                    else {
+                        json.message = "Bir hata oluştu";
+                    }
+
                 }
-                KS.PageMessage("danger", json.Message);
+                KS.Message.Error(json.message, "Hata");
             },
             success: function (e) {
-                if (e.Message && e.Result) {
-                    if (e.Result == "Success")
-                        KS.PageMessage("success", e.Message);
+                if (e.message && e.status) {
+                    if (e.status == "success")
+                        KS.Message.Success(e.message);
                     else {
-                        KS.PageMessage("danger", e.Message);
+                        KS.Message.Error(e.message);
                     }
                 }
                 if (onSuccess) {

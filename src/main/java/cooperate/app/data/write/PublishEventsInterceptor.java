@@ -20,7 +20,11 @@ public class PublishEventsInterceptor extends EmptyInterceptor {
             EntityBase entity = (EntityBase) entities.next();
             ArrayList<IEvent> events = entity.domainEvents.getAndClear();
             for (IEvent event : events) {
-                _mediator.publish(event);
+                try {
+                    _mediator.publish(event);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         super.postFlush(entities);

@@ -32,6 +32,7 @@
     <entry key="title.errorPage">Hata!</entry>
     <entry key="title.user.index">Kullanıcı Listesi</entry>
     <entry key="title.user.create">Yeni Kullanıcı Kaydetme</entry>
+    <entry key="error.userNotFound">Kullanıcı bulunamadı.</entry>
     <!--Menu-->
     <entry key="menu.systemmanagement">Sistem Yönetimi</entry>
     <entry key="menu.rolemanagement">Rol Yönetimi</entry>
@@ -51,5 +52,7 @@
     <entry key="permission.user.enable">Kullanıcı Aktifleştirme/Pasifleştirme</entry>
     <!--Messages-->
     <entry key="message.userAdded">Kullanıcı eklendi.</entry>
+    <entry key="message.genericSuccess">İşlem başarılı.</entry>
+    <entry key="message.genericError">Bir hata alındı.</entry>
 
 </properties>

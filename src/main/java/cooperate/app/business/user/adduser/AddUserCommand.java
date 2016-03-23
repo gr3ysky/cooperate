@@ -14,6 +14,7 @@ public class AddUserCommand implements ICommand {
     private String email;
     private String password;
     private int roleId;
+    private int createUserId;
 
     public int getRoleId() {
         return roleId;
@@ -45,6 +46,14 @@ public class AddUserCommand implements ICommand {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(int createUserId) {
+        this.createUserId = createUserId;
     }
 
     public IHandleCommand<AddUserCommand> getHandler() {

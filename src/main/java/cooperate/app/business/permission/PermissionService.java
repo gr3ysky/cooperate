@@ -19,7 +19,7 @@ public class PermissionService {
     private PermissionReadRepository permissionReadRepository;
 
     @Transactional
-    public void addPermission(AddPermissionCommand command) {
+    public void addPermission(AddPermissionCommand command) throws Exception {
         mediator.send(command);
     }
 

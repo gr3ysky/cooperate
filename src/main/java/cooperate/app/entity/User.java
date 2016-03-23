@@ -1,58 +1,48 @@
 package cooperate.app.entity;
 
-import org.hibernate.annotations.Table;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Timestamp;
 
 @Entity
-@Table(appliesTo = "User")
 public class User extends EntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int UserId;
-    private String FullName;
-    private String Email;
+    private int userId;
+    private String fullName;
+    private String email;
     private byte[] Password;
-    private java.sql.Timestamp CreateDate;
-    private long CreateUserId;
-    private Long UpdateUserId;
+    private java.sql.Timestamp createDate;
+    private Integer createUserId;
+    private Integer updateUserId;
     private java.sql.Timestamp UpdateDate;
-    private int RoleId;
-    private boolean IsActive;
-
-    public int getRoleId() {
-        return RoleId;
-    }
-
-    public void setRoleId(int roleId) {
-        RoleId = roleId;
-    }
+    private int roleId;
+    private boolean isActive;
 
     public int getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(int userId) {
-        this.UserId = userId;
+        this.userId = userId;
     }
 
-    public String getFullname() {
-        return FullName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.FullName = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        this.Email = email;
+        this.email = email;
     }
 
     public byte[] getPassword() {
@@ -60,54 +50,54 @@ public class User extends EntityBase {
     }
 
     public void setPassword(byte[] password) {
-        this.Password = password;
+        Password = password;
     }
 
-    public java.sql.Timestamp getCreatedate() {
-        return CreateDate;
+    public Timestamp getCreateDate() {
+        return createDate;
     }
 
-    public void setCreatedate(java.sql.Timestamp createdate) {
-        this.CreateDate = createdate;
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
     }
 
-    public Long getUpdateuser() {
-        return UpdateUserId;
+    public int getCreateUserId() {
+        return createUserId;
     }
 
-    public void setUpdateuser(Long updateuser) {
-        this.UpdateUserId = updateuser;
+    public void setCreateUserId(int createUserId) {
+        this.createUserId = createUserId;
     }
 
-    public java.sql.Timestamp getUpdatedate() {
+    public int getUpdateUserId() {
+        return updateUserId;
+    }
+
+    public void setUpdateUserId(int updateUserId) {
+        this.updateUserId = updateUserId;
+    }
+
+    public Timestamp getUpdateDate() {
         return UpdateDate;
     }
 
-    public void setUpdatedate(java.sql.Timestamp updatedate) {
-        this.UpdateDate = UpdateDate;
+    public void setUpdateDate(Timestamp updateDate) {
+        UpdateDate = updateDate;
     }
 
-    public long getCreateUserId() {
-        return CreateUserId;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setCreateUserId(long createUserId) {
-        CreateUserId = createUserId;
-    }
-
-    public Long getUpdateUserId() {
-        return UpdateUserId;
-    }
-
-    public void setUpdateUserId(Long updateUserId) {
-        UpdateUserId = updateUserId;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     public boolean getIsActive() {
-        return IsActive;
+        return isActive;
     }
 
     public void setIsActive(boolean active) {
-        IsActive = active;
+        isActive = active;
     }
 }

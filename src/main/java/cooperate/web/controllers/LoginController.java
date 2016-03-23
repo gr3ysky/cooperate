@@ -51,7 +51,6 @@ public class LoginController extends BaseController {
             LoginRequest loginRequest = (LoginRequest) context.getBean("loginRequest");
             loginRequest.setEmail(loginModel.getEmail());
             loginRequest.setPassword(loginModel.getPassword());
-
             LoginResponse login = loginService.Login(loginRequest);
             if (login.isSuccess()) {
                 session.setAttribute(SessionConstants.User, login.getLoginDto());
@@ -59,7 +58,7 @@ public class LoginController extends BaseController {
 
                     String encrypted = DesEncrypter.encrypt(loginModel.getEmail());
                     Cookie rememberMeCookie = new Cookie(SessionConstants.RememberMeCookieName, encrypted);
-                    rememberMeCookie.setMaxAge(100000);
+                    rememberMeCookie.setMaxAge(10000000);
                     response.addCookie(rememberMeCookie);
                 }
                 if (login.getLoginDto().Role == Role.SuperUser)

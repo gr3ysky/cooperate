@@ -15,28 +15,17 @@ import java.util.Locale;
 
 @EnableWebMvc
 @ControllerAdvice
-public class GlobalErrorHandler implements HandlerExceptionResolver {
+public class HtmlErrorHandler implements HandlerExceptionResolver {
 
     private static final String GlobalErrorViewName = "shared/error";
     @Autowired
     ApplicationContext context;
 
+    @ResponseBody
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        switch (getReponseTypeFromRequest(request)) {
-            case Html:
-                return handleHtmlError(ex);
-            default:
-                return handleJsonError(ex);
-        }
+        return handleHtmlError(ex);
     }
 
-    @ResponseBody
-    private ModelAndView handleJsonError(Exception e) {
-        ModelAndView model = new ModelAndView();
-        model.addObject("status", "error");
-        model.addObject("message", e.getMessage());
-        return model;
-    }
 
     private ModelAndView handleHtmlError(Exception e) {
         ModelAndView model = new ModelAndView(GlobalErrorViewName);
@@ -52,16 +41,5 @@ public class GlobalErrorHandler implements HandlerExceptionResolver {
         if (e.getMessage() == "UnauthorizedException")
             model.setViewName("redirect:/login");
         return model;
-    }
-
-    private ResponseType getReponseTypeFromRequest(HttpServletRequest request) {
-        if (request.getHeader("accept").contains("text/html"))
-            return ResponseType.Html;
-        return ResponseType.Json;
-    }
-
-    protected enum ResponseType {
-        Html,
-        Json
     }
 }

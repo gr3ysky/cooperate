@@ -43,9 +43,10 @@
     <table style="width:100%" cellpadding="0" cellspacing="0">
         <thead>
         <tr>
-            <th>İşlem</th>
             <th><spring:message
                     code="label.operation"/></th>
+            <th><spring:message
+                    code="label.fullName"/></th>
             <th class="hidden-xs"><spring:message
                     code="label.email"/></th>
             <th class="hidden-xs"><spring:message
@@ -73,8 +74,8 @@
                 filterForm:"frmSearchUsers",
                 customButtons: [
                     {button: new KS.Grid.Button(KS.Grid.ButtonTypes.Create, null, "/su/users/create", null, "<spring:message code="label.new"/>", "User.openCreate(this);")},
-                    {button: new KS.Grid.Button(KS.Grid.ButtonTypes.Enable, null, "/su/users/enable", ["userId"], "<spring:message code="label.setEnabled"/>")},
-                    {button: new KS.Grid.Button(KS.Grid.ButtonTypes.Update, null, "/su/users/update", ["userId"], "<spring:message code="label.update"/>")},
+                    {button: new KS.Grid.Button(KS.Grid.ButtonTypes.Enable, null, "/su/users/enable", ["userId", "isActive"], "<spring:message code="label.setEnabled"/>", "User.openEnable(this);")},
+                    {button: new KS.Grid.Button(KS.Grid.ButtonTypes.Update, null, "/su/users/update", ["userId"], "<spring:message code="label.update"/>", "User.openUpdate(this);")},
                 ]
             });
 

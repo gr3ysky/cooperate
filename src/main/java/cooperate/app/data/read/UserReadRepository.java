@@ -2,6 +2,7 @@ package cooperate.app.data.read;
 
 
 import cooperate.app.business.user.login.LoginDto;
+import cooperate.app.entity.User;
 import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
 import cooperate.infrastructure.dto.UserDto;
@@ -12,7 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class UserReadRepository extends Database {
+public class UserReadRepository extends GenericReadRepository<User> {
+
+    public UserReadRepository() {
+        setClazz(User.class);
+    }
+
     public LoginDto getLoginDtobyEmail(String email) throws Exception {
         LoginDto loginDto = exetuteReader(LoginDto.class, "p_get_user_by_email", email);
         return loginDto;

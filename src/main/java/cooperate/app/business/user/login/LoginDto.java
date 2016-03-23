@@ -7,7 +7,7 @@ import cooperate.infrastructure.mediation.IResponse;
 public class LoginDto implements IResponse {
     @NotMapped
     public boolean IsSuccess;
-    public long UserId;
+    public int UserId;
     public String Fullname;
     public byte[] Password;
     public int RoleId;
