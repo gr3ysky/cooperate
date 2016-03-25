@@ -6,6 +6,7 @@ import cooperate.app.business.user.login.LoginDto;
 import cooperate.app.business.user.login.LoginDtoRequest;
 import cooperate.infrastructure.constant.SessionConstants;
 import cooperate.infrastructure.dto.RolePermissionDto;
+import cooperate.infrastructure.exception.CoopException;
 import cooperate.infrastructure.security.DesEncrypter;
 import cooperate.infrastructure.security.PermissionManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
                 List<RolePermissionDto> rolePermissionDtos = permissionService.getRolePermissionList();
                 for (String perm : permissions) {
                     if (!request.getServletPath().equals("/partial/menu") && !PermissionManager.CheckPermission(loginDto.RoleId, perm, rolePermissionDtos)) {
-                        throw new Exception("You are not allowed to to this!");
+                        throw new CoopException("error.notAuthorized");
                     }
                 }
 

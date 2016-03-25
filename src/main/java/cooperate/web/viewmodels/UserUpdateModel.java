@@ -7,11 +7,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
 
-public class UserEditModel implements Serializable {
-    @Resource(name = "messages", mappedName = "label.fullName")
+public class UserUpdateModel {
+    @Resource(name = "messages", mappedName = "label.id")
     private int userId;
 
     @NotEmpty
@@ -32,10 +30,6 @@ public class UserEditModel implements Serializable {
     @Resource(name = "messages", mappedName = "label.role")
     private int roleId;
 
-    @NotEmpty
-    @Size(min = 6, max = 12)
-    @Resource(name = "messages", mappedName = "label.password")
-    private String password;
 
     public String getFullName() {
         return fullName;
@@ -53,14 +47,6 @@ public class UserEditModel implements Serializable {
         this.email = email;
     }
 
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public int getUserId() {
         return userId;

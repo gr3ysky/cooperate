@@ -1,11 +1,22 @@
 package cooperate.infrastructure.dto;
 
-public class UserDto {
-    private int UserId;
-    private String FullName;
-    private String Email;
-    private boolean IsActive;
+import cooperate.infrastructure.mediation.IResponse;
+
+public class UserDto implements IResponse {
+    private int userId;
+    private String fullName;
+    private String email;
+    private boolean isActive;
     private String roleName;
+    private int roleId;
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
 
     public String getRoleName() {
         return roleName;
@@ -16,35 +27,35 @@ public class UserDto {
     }
 
     public int getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(int userId) {
-        UserId = userId;
+        this.userId = userId;
     }
 
     public String getFullName() {
-        return FullName;
+        return fullName;
     }
 
     public void setFullName(String fullName) {
-        FullName = fullName;
+        this.fullName = fullName;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public boolean getIsActive() {
-        return IsActive;
+        return isActive;
     }
 
     public void setIsActive(boolean active) {
-        IsActive = active;
+        this.isActive = active;
     }
 
 }

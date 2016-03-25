@@ -4,10 +4,12 @@ import cooperate.app.ServiceBase;
 import cooperate.app.business.user.ListUsers.ListUsersRequestHandler;
 import cooperate.app.business.user.activateUser.ActivateUserCommand;
 import cooperate.app.business.user.adduser.AddUserCommand;
+import cooperate.app.business.user.getUser.GetUserRequest;
 import cooperate.app.business.user.login.LoginDto;
 import cooperate.app.business.user.login.LoginDtoRequest;
 import cooperate.app.business.user.login.LoginRequest;
 import cooperate.app.business.user.login.LoginResponse;
+import cooperate.app.business.user.updateUser.UpdateUserCommand;
 import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
 import cooperate.infrastructure.dto.UserDto;
@@ -52,4 +54,13 @@ public class UserService extends ServiceBase {
         _mediator.send(command);
     }
 
+    @Transactional(readOnly = true)
+    public UserDto GetUserDto(GetUserRequest request) throws Exception {
+        return _mediator.request(request);
+    }
+
+    @Transactional
+    public void UpdateUser(UpdateUserCommand command) throws Exception {
+        _mediator.send(command);
+    }
 }

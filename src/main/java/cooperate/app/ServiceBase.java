@@ -6,4 +6,6 @@ import org.springframework.context.ApplicationContext;
 public abstract class ServiceBase {
     @Autowired
     protected ApplicationContext context;
+
+
 }

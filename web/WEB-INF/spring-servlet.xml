@@ -20,7 +20,6 @@
         <property name="suffix" value=".jsp"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
     </bean>
-    <bean class="cooperate.web.core.HtmlErrorHandler "/>
     <bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">

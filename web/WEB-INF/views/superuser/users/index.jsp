@@ -64,7 +64,7 @@
     <script>
         $(function () {
 
-            KS.Grid.Render("#test-grid table", "/su/users/test", {
+            KS.Grid.Render("#test-grid table", "/su/users/list", {
                 columns: [
                     {data: "fullName"},
                     {data: "email"},

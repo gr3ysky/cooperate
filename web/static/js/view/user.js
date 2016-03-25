@@ -15,4 +15,9 @@ var User = User || {};
             }
         });
     };
+
+    User.openUpdate = function (btn) {
+        window.location = $(btn).data("url") + "/" + $(btn).data("params").userId;
+    };
+
 })(User);

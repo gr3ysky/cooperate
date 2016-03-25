@@ -7,4 +7,5 @@ public class PermissionConstants {
     public static final String UserIndex = "PERM_USER_INDEX";
     public static final String UserCreate = "PERM_USER_CREATE";
 
+    public static final String UserUpdate = "PERM_USER_UPDATE";
 }
