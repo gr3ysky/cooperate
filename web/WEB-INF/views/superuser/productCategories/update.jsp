@@ -1,61 +1,40 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<title><spring:message code="title.user.create"/></title>
+<title><spring:message code="title.productCategory.create"/></title>
 <body>
 <content tag="page_header">
     <div class="row">
         <div class="col-xs-12 margin-bottom-10">
             <div class="btn-group pull-right" role="group">
-                <a class="btn btn-primary" href="/su/users"><spring:message code="title.user.index"/>/a>
+                <a class="btn btn-primary" href="/su/product-categories"> <spring:message
+                        code="title.productCategory.index"/></a>
 
             </div>
         </div>
     </div>
 </content>
 <div class="row">
-    <form:form modelAttribute="user" action="/su/users/creteUser" method="post" class="form-horizontal">
+    <form:form modelAttribute="productCategory" action="/su/product-categories/update" method="post"
+               class="form-horizontal">
 
+        <form:hidden path="productCategoryId"/>
         <div class="form-group col-md-6 col-xs-12">
-            <label class="col-md-4 col-xs-12 control-label" for="fullName">
-                <spring:message code="label.fullName"/>
+            <label class="col-md-4 col-xs-12 control-label" for="name">
+                <spring:message code="label.productCategory"/>
             </label>
             <div class="col-md-8 col-xs-12">
-                <form:input cssClass="form-control" path="fullName"/>
-                <form:errors cssClass="text-danger" path="fullName"/>
-            </div>
-        </div>
-
-        <div class="form-group col-md-6 col-xs-12">
-            <label class="col-md-4 col-xs-12 control-label" for="email">
-                <spring:message code="label.email"/>
-            </label>
-            <div class="col-md-8 col-xs-12">
-                <form:input cssClass="form-control" type="email" path="email"/>
-                <label class="label label-info">@boun.edu.tr</label>
-                <form:errors cssClass="text-danger" path="email"/>
-
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <div class="form-group col-md-6 col-xs-12">
-            <label class="col-md-4 col-xs-12 control-label" for="password">
-                <spring:message code="label.password"/>
-            </label>
-            <div class="col-md-8 col-xs-12">
-                <form:input cssClass="form-control" path="password" type="password"/>
-                <form:errors cssClass="text-danger" path="password"></form:errors>
+                <form:input cssClass="form-control" path="name"/>
+                <form:errors cssClass="text-danger" path="name"></form:errors>
             </div>
         </div>
         <div class="form-group col-md-6 col-xs-12">
-            <label class="col-md-4 col-xs-12 control-label" for="roleId">
-                <spring:message code="label.role"/>
+            <label class="col-md-4 col-xs-12 control-label" for="resourceKey">
+                <spring:message code="label.resourceKey"/>
             </label>
             <div class="col-md-8 col-xs-12">
-                <form:select cssClass="form-control" path="roleId" itemLabel="text" itemValue="value" items="${roles}"/>
-                <form:errors cssClass="text-danger" path="roleId"></form:errors>
+                <form:input cssClass="form-control" path="resourceKey"/>
+                <form:errors cssClass="text-danger" path="resourceKey"></form:errors>
             </div>
         </div>
 
@@ -98,6 +77,7 @@
         });
     </script>
 </content>
+
 
 
 

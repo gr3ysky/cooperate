@@ -9,8 +9,9 @@
         Filtreler
     </div>
     <div class="panel-body">
-        <form id="frmSearchUsers">
-            <div class="row">
+        <div class="row">
+            <form id="frmSearchUsers">
+
                 <div class="form-group col-md-6 col-xs-12 no-padding">
                     <div class="col-md-4"><label class="control-label">Ad Soyad</label></div>
                     <div class="col-md-8"><input type="text" name="fullname" class="form-control"/></div>
@@ -25,17 +26,19 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-xs-12">
-                    <div class="col-md-4">
-                        <btn class="btn btn-primary btn-sm" onclick="KS.Grid.Search('#test-grid table');"><i
-                                class="glyphicon glyphicon-search"></i> &nbsp; <spring:message code="label.search"/>
-                        </btn>
-                    </div>
-
+            </form>
+            <div class="col-xs-12">
+                <div class="col-md-4">
+                    <btn class="btn btn-primary btn-sm" onclick="KS.Grid.Search('#test-grid table');"><i
+                            class="glyphicon glyphicon-search"></i> &nbsp; <spring:message code="label.search"/>
+                    </btn>
+                    <btn class="btn btn-danger btn-sm" onclick="$('#frmSearchUsers')[0].reset();"><i
+                            class="glyphicon glyphicon-search"></i> &nbsp; <spring:message code="label.reset"/>
+                    </btn>
                 </div>
-            </div>
 
-        </form>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -69,9 +72,9 @@
                     {data: "fullName"},
                     {data: "email"},
                     {data: "roleName"},
-                    {data: "isActive",type:"bool"}
+                    {data: "isActive", type: "bool"}
                 ],
-                filterForm:"frmSearchUsers",
+                filterForm: "frmSearchUsers",
                 customButtons: [
                     {button: new KS.Grid.Button(KS.Grid.ButtonTypes.Create, null, "/su/users/create", null, "<spring:message code="label.new"/>", "User.openCreate(this);")},
                     {button: new KS.Grid.Button(KS.Grid.ButtonTypes.Enable, null, "/su/users/enable", ["userId", "isActive"], "<spring:message code="label.setEnabled"/>", "User.openEnable(this);")},

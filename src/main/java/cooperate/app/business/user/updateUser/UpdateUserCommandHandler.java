@@ -5,6 +5,7 @@ import cooperate.app.data.write.UserRepository;
 import cooperate.app.entity.User;
 import cooperate.infrastructure.exception.CoopException;
 import cooperate.infrastructure.mediation.IHandleCommand;
+import org.apache.commons.lang3.text.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,7 @@ public class UpdateUserCommandHandler implements IHandleCommand<UpdateUserComman
         if (user == null)
             throw new CoopException("error.userNotFound");
         user.setEmail(command.getEmail());
-        user.setFullName(command.getFullName());
+        user.setFullName(WordUtils.capitalizeFully(command.getFullName()));
         user.setIsActive(command.getIsActive());
         user.setUpdateDate(new Timestamp(System.currentTimeMillis()));
         user.setUpdateUserId(command.getUpdateUserId());

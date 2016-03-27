@@ -21,7 +21,7 @@ public class UserCreateModel implements Serializable {
 
     @NotEmpty
     @Email
-    @Length(max = 80)
+    @Length(max = 100)
     @Pattern(regexp = ".*@boun.edu.tr$")
     private String email;
 

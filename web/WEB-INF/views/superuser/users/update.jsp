@@ -7,8 +7,7 @@
     <div class="row">
         <div class="col-xs-12 margin-bottom-10">
             <div class="btn-group pull-right" role="group">
-                <a class="btn btn-primary" href="/su/users">Kullanıcı Listesi</a>
-
+                <a class="btn btn-primary" href="/su/users"><spring:message code="title.user.index"/></a>
             </div>
         </div>
     </div>

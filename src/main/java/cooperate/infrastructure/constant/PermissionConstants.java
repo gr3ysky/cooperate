@@ -6,6 +6,11 @@ public class PermissionConstants {
     //User
     public static final String UserIndex = "PERM_USER_INDEX";
     public static final String UserCreate = "PERM_USER_CREATE";
-
     public static final String UserUpdate = "PERM_USER_UPDATE";
+    //Product Categories
+    public static final String ProductCategoriesIndex = "PERM_PROD_CAT_INDEX";
+    public static final String ProductCategoriesCreate = "PERM_PROD_CAT_CREATE";
+    public static final String ProductCategoriesUpdate = "PERM_PROD_CAT_UPDATE";
+    public static final String ProductCategoriesDelete = "PERM_PROD_CAT_DELETE";
+
 }

@@ -84,6 +84,7 @@ public class SuUsersController extends BaseController {
         return mav;
     }
 
+
     @HasPermission(to = {PermissionConstants.UserCreate})
     @RequestMapping(value = "/su/users/creteUser", method = RequestMethod.POST, produces = "text/html")
     public ModelAndView createUser(@Valid @ModelAttribute("user") UserCreateModel userCreateModel, BindingResult result) throws Exception {
@@ -130,7 +131,7 @@ public class SuUsersController extends BaseController {
             mav.addObject("user", userUpdateModel);
             return mav;
         }
-        UpdateUserCommand command = (UpdateUserCommand) context.getBean("updateUserCommand");
+        UpdateUserCommand command = (UpdateUserCommand) context.getBean("updateProductCategoryCommand");
         command.setFullName(userUpdateModel.getFullName());
         command.setEmail(userUpdateModel.getEmail());
         command.setRoleId(userUpdateModel.getRoleId());

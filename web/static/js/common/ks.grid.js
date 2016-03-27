@@ -187,7 +187,7 @@
                 draw: d.draw,
                 pageSize: d.length,
                 start: d.start,
-                orderColumn: d.columns[d.order[0].column].data,
+                orderColumn: d.order[0].column,
                 orderDir: d.order[0].dir
             };
             if (options.filterForm) {
