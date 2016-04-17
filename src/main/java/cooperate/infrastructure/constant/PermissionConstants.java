@@ -13,4 +13,29 @@ public class PermissionConstants {
     public static final String ProductCategoriesUpdate = "PERM_PROD_CAT_UPDATE";
     public static final String ProductCategoriesDelete = "PERM_PROD_CAT_DELETE";
 
+    //Packaging
+    public static final String PackagingIndex = "PERM_PACKAGING_INDEX";
+    public static final String PackagingCreate = "PERM_PACKAGING_CREATE";
+    public static final String PackagingUpdate = "PERM_PACKAGING_UPDATE";
+    public static final String PackagingDelete = "PERM_PACKAGING_DELETE";
+
+    //Sale Type
+    public static final String SaleTypeIndex = "PERM_SALE_TYPE_INDEX";
+    public static final String SaleTypeCreate = "PERM_SALE_TYPE_CREATE";
+    public static final String SaleTypeUpdate = "PERM_SALE_TYPE_UPDATE";
+    public static final String SaleTypeDelete = "PERM_SALE_TYPE_DELETE";
+
+    //Unit
+    public static final String UnitIndex = "PERM_UNIT_INDEX";
+    public static final String UnitCreate = "PERM_UNIT_CREATE";
+    public static final String UnitUpdate = "PERM_UNIT_UPDATE";
+    public static final String UnitDelete = "PERM_UNIT_DELETE";
+
+    //Product Feature
+    public static final String ProductFeatureIndex = "PERM_PRD_FEATURE_INDEX";
+    public static final String ProductFeatureCreate = "PERM_PRD_FEATURE_CREATE";
+    public static final String ProductFeatureUpdate = "PERM_PRD_FEATURE_UPDATE";
+    public static final String ProductFeatureDelete = "PERM_PRD_FEATURE_DELETE";
+
+
 }

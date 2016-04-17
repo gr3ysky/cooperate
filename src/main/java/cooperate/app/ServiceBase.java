@@ -7,5 +7,4 @@ public abstract class ServiceBase {
     @Autowired
     protected ApplicationContext context;
 
-
 }

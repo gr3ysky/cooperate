@@ -85,7 +85,7 @@ public class SuProductCategoryController extends BaseController {
     @RequestMapping(value = "/su/product-categories/enable", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<AjaxResponse> enable(@RequestParam int productCategoryId) throws Exception {
 
-        ActivateProductCategoryCommand command = (ActivateProductCategoryCommand) context.getBean("activateProductCategoryCommand");
+        ActivateProductCategoryCommand command = (ActivateProductCategoryCommand) context.getBean("activatePackagingCommand");
         command.setUpdateUserId(getSessionUser().UserId);
         command.setProductCategoryId(productCategoryId);
         productCategoriesService.ActivateProductCategory(command);
@@ -125,9 +125,9 @@ public class SuProductCategoryController extends BaseController {
         command.setIsActive(productCategory.getIsActive());
         command.setUpdateUserId(getSessionUser().UserId);
         command.setProductCategoryId(productCategory.getProductCategoryId());
-        productCategoriesService.AddProductCommand(command);
+        productCategoriesService.UpdateProduct(command);
         mav.addObject("productCategory", productCategory);
-        mav.addObject("message", context.getMessage("message.productCategoryAdded", null, Locale.getDefault()));
+        mav.addObject("message", context.getMessage("message.productCategoryUpdated", null, Locale.getDefault()));
         mav.addObject("status", "success");
         return mav;
     }

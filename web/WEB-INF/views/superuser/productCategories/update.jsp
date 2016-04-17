@@ -15,7 +15,7 @@
     </div>
 </content>
 <div class="row">
-    <form:form modelAttribute="productCategory" action="/su/product-categories/update" method="post"
+    <form:form modelAttribute="productCategory" action="/su/product-categories/updateProductFeature" method="post"
                class="form-horizontal">
 
         <form:hidden path="productCategoryId"/>

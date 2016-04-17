@@ -1,6 +1,6 @@
 (function (grid) {
     grid.Search = function (selector) {
-        $(selector).dataTable().api().draw();
+        $(selector).dataTable().api().ajax.reload();
     };
     grid.Render = function (selector, url, options) {
         $(selector).addClass("table table-striped table-bordered table-hover table-responsive");
@@ -11,7 +11,7 @@
                 type: "POST",
                 data: getData,
             },
-            minCustomButtonCountForMenu: 2,
+            minCustomButtonCountForMenu: 3,
             deferRender: true,
             processing: true,
             serverSide: true,
@@ -201,7 +201,7 @@
             console.log("getCustomButtonsColumnsHtml");
             var html = "";
             for (var i = 0; i < options.customButtons.length; i++) {
-                console.log(options.customButtons[i].button);
+                //console.log(options.customButtons[i].button);
                 if (options.customButtons[i].button.showInHeader === false) {
                     hasItems = true;
                     html += getInColumnButtonHtml(options.customButtons[i].button, data, type, row);
@@ -235,6 +235,7 @@
         }
 
         function getInColumnButtonHtml(button, data, type, row) {
+            console.log(button);
             var columnData = extractAllButtonData(button.columnData, row, button.data);
             if (button.buttonType == grid.ButtonTypes.Enable && row.isActive != undefined) {
                 if (row.isActive == true) {
@@ -383,8 +384,9 @@
         }
         if (buttonType == grid.ButtonTypes.Custom) {
             if (showInHeader == true) {
-                this.columnData = null;
-                this.includeInMenu = false;
+                //  this.columnData = null;
+                this.includeInMenu = true;
+                this.showInHeader = false;
             }
         }
         return this;

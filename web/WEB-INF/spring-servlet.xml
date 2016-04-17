@@ -20,6 +20,10 @@
         <property name="suffix" value=".jsp"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
     </bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10240000"/>
+    </bean>
+
     <bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -116,4 +120,6 @@
             </set>
         </property>
     </bean>
+
+
 </beans>

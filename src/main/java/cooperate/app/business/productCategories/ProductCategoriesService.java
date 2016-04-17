@@ -40,4 +40,9 @@ public class ProductCategoriesService extends ServiceBase {
         return mediator.request(request);
 
     }
+
+    @Transactional
+    public void UpdateProduct(ICommand command) throws Exception {
+        mediator.send(command);
+    }
 }

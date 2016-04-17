@@ -131,7 +131,7 @@ public class SuUsersController extends BaseController {
             mav.addObject("user", userUpdateModel);
             return mav;
         }
-        UpdateUserCommand command = (UpdateUserCommand) context.getBean("updateProductCategoryCommand");
+        UpdateUserCommand command = (UpdateUserCommand) context.getBean("updateUserCommand");
         command.setFullName(userUpdateModel.getFullName());
         command.setEmail(userUpdateModel.getEmail());
         command.setRoleId(userUpdateModel.getRoleId());

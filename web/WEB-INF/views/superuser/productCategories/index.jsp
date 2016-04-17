@@ -36,7 +36,7 @@
                         class="glyphicon glyphicon-search"></i> &nbsp; <spring:message code="label.search"/>
                 </btn>
                 <button class="btn btn-danger btn-sm" onclick="$('#frmSearchProductCategories')[0].reset();"><i
-                        class="glyphicon glyphicon-search"></i> &nbsp; <spring:message code="label.reset"/>
+                        class="glyphicon glyphicon-remove-circle"></i> &nbsp; <spring:message code="label.reset"/>
                 </button>
             </div>
 

@@ -15,7 +15,7 @@
     </div>
 </content>
 <div class="row">
-    <form:form modelAttribute="productCategory" action="/su/product-categories/create" method="post"
+    <form:form modelAttribute="productCategory" action="/su/product-categories/createProductFeature" method="post"
                class="form-horizontal">
 
 
