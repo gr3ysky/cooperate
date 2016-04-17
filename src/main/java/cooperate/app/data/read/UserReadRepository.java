@@ -29,6 +29,7 @@ public class UserReadRepository extends GenericReadRepository<User> {
         List<UserDto> list = new ArrayList<UserDto>();
         list = exetuteListReader(UserDto.class, "p_list_users_grid",
                 request.getFilter().getFullname(),
+                SetNull(request.getFilter().getRoleId()),
                 SetNull(request.getFilter().getIsActive()),
                 request.getStart(),
                 request.getPageSize(),

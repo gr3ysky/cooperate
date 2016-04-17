@@ -1,4 +1,4 @@
-package cooperate.web.controllers;
+package cooperate.web.controllers.admin;
 
 import cooperate.app.business.role.RoleService;
 import cooperate.app.business.user.UserService;
@@ -11,6 +11,8 @@ import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
 import cooperate.infrastructure.dto.UserDto;
 import cooperate.infrastructure.dto.UserFilterDto;
+import cooperate.infrastructure.exception.CoopException;
+import cooperate.web.controllers.BaseController;
 import cooperate.web.core.HasPermission;
 import cooperate.web.viewmodels.AjaxResponse;
 import cooperate.web.viewmodels.UserCreateModel;
@@ -29,8 +31,7 @@ import javax.validation.Valid;
 import java.util.Locale;
 
 @Controller
-public class SuUsersController extends BaseController {
-
+public class AdminUsersControllers extends BaseController {
     @Autowired
     UserService userService;
 
@@ -38,19 +39,19 @@ public class SuUsersController extends BaseController {
     RoleService roleService;
 
     @HasPermission(to = {PermissionConstants.UserIndex})
-    @RequestMapping("/su/users")
+    @RequestMapping("/admin/users")
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView("superuser/users/index");
-        mav.addObject("pageDescription", context.getMessage("page.description.superuser.index", null, Locale.getDefault()));
+        ModelAndView mav = new ModelAndView("admin/users/index");
+        mav.addObject("pageDescription", context.getMessage("page.description.admin.users.index", null, Locale.getDefault()));
         return mav;
     }
 
     @HasPermission(to = {PermissionConstants.UserIndex})
-    @RequestMapping(value = "/su/users/list")
+    @RequestMapping(value = "/admin/users/list")
     public ResponseEntity<ListResponse<UserDto>> list(@Valid @ModelAttribute("request") ListRequest<UserFilterDto, UserDto> request, @ModelAttribute("filter") UserFilterDto filter, BindingResult result) throws Exception {
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        filter.setRoleId(-1);
+        filter.setRoleId(3);
         request.setFilter(filter);
         ListResponse<UserDto> response = userService.ListUsers(request);
         return new ResponseEntity<ListResponse<UserDto>>(response, httpHeaders, HttpStatus.OK);
@@ -58,49 +59,52 @@ public class SuUsersController extends BaseController {
     }
 
     @HasPermission(to = {PermissionConstants.UserCreate})
-    @RequestMapping(value = "/su/users/create")
+    @RequestMapping(value = "/admin/users/create")
     public ModelAndView create() throws Exception {
-        ModelAndView mav = new ModelAndView("superuser/users/create");
-        mav.addObject("user", new UserCreateModel());
-        mav.addObject("roles", roleService.getRolesList());
+        ModelAndView mav = new ModelAndView("admin/users/create");
+        UserCreateModel model = new UserCreateModel();
+        model.setRoleId(3);
+        mav.addObject("user", model);
+
         return mav;
     }
 
     @HasPermission(to = {PermissionConstants.UserUpdate})
-    @RequestMapping(value = "/su/users/update/{userId}")
+    @RequestMapping(value = "/admin/users/update/{userId}")
     public ModelAndView update(@PathVariable int userId) throws Exception {
-        ModelAndView mav = new ModelAndView("superuser/users/update");
+        ModelAndView mav = new ModelAndView("admin/users/update");
         GetUserRequest request = (GetUserRequest) context.getBean("getUserRequest");
         request.setUserId(userId);
         UserDto dto = userService.GetUserDto(request);
-
+        if (dto.getRoleId() != 3)
+            throw new CoopException("error.notAllowed");
         UserUpdateModel model = new UserUpdateModel();
         model.setRoleId(dto.getRoleId());
         model.setFullName(dto.getFullName());
         model.setUserId(dto.getUserId());
         model.setEmail(dto.getEmail());
         model.setIsActive(dto.getIsActive());
+        model.setRoleId(3);
         mav.addObject("user", model);
-        mav.addObject("roles", roleService.getRolesList());
         return mav;
     }
 
 
     @HasPermission(to = {PermissionConstants.UserCreate})
-    @RequestMapping(value = "/su/users/creteUser", method = RequestMethod.POST, produces = "text/html")
+    @RequestMapping(value = "/admin/users/creteUser", method = RequestMethod.POST, produces = "text/html")
     public ModelAndView createUser(@Valid @ModelAttribute("user") UserCreateModel userCreateModel, BindingResult result) throws Exception {
-        ModelAndView mav = new ModelAndView("superuser/users/create");
+        ModelAndView mav = new ModelAndView("admin/users/create");
         mav.addObject("roles", roleService.getRolesList());
         if (result.hasErrors()) {
             mav.addObject("user", userCreateModel);
-            mav.setViewName("superuser/users/create");
+            mav.setViewName("admin/users/create");
             return mav;
         }
         AddUserCommand command = (AddUserCommand) context.getBean("addUserCommand");
         command.setFullName(userCreateModel.getFullName());
         command.setPassword(userCreateModel.getPassword());
         command.setEmail(userCreateModel.getEmail());
-        command.setRoleId(userCreateModel.getRoleId());
+        command.setRoleId(3);
         userService.AddUser(command);
         mav.addObject("user", new UserCreateModel());
         mav.addObject("message", context.getMessage("message.userAdded", null, Locale.getDefault()));
@@ -110,9 +114,8 @@ public class SuUsersController extends BaseController {
 
 
     @HasPermission(to = {PermissionConstants.UserUpdate})
-    @RequestMapping(value = "/su/users/enable", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/admin/users/enable", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<AjaxResponse> enable(@RequestParam int userId) throws Exception {
-
         ActivateUserCommand command = (ActivateUserCommand) context.getBean("activateUserCommand");
         command.setUserId(userId);
         command.setUpdateUserId(getSessionUser().UserId);
@@ -124,10 +127,9 @@ public class SuUsersController extends BaseController {
     }
 
     @HasPermission(to = {PermissionConstants.UserUpdate})
-    @RequestMapping(value = "/su/users/updateUser", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/admin/users/updateUser", method = RequestMethod.POST, produces = "application/json")
     public ModelAndView updateUser(@Valid @ModelAttribute("user") UserUpdateModel userUpdateModel, BindingResult result) throws Exception {
-        ModelAndView mav = new ModelAndView("superuser/users/update");
-        mav.addObject("roles", roleService.getRolesList());
+        ModelAndView mav = new ModelAndView("admin/users/update");
         if (result.hasErrors()) {
             mav.addObject("user", userUpdateModel);
             return mav;
@@ -135,7 +137,7 @@ public class SuUsersController extends BaseController {
         UpdateUserCommand command = (UpdateUserCommand) context.getBean("updateUserCommand");
         command.setFullName(userUpdateModel.getFullName());
         command.setEmail(userUpdateModel.getEmail());
-        command.setRoleId(userUpdateModel.getRoleId());
+        command.setRoleId(3);
         command.setIsActive(userUpdateModel.getIsActive());
         command.setUserId(userUpdateModel.getUserId());
         command.setUpdateUserId(getSessionUser().UserId);
@@ -145,5 +147,4 @@ public class SuUsersController extends BaseController {
         mav.addObject("status", "success");
         return mav;
     }
-
 }

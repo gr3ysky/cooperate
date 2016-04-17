@@ -35,6 +35,7 @@
     <entry key="label.image">İmaj</entry>
     <entry key="label.imagePreview">İmaj Önizleme</entry>
     <entry key="label.close">Kapat</entry>
+    <entry key="label.member">Üye</entry>
     <!-- Page descriptions -->
     <entry key="page.description.login.index">Lütfen email ve şifrenizi giriniz.</entry>
     <entry key="page.description.superuser.index">Siteyi buradan yönetebilirsiniz.</entry>
@@ -43,6 +44,7 @@
     <entry key="page.description.saleType.index">Satış tipi tanımlarını buradan yönetebilirsiniz.</entry>
     <entry key="page.description.unit.index">Birim tanımlarını buradan yönetebilirsiniz.</entry>
     <entry key="page.description.productFeature.index">Ürün özellikleri tanımlarını buradan yönetebilirsiniz.</entry>
+    <entry key="page.description.admin.users.index">Üyeleri buradan yönetebilirsiniz.</entry>
     <!--Errors-->
     <entry key="error.maxUploadSizeError">En fazla %d bitlik dosya yükleyebilrsiniz.</entry>
     <entry key="error.loginfailed">Giriş başarısız!</entry>
@@ -58,6 +60,7 @@
     <entry key="error.prductFeatureNotFound">Ürün özelliği bulunamadı.</entry>
     <entry key="error.onlyImagesAllowed">Sadece resim yükleyebilirsiniz.</entry>
     <entry key="error.cannotCreateDirectory">%s klasörü yaratılamadı.</entry>
+    <entry key="error.notAllowed">Bu işleme yetkiniz yok!</entry>
     <!--Titles-->
     <entry key="title.errorPage">Hata!</entry>
     <entry key="title.user.index">Kullanıcı Listesi</entry>
@@ -88,6 +91,7 @@
     <entry key="menu.saletypes">Satış Tipleri</entry>
     <entry key="menu.units">Birimler</entry>
     <entry key="menu.users">Kullanıcılar</entry>
+    <entry key="menu.usersmanagement">Kullanıcı Yönetimi</entry>
 
     <!--Permission-->
     <entry key="permission.user.index">Kullanıcı Listeleme</entry>
