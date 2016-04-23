@@ -21,6 +21,9 @@ public class AddProducerCommandHandler implements IHandleCommand<AddProducerComm
         producer.setIsActive(command.isActive());
         producer.setName(WordUtils.capitalizeFully(command.getName()));
         producer.setDescription(command.getDescription());
+        producer.setLatitude(command.getLatitude());
+        producer.setLongitude(command.getLongitude());
+
         if (command.getMemberSince() != null)
             producer.setMembersince(new java.sql.Date(command.getMemberSince().getTime()));
         producerRepository.create(producer);

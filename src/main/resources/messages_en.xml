@@ -26,4 +26,17 @@
     <entry key="menu.saletypes">Sale Types</entry>
     <entry key="menu.units">Units</entry>
     <entry key="menu.users">Users</entry>
+    <entry key="title.producer.create">Üretici Ekleme</entry>
+    <entry key="title.producer.index">Üretici Listesi</entry>
+    <entry key="label.producerName">Üretici Adı</entry>
+    <entry key="label.description">Açıklama</entry>
+    <entry key="label.latitude">Enlem</entry>
+    <entry key="label.longitude">Boylam</entry>
+    <entry key="label.memberSince">Katılım Tarihi</entry>
+    <entry key="label.images">İmajlar</entry>
+    <entry key="title.producerimages.index">Üretici İmajları</entry>
+    <entry key="label.altText">Alternatif Yazısı</entry>
+    <entry key="label.orderNo">Sıra</entry>
+    <entry key="title.producerImage.create">Üretici Imaj Ekleme</entry>
+    <entry key="title.producerImages.update">Üretici İmaj Güncelleme</entry>
 </properties>

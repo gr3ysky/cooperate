@@ -37,5 +37,10 @@ public class PermissionConstants {
     public static final String ProductFeatureUpdate = "PERM_PRD_FEATURE_UPDATE";
     public static final String ProductFeatureDelete = "PERM_PRD_FEATURE_DELETE";
 
+    //Producer
+    public static final String ProducerIndex = "PERM_PRODUCER_INDEX";
+    public static final String ProducerCreate = "PERM_PRODUCER_CREATE";
+    public static final String ProducerUpdate = "PERM_PRODUCER_UPDATE";
+    public static final String ProducerDelete = "PERM_PRODUCER_DELETE";
 
 }

@@ -16,16 +16,12 @@ public class Producer extends EntityBase {
     @NotEmpty
     @Length(max = 100, min = 1)
     private String name;
-    @NotEmpty
     private String description;
     private java.sql.Date memberSince;
     private Double latitude;
     private Double longitude;
-    @NotEmpty
     private boolean isActive;
-    @NotEmpty
     private int createUserId;
-    @NotEmpty
     private java.sql.Timestamp createDate;
     private int updateUserId;
     private java.sql.Timestamp updateDate;

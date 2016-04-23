@@ -1,12 +1,12 @@
 package cooperate.infrastructure.dto.producer;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class ProducerListDto {
     private int producerId;
     private boolean isActive;
     private String name;
-    private java.sql.Timestamp memberSince;
+    private java.sql.Date memberSince;
 
     public int getProducerId() {
         return producerId;
@@ -32,11 +32,11 @@ public class ProducerListDto {
         this.name = name;
     }
 
-    public Timestamp getMemberSince() {
+    public Date getMemberSince() {
         return memberSince;
     }
 
-    public void setMemberSince(Timestamp memberSince) {
+    public void setMemberSince(Date memberSince) {
         this.memberSince = memberSince;
     }
 }
