@@ -3,6 +3,7 @@ package cooperate.app.data.read;
 import cooperate.app.entity.Unit;
 import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
+import cooperate.infrastructure.dto.SelectListItem;
 import cooperate.infrastructure.dto.unit.UnitFilterDto;
 import cooperate.infrastructure.dto.unit.UnitListDto;
 import org.springframework.stereotype.Repository;
@@ -36,4 +37,9 @@ public class UnitReadRepository extends GenericReadRepository<Unit> {
         units.setRecordsTotal((Long) getOutputValue("p_total"));
         return units;
     }
+
+    public List<SelectListItem> getUnitsDropDown() throws Exception {
+        return exetuteListReader(SelectListItem.class, "p_dropdown_unit");
+    }
+
 }

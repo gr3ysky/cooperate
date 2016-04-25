@@ -47,7 +47,7 @@
             <th><spring:message
                     code="label.operation"/></th>
             <th><spring:message
-                    code="label.producerName"/></th>
+                    code="label.productName"/></th>
             <th><spring:message
                     code="label.altText"/></th>
             <th><spring:message

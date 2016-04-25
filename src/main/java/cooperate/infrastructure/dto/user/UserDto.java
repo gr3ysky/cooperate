@@ -1,4 +1,4 @@
-package cooperate.infrastructure.dto;
+package cooperate.infrastructure.dto.user;
 
 import cooperate.infrastructure.mediation.IResponse;
 
@@ -9,6 +9,15 @@ public class UserDto implements IResponse {
     private boolean isActive;
     private String roleName;
     private int roleId;
+    private int memberId;
+
+    public int getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
+    }
 
     public int getRoleId() {
         return roleId;

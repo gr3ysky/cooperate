@@ -5,8 +5,10 @@ import cooperate.app.business.saleType.activateSaleType.ActivateSaleTypeCommand;
 import cooperate.app.business.saleType.getSaleType.GetSaleTypeRequest;
 import cooperate.app.business.saleType.listSaleTypes.ListSaleTypesRequestHandler;
 import cooperate.app.business.saleType.updateSaleType.UpdateSaleTypeCommand;
+import cooperate.app.data.read.SaleTypeReadRepository;
 import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
+import cooperate.infrastructure.dto.SelectListItem;
 import cooperate.infrastructure.dto.saleType.SaleTypeDto;
 import cooperate.infrastructure.dto.saleType.SaleTypeFilterDto;
 import cooperate.infrastructure.dto.saleType.SaleTypeListDto;
@@ -16,10 +18,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class SaleTypeService extends ServiceBase {
     @Autowired
     Mediator mediator;
+    @Autowired
+    SaleTypeReadRepository saleTypeReadRepository;
+
+    @Transactional(readOnly = true)
+    public List<SelectListItem> getSaleTypesDropDown() throws Exception {
+        return saleTypeReadRepository.getSaleTypesDropDown();
+    }
 
     @Transactional(readOnly = true)
     public ListResponse<SaleTypeListDto> ListSaleTypes(ListRequest<SaleTypeFilterDto, SaleTypeListDto> request) throws Exception {

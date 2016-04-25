@@ -9,8 +9,8 @@ import cooperate.app.business.user.updateUser.UpdateUserCommand;
 import cooperate.infrastructure.constant.PermissionConstants;
 import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
-import cooperate.infrastructure.dto.UserDto;
-import cooperate.infrastructure.dto.UserFilterDto;
+import cooperate.infrastructure.dto.user.UserDto;
+import cooperate.infrastructure.dto.user.UserFilterDto;
 import cooperate.web.core.HasPermission;
 import cooperate.web.viewmodels.AjaxResponse;
 import cooperate.web.viewmodels.UserCreateModel;
@@ -96,7 +96,7 @@ public class SuUsersController extends BaseController {
             mav.setViewName("superuser/users/create");
             return mav;
         }
-        AddUserCommand command = (AddUserCommand) context.getBean("addUserCommand");
+        AddUserCommand command = (AddUserCommand) context.getBean("addMemberCommand");
         command.setFullName(userCreateModel.getFullName());
         command.setPassword(userCreateModel.getPassword());
         command.setEmail(userCreateModel.getEmail());
@@ -132,7 +132,7 @@ public class SuUsersController extends BaseController {
             mav.addObject("user", userUpdateModel);
             return mav;
         }
-        UpdateUserCommand command = (UpdateUserCommand) context.getBean("updateUserCommand");
+        UpdateUserCommand command = (UpdateUserCommand) context.getBean("updateMemberCommand");
         command.setFullName(userUpdateModel.getFullName());
         command.setEmail(userUpdateModel.getEmail());
         command.setRoleId(userUpdateModel.getRoleId());

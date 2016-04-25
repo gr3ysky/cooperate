@@ -1,8 +1,5 @@
-package cooperate.infrastructure.dto;
+package cooperate.infrastructure.dto.user;
 
-/**
- * Created by Taner on 18.03.2016.
- */
 public class UserFilterDto {
 
     private String fullname;

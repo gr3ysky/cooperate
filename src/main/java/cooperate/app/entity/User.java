@@ -1,9 +1,6 @@
 package cooperate.app.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -19,7 +16,17 @@ public class User extends EntityBase {
     private Integer updateUserId;
     private java.sql.Timestamp UpdateDate;
     private int roleId;
+    @Column(nullable = true)
+    private Integer memberId;
     private boolean isActive;
+
+    public Integer getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(Integer memberId) {
+        this.memberId = memberId;
+    }
 
     public int getUserId() {
         return userId;

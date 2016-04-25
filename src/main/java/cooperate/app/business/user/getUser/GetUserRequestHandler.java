@@ -2,7 +2,7 @@ package cooperate.app.business.user.getUser;
 
 import cooperate.app.data.read.UserReadRepository;
 import cooperate.app.entity.User;
-import cooperate.infrastructure.dto.UserDto;
+import cooperate.infrastructure.dto.user.UserDto;
 import cooperate.infrastructure.exception.CoopException;
 import cooperate.infrastructure.mediation.IHandleRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,8 @@ public class GetUserRequestHandler implements IHandleRequest<GetUserRequest, Use
         dto.setIsActive(user.getIsActive());
         dto.setUserId(user.getUserId());
         dto.setRoleId(user.getRoleId());
+        if (user.getMemberId() != null)
+            dto.setMemberId(user.getMemberId());
         return dto;
 
     }

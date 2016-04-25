@@ -6,8 +6,10 @@ import cooperate.app.business.producer.addProducer.AddProducerCommand;
 import cooperate.app.business.producer.getProducer.GetProducerRequest;
 import cooperate.app.business.producer.listProducers.ListProducersRequestHandler;
 import cooperate.app.business.producer.updateProducer.UpdateProducerCommand;
+import cooperate.app.data.read.ProducerReadRepository;
 import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
+import cooperate.infrastructure.dto.SelectListItem;
 import cooperate.infrastructure.dto.producer.ProducerDto;
 import cooperate.infrastructure.dto.producer.ProducerFilterDto;
 import cooperate.infrastructure.dto.producer.ProducerListDto;
@@ -16,10 +18,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class ProducerService extends ServiceBase {
     @Autowired
     Mediator mediator;
+
+    @Autowired
+    ProducerReadRepository producerReadRepository;
+
+    @Transactional(readOnly = true)
+    public List<SelectListItem> getProducersDropDown() throws Exception {
+        return producerReadRepository.getProducersDropDown();
+    }
+
 
     @Transactional(readOnly = true)
     public ListResponse<ProducerListDto> ListProducers(ListRequest<ProducerFilterDto, ProducerListDto> request) throws Exception {

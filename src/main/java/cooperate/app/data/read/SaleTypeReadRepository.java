@@ -3,6 +3,7 @@ package cooperate.app.data.read;
 import cooperate.app.entity.SaleType;
 import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
+import cooperate.infrastructure.dto.SelectListItem;
 import cooperate.infrastructure.dto.saleType.SaleTypeFilterDto;
 import cooperate.infrastructure.dto.saleType.SaleTypeListDto;
 import org.springframework.stereotype.Repository;
@@ -36,5 +37,9 @@ public class SaleTypeReadRepository extends GenericReadRepository<SaleType> {
         saleTypes.setRecordsFiltered((Long) getOutputValue("p_filtered_total"));
         saleTypes.setRecordsTotal((Long) getOutputValue("p_total"));
         return saleTypes;
+    }
+
+    public List<SelectListItem> getSaleTypesDropDown() throws Exception {
+        return exetuteListReader(SelectListItem.class, "p_dropdown_sale_type");
     }
 }

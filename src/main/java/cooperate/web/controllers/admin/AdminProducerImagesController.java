@@ -164,6 +164,7 @@ public class AdminProducerImagesController extends BaseController {
         command.setOrderNo(producerImageUpdateModel.getOrderNo());
         command.setProducerId(producerImageUpdateModel.getProducerId());
         producerImageService.UpdateProducerImage(command);
+        producerImageUpdateModel.setImageUrl(imageUrl);
         mav.addObject("producerImage", producerImageUpdateModel);
         mav.addObject("message", context.getMessage("message.genericSuccess", null, Locale.getDefault()));
         mav.addObject("status", "success");

@@ -3,6 +3,7 @@ package cooperate.app.data.read;
 import cooperate.app.entity.Packaging;
 import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
+import cooperate.infrastructure.dto.SelectListItem;
 import cooperate.infrastructure.dto.packaging.PackagingFilterDto;
 import cooperate.infrastructure.dto.packaging.PackagingListDto;
 import org.springframework.stereotype.Repository;
@@ -35,5 +36,9 @@ public class PackagingReadRepository extends GenericReadRepository<Packaging> {
         packagings.setRecordsTotal((Long) getOutputValue("p_total"));
         return packagings;
 
+    }
+
+    public List<SelectListItem> getPackagingDropdown() throws Exception {
+        return exetuteListReader(SelectListItem.class, "p_dropdown_packaging");
     }
 }

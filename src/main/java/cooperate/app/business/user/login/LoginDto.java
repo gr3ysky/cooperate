@@ -13,6 +13,7 @@ public class LoginDto implements IResponse {
     public int RoleId;
     public String RoleName;
     public String RoleCode;
+    public int MemberId;
     @NotMapped
     public Role Role;
 

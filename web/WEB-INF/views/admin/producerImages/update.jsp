@@ -19,6 +19,7 @@
                class="form-horizontal" enctype="multipart/form-data">
         <form:hidden path="producerId"/>
         <form:hidden path="producerImageId"/>
+        <form:hidden path="imageUrl"/>
         <div class="form-group col-md-6 col-xs-12">
             <label class="col-md-4 col-xs-12 control-label" for="image">
                 <spring:message code="label.image"/>
@@ -72,7 +73,7 @@
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form:form>
 
-    <c:if test="${not empty productImage.imageUrl}">
+    <c:if test="${not empty producerImage.imageUrl}">
         <div class="panel panel-primary">
             <div class="panel-heading"><strong><spring:message code="label.imagePreview"></spring:message></strong>
             </div>

@@ -1,7 +1,10 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="cooperate.app.business.user.login.LoginDto" %>
+<%@ page import="cooperate.infrastructure.constant.SessionConstants" %>
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
+<% LoginDto login = (LoginDto) request.getSession().getAttribute(SessionConstants.User);
+%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -28,6 +31,23 @@
                     </button>
                     <a class="navbar-brand" style="padding:10px 15px;" href="/"><spring:message code="label.siteName"/></a>
                 </div>
+                <%
+                    if (login != null) { %>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="true"><%= login.Fullname %><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <%
+                                if (login.MemberId > 0) { %>
+                            <li><a href="/profile">Profil</a></li>
+                            <%}%>
+                            <li><a href="/logout">Çıkış</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <%}%>
                 <div class="collapse navbar-collapse" id="menu-content">
                 </div>
             </div>

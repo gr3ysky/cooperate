@@ -2,7 +2,7 @@ package cooperate.web.controllers;
 
 import cooperate.infrastructure.constant.PermissionConstants;
 import cooperate.infrastructure.dto.ListResponse;
-import cooperate.infrastructure.dto.UserDto;
+import cooperate.infrastructure.dto.user.UserDto;
 import cooperate.web.core.HasPermission;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

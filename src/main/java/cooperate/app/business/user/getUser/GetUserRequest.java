@@ -1,6 +1,6 @@
 package cooperate.app.business.user.getUser;
 
-import cooperate.infrastructure.dto.UserDto;
+import cooperate.infrastructure.dto.user.UserDto;
 import cooperate.infrastructure.mediation.IHandleRequest;
 import cooperate.infrastructure.mediation.IRequest;
 import org.springframework.beans.factory.annotation.Autowired;

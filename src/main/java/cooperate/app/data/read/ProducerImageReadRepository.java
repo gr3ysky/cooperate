@@ -17,7 +17,7 @@ public class ProducerImageReadRepository extends GenericReadRepository<ProducerI
     }
 
     public ListResponse<ProducerImageListDto> ListProducerImages(ListRequest<ProducerImageFilterDto, ProducerImageListDto> request) throws Exception {
-        ListResponse<ProducerImageListDto> producers = new ListResponse<ProducerImageListDto>();
+        ListResponse<ProducerImageListDto> images = new ListResponse<ProducerImageListDto>();
         List<ProducerImageListDto> list = new ArrayList<ProducerImageListDto>();
         list = exetuteListReader(ProducerImageListDto.class, "p_list_producer_images_grid",
                 request.getFilter().getProducerId(),
@@ -29,10 +29,10 @@ public class ProducerImageReadRepository extends GenericReadRepository<ProducerI
                 null,
                 null
         );
-        producers.setData(list);
-        producers.setDraw(request.getDraw());
-        producers.setRecordsFiltered((Long) getOutputValue("p_filtered_total"));
-        producers.setRecordsTotal((Long) getOutputValue("p_total"));
-        return producers;
+        images.setData(list);
+        images.setDraw(request.getDraw());
+        images.setRecordsFiltered((Long) getOutputValue("p_filtered_total"));
+        images.setRecordsTotal((Long) getOutputValue("p_total"));
+        return images;
     }
 }

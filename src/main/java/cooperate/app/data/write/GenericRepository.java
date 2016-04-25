@@ -22,7 +22,7 @@ public class GenericRepository<T extends EntityBase> {
     }
 
     public void create(T entity) {
-        getCurrentSession().persist(entity);
+        getCurrentSession().save(entity);
     }
 
     public void update(T entity) {

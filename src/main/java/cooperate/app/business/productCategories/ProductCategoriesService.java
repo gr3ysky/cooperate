@@ -2,8 +2,10 @@ package cooperate.app.business.productCategories;
 
 import cooperate.app.ServiceBase;
 import cooperate.app.business.productCategories.listProductCategories.ListProductCategoriesRequestHandler;
+import cooperate.app.data.read.ProductCategoriesReadRepository;
 import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
+import cooperate.infrastructure.dto.SelectListItem;
 import cooperate.infrastructure.dto.productCategory.ProductCategoryDto;
 import cooperate.infrastructure.dto.productCategory.ProductCategoryFilterDto;
 import cooperate.infrastructure.dto.productCategory.ProductCategoryListDto;
@@ -14,10 +16,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class ProductCategoriesService extends ServiceBase {
     @Autowired
     Mediator mediator;
+
+    @Autowired
+    ProductCategoriesReadRepository productCategoriesReadRepository;
+
+    @Transactional(readOnly = true)
+    public List<SelectListItem> getProductCategoriesDropDown() throws Exception {
+        return productCategoriesReadRepository.getProductCategoriesDropDown();
+    }
 
     @Transactional(readOnly = true)
     public ListResponse<ProductCategoryListDto> ListProductCategories(ListRequest<ProductCategoryFilterDto, ProductCategoryListDto> request) throws Exception {

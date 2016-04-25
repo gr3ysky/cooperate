@@ -3,8 +3,10 @@ package cooperate.app.business.productFeature;
 import cooperate.app.ServiceBase;
 import cooperate.app.business.productFeature.getProductFeature.GetProductFeatureRequest;
 import cooperate.app.business.productFeature.listProductFeatures.ListProductFeaturesRequestHandler;
+import cooperate.app.data.read.ProductFeatureReadRepository;
 import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
+import cooperate.infrastructure.dto.SelectListItem;
 import cooperate.infrastructure.dto.productFeature.ProductFeatureDto;
 import cooperate.infrastructure.dto.productFeature.ProductFeatureFilterDto;
 import cooperate.infrastructure.dto.productFeature.ProductFeatureListDto;
@@ -15,10 +17,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class ProductFeatureService extends ServiceBase {
     @Autowired
     Mediator mediator;
+
+    @Autowired
+    ProductFeatureReadRepository productFeatureReadRepository;
+
+    @Transactional(readOnly = true)
+    public List<SelectListItem> getProductFeaturesDropDown() throws Exception {
+        return productFeatureReadRepository.getProductFeaturesDropDown();
+    }
 
     @Transactional
     public void AddProductFeature(ICommand command) throws Exception {

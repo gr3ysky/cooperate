@@ -39,4 +39,20 @@
     <entry key="label.orderNo">Sıra</entry>
     <entry key="title.producerImage.create">Üretici Imaj Ekleme</entry>
     <entry key="title.producerImages.update">Üretici İmaj Güncelleme</entry>
+    <entry key="title.productImage.create">Ürün İmajı Ekleme</entry>
+    <entry key="title.productimages.index">Ürün İmajları</entry>
+    <entry key="title.productImages.update">Ürün İmajı Güncelleme</entry>
+    <entry key="label.productName">Ürün Adı</entry>
+    <entry key="title.product.index">Ürün Listesi</entry>
+    <entry key="label.Producer">Üretici</entry>
+    <entry key="title.product.create">Ürün Ekleme</entry>
+    <entry key="label.unitPrice">Birim Fiyat</entry>
+    <entry key="title.product.update">Ürün güncelleme</entry>
+    <entry key="label.product">Ürün</entry>
+    <entry key="title.profile.create">Profil Oluşturma</entry>
+    <entry key="label.userName">Kullanıcı Adı</entry>
+    <entry key="label.volunteerForSelling">Satış için gönüllüyüm.</entry>
+    <entry key="label.volunteerForPackaging">Paketleme için gönüllüyüm.</entry>
+    <entry key="label.isPublic">Profilim herkese görünür olsun.</entry>
+    <entry key="title.profile.update">Profil güncelleme</entry>
 </properties>

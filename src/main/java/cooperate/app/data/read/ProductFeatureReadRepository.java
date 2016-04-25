@@ -3,6 +3,7 @@ package cooperate.app.data.read;
 import cooperate.app.entity.ProductFeature;
 import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
+import cooperate.infrastructure.dto.SelectListItem;
 import cooperate.infrastructure.dto.productFeature.ProductFeatureFilterDto;
 import cooperate.infrastructure.dto.productFeature.ProductFeatureListDto;
 import org.springframework.stereotype.Repository;
@@ -36,5 +37,9 @@ public class ProductFeatureReadRepository extends GenericReadRepository<ProductF
         productFeatures.setRecordsTotal((Long) getOutputValue("p_total"));
         return productFeatures;
 
+    }
+
+    public List<SelectListItem> getProductFeaturesDropDown() throws Exception {
+        return exetuteListReader(SelectListItem.class, "p_dropdown_product_feature");
     }
 }

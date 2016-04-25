@@ -5,8 +5,8 @@ import cooperate.app.business.user.login.LoginDto;
 import cooperate.app.entity.User;
 import cooperate.infrastructure.dto.ListRequest;
 import cooperate.infrastructure.dto.ListResponse;
-import cooperate.infrastructure.dto.UserDto;
-import cooperate.infrastructure.dto.UserFilterDto;
+import cooperate.infrastructure.dto.user.UserDto;
+import cooperate.infrastructure.dto.user.UserFilterDto;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -1,7 +1,10 @@
+<%@ page import="cooperate.app.business.user.login.LoginDto" %>
+<%@ page import="cooperate.infrastructure.constant.SessionConstants" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% LoginDto login = (LoginDto) request.getSession().getAttribute(SessionConstants.User);
+%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -25,21 +28,50 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" style="padding:10px 15px;" href="/"><spring:message code="label.siteName"/></a>
+                    <a class="navbar-brand" style="padding:10px 15px;" href="/"><spring:message
+                            code="label.siteName"/></a>
                 </div>
+                <%
+                    if (login != null) { %>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="true"><%= login.Fullname %><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <%
+                                if (login.MemberId > 0) { %>
+                            <li><a href="/profile">Profil</a></li>
+                            <%}%>
+                            <li><a href="/logout">Çıkış</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <%}%>
                 <div class="collapse navbar-collapse" id="menu-content">
-                    </div>
-    </div>
-            </nav>
+                </div>
+
+            </div>
+        </nav>
 
     <div class="container">
         <!-- Page Heading -->
+
+        <%
+            if (login != null && login.MemberId == 0) { %>
+        <div class='alert alert-warning'>
+            Lütfen profilinizi oluşturmak için <a href='/profile/create'>tıklayın.</a>
+        </div>
+        <%}%>
+
+
         <div class="row">
             <div class="col-lg-12 hidden-sm hidden-xs">
                 <h1 class="page-header">
                     <sitemesh:write property='title' default="Website"/>
                     <small>${pageDescription} </small>
                 </h1>
+
                 <!-- Sub menu will go here -->
 
             </div>
@@ -48,6 +80,8 @@
                     <sitemesh:write property='title' default="Website"/>
                     <small>${pageDescription} </small>
                 </h4>
+
+
                 <!-- Sub menu will go here -->
 
             </div>

@@ -36,6 +36,9 @@
     <entry key="label.imagePreview">İmaj Önizleme</entry>
     <entry key="label.close">Kapat</entry>
     <entry key="label.member">Üye</entry>
+    <entry key="label.tags">Etiketler</entry>
+    <entry key="label.stockCount">Stok Miktarı</entry>
+    <entry key="label.isPrePayed">Ön Ödemeli mi?</entry>
     <!-- Page descriptions -->
     <entry key="page.description.login.index">Lütfen email ve şifrenizi giriniz.</entry>
     <entry key="page.description.superuser.index">Siteyi buradan yönetebilirsiniz.</entry>
@@ -46,6 +49,7 @@
     <entry key="page.description.productFeature.index">Ürün özellikleri tanımlarını buradan yönetebilirsiniz.</entry>
     <entry key="page.description.admin.users.index">Üyeleri buradan yönetebilirsiniz.</entry>
     <entry key="page.description.admin.producers.index">Üreticileri buradan yönetebilirsiniz.</entry>
+    <entry key="page.description.admin.products.index">Ürünleri buradan yönetebilirsiniz.</entry>
     <!--Errors-->
     <entry key="error.maxUploadSizeError">En fazla %d bitlik dosya yükleyebilrsiniz.</entry>
     <entry key="error.loginfailed">Giriş başarısız!</entry>
@@ -63,6 +67,10 @@
     <entry key="error.cannotCreateDirectory">%s klasörü yaratılamadı.</entry>
     <entry key="error.notAllowed">Bu işleme yetkiniz yok!</entry>
     <entry key="error.producerNotFound">Üretici bulunamadı!</entry>
+    <entry key="error.profileAlreadyCreated">Profil daha önce oluşturulmuş.</entry>
+    <entry key="error.memberNotFound">Profil bilgisi bulınamadı.</entry>
+    <entry key="error.userNameExists">Kullanıcı adı alınmış. Başka bir tane deneyin.</entry>
+    <entry key="error.profileIsNotPublic">Bu profilin görüntülenemez.</entry>
     <!--Titles-->
     <entry key="title.errorPage">Hata!</entry>
     <entry key="title.user.index">Kullanıcı Listesi</entry>
@@ -95,6 +103,9 @@
     <entry key="menu.units">Birimler</entry>
     <entry key="menu.users">Kullanıcılar</entry>
     <entry key="menu.usersmanagement">Kullanıcı Yönetimi</entry>
+    <entry key="menu.cooperatemanagement">Kooperatif</entry>
+    <entry key="menu.producers">Üreticiler</entry>
+    <entry key="menu.products">Ürünler</entry>
 
     <!--Permission-->
     <entry key="permission.user.index">Kullanıcı Listeleme</entry>
@@ -133,5 +144,22 @@
     <entry key="label.orderNo">Sıra</entry>
     <entry key="title.producerImage.create">Üretici Imaj Ekleme</entry>
     <entry key="title.producerImages.update">Üretici İmaj Güncelleme</entry>
+    <entry key="title.productImage.create">Ürün İmajı Ekleme</entry>
+    <entry key="title.productimages.index">Ürün İmajları</entry>
+    <entry key="title.productImages.update">Ürün İmajı Güncelleme</entry>
+    <entry key="label.productName">Ürün Adı</entry>
+    <entry key="title.product.index">Ürün Listesi</entry>
+    <entry key="label.producer">Üretici</entry>
+    <entry key="title.product.create">Ürün Ekleme</entry>
+    <entry key="label.unitPrice">Birim Fiyat</entry>
+    <entry key="title.product.update">Ürün güncelleme</entry>
+    <entry key="label.product">Ürün</entry>
+    <entry key="title.profile.create">Profil Oluşturma</entry>
+    <entry key="label.userName">Kullanıcı Adı</entry>
+    <entry key="label.profileName">Profil Adı</entry>
+    <entry key="label.volunteerForSelling">Satış için gönüllüyüm.</entry>
+    <entry key="label.volunteerForPackaging">Paketleme için gönüllüyüm.</entry>
+    <entry key="label.isPublic">Profilim herkese görünür olsun.</entry>
+    <entry key="title.profile.update">Profil güncelleme</entry>
 
 </properties>

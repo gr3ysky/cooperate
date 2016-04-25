@@ -85,11 +85,11 @@
                 }
                 //console.log(json);
                 if (json != "") {
-                    KS.PageMessage("danger", json.Message);
+                    KS.Message.Error(json.message);
                 } else if (jqXHR.status == 500) {
-                    KS.PageMessage("danger", JSON.parse(jqXHR.responseText).Message);
+                    KS.Message.Error(JSON.parse(jqXHR.responseText).message);
                 } else if (jqXHR.status == 404) {
-                    KS.PageMessage("danger", "İçerik bulunamadı.");
+                    KS.Message.Error("İçerik bulunamadı.");
                 }
             },
             success: function (html) {

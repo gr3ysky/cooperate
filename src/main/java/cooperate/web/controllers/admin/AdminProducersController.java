@@ -91,7 +91,7 @@ public class AdminProducersController extends BaseController {
             mav.addObject("producer", producerCreateModel);
             return mav;
         }
-        AddProducerCommand command = (AddProducerCommand) context.getBean("AddProducerCommand");
+        AddProducerCommand command = (AddProducerCommand) context.getBean("addProducerCommand");
         command.setActive(producerCreateModel.isActive());
         command.setDescription(producerCreateModel.getDescription());
         command.setName(producerCreateModel.getName());

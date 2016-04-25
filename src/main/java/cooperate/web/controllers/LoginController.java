@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -61,6 +62,10 @@ public class LoginController extends BaseController {
                     rememberMeCookie.setMaxAge(10000000);
                     response.addCookie(rememberMeCookie);
                 }
+                if (login.getLoginDto().MemberId == 0) {
+                    modelAndView.setViewName("redirect:/profile/create");
+                }
+
                 if (login.getLoginDto().Role == Role.SuperUser)
                     modelAndView.setViewName("redirect:/super-admin");
                 else if (login.getLoginDto().Role == Role.Admin)
@@ -75,4 +80,18 @@ public class LoginController extends BaseController {
         }
         return modelAndView;
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = "text/html")
+    public ModelAndView logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView model = new ModelAndView("redirect:/");
+        session.invalidate();
+        for (Cookie cookie : request.getCookies()) {
+            cookie.setValue("");
+            cookie.setPath("/");
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        }
+        return model;
+    }
+
 }
