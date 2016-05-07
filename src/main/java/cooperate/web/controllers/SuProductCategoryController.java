@@ -85,7 +85,7 @@ public class SuProductCategoryController extends BaseController {
     @RequestMapping(value = "/su/product-categories/enable", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<AjaxResponse> enable(@RequestParam int productCategoryId) throws Exception {
 
-        ActivateProductCategoryCommand command = (ActivateProductCategoryCommand) context.getBean("activatePackagingCommand");
+        ActivateProductCategoryCommand command = (ActivateProductCategoryCommand) context.getBean("activateProductCategoryCommand");
         command.setUpdateUserId(getSessionUser().UserId);
         command.setProductCategoryId(productCategoryId);
         productCategoriesService.ActivateProductCategory(command);

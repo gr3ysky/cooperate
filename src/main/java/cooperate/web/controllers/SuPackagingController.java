@@ -99,7 +99,7 @@ public class SuPackagingController extends BaseController {
     @RequestMapping(value = "/su/packaging/update/{packagingId}", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable int packagingId) throws Exception {
         ModelAndView mav = new ModelAndView("superuser/packaging/update");
-        GetPackagingRequest request = (GetPackagingRequest) context.getBean("getProductFeatureRequest");
+        GetPackagingRequest request = (GetPackagingRequest) context.getBean("getPackagingRequest");
         request.setPackagingId(packagingId);
         PackagingDto dto = packagingService.GetPackagingDto(request);
         PackagingUpdateViewModel model = new PackagingUpdateViewModel();
@@ -119,7 +119,7 @@ public class SuPackagingController extends BaseController {
             mav.addObject("packaging", packagingUpdateViewModel);
             return mav;
         }
-        UpdatePackagingCommand command = (UpdatePackagingCommand) context.getBean("updateProductFeatureCommand");
+        UpdatePackagingCommand command = (UpdatePackagingCommand) context.getBean("updatePackagingCommand");
         command.setResourceKey(packagingUpdateViewModel.getResourceKey());
         command.setName(packagingUpdateViewModel.getName());
         command.setIsActive(packagingUpdateViewModel.getIsActive());

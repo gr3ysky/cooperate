@@ -66,7 +66,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 
             } else if (request.getServletPath().equals("/partial/menu")) {
 
-                throw new Exception("Your session has expired");
+                //throw new Exception("Your session has expired");
             }
         }
         return super.preHandle(request, response, handler);

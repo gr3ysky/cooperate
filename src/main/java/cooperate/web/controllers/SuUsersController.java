@@ -96,7 +96,7 @@ public class SuUsersController extends BaseController {
             mav.setViewName("superuser/users/create");
             return mav;
         }
-        AddUserCommand command = (AddUserCommand) context.getBean("addMemberCommand");
+        AddUserCommand command = (AddUserCommand) context.getBean("addUserCommand");
         command.setFullName(userCreateModel.getFullName());
         command.setPassword(userCreateModel.getPassword());
         command.setEmail(userCreateModel.getEmail());
@@ -132,7 +132,7 @@ public class SuUsersController extends BaseController {
             mav.addObject("user", userUpdateModel);
             return mav;
         }
-        UpdateUserCommand command = (UpdateUserCommand) context.getBean("updateMemberCommand");
+        UpdateUserCommand command = (UpdateUserCommand) context.getBean("updateUserCommand");
         command.setFullName(userUpdateModel.getFullName());
         command.setEmail(userUpdateModel.getEmail());
         command.setRoleId(userUpdateModel.getRoleId());
