@@ -42,7 +42,6 @@ public class AdminUsersControllers extends BaseController {
     @RequestMapping("/admin/users")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("admin/users/index");
-        mav.addObject("pageDescription", context.getMessage("page.description.admin.users.index", null, Locale.getDefault()));
         return mav;
     }
 

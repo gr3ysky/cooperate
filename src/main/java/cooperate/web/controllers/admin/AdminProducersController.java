@@ -38,7 +38,6 @@ public class AdminProducersController extends BaseController {
     @RequestMapping("/admin/producers")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("admin/producers/index");
-        mav.addObject("pageDescription", context.getMessage("page.description.admin.producers.index", null, Locale.getDefault()));
         return mav;
     }
 

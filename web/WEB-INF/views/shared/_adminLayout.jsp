@@ -63,14 +63,14 @@
                     <h3>
                         <sitemesh:write property='title' default="Website"/>
                     </h3>
-                    <h5 class="text-muted">${pageDescription} </h5>
+
 
                 </div>
                 <div class="col-lg-12 hidden-lg hidden-md no-margin no-padding">
                     <h3>
                         <sitemesh:write property='title' default="Website"/>
                     </h3>
-                    <h5>${pageDescription} </h5>
+
                 </div>
                 <div class="clearfix"></div>
                 <hr>

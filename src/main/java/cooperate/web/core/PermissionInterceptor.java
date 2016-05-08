@@ -34,6 +34,8 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
             return super.preHandle(request, response, handler);
         HandlerMethod handlerMethod = (HandlerMethod) handler;
 
+        response.addCookie(new Cookie("_locale", "tr"));
+
         HasPermission hasPermission = handlerMethod.getMethodAnnotation(HasPermission.class);
         if (hasPermission != null) {
             LoginDto loginDto = (LoginDto) request.getSession().getAttribute(SessionConstants.User);

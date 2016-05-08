@@ -34,7 +34,6 @@ public class LoginController extends BaseController {
         LoginModel loginModel = new LoginModel();
         loginModel.setRememberMe(true);
         model.addObject("login", loginModel);
-        model.addObject("pageDescription", context.getMessage("page.description.login.index", null, Locale.getDefault()));
         return model;
     }
 

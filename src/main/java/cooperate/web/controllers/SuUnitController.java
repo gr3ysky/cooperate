@@ -38,7 +38,6 @@ public class SuUnitController extends BaseController {
     @RequestMapping("/su/unit")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("superuser/unit/index");
-        mav.addObject("pageDescription", context.getMessage("page.description.unit.index", null, Locale.getDefault()));
         return mav;
     }
 

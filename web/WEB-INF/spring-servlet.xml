@@ -27,7 +27,7 @@
     <bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="classpath:messages"/>
+        <property name="basename" value="messages"/>
         <property name="defaultEncoding" value="UTF-8"/>
         <property name="cacheSeconds" value="0"/>
         <property name="fileEncodings" value="UTF-8"/>
@@ -51,9 +51,11 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url"
-                  value="jdbc:mysql://localhost:3306/cooperative_db?useUnicode=true&amp;characterEncoding=utf-8"/>
+                  value="jdbc:mysql://localhost:3306/cooperative_db?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
         <property name="username" value="root"/>
         <property name="password" value="tt2006"/>
+
+
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -76,6 +78,8 @@
                         key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect
                 </prop>
                 <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.c3p0.timeout">600</prop>
+                <prop key="hibernate.c3p0.maxIdleTimeExcessConnections">20</prop>
             </props>
         </property>
 

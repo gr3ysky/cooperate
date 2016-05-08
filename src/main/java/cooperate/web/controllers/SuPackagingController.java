@@ -38,7 +38,6 @@ public class SuPackagingController extends BaseController {
     @RequestMapping("/su/packaging")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("superuser/packaging/index");
-        mav.addObject("pageDescription", context.getMessage("page.description.packaging.index", null, Locale.getDefault()));
         return mav;
     }
 

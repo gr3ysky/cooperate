@@ -41,7 +41,6 @@ public class SuUsersController extends BaseController {
     @RequestMapping("/su/users")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("superuser/users/index");
-        mav.addObject("pageDescription", context.getMessage("page.description.superuser.index", null, Locale.getDefault()));
         return mav;
     }
 

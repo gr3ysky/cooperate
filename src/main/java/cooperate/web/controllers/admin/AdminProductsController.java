@@ -44,7 +44,6 @@ public class AdminProductsController extends BaseController {
     @RequestMapping("/admin/products")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("admin/products/index");
-        mav.addObject("pageDescription", context.getMessage("page.description.admin.products.index", null, Locale.getDefault()));
         return mav;
     }
 

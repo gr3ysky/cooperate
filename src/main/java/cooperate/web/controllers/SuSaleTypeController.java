@@ -37,7 +37,6 @@ public class SuSaleTypeController extends BaseController {
     @RequestMapping("/su/sale-type")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("superuser/saleType/index");
-        mav.addObject("pageDescription", context.getMessage("page.description.saleType.index", null, Locale.getDefault()));
         return mav;
     }
 

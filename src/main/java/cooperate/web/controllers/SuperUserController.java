@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 public class SuperUserController extends BaseController {
@@ -22,7 +21,6 @@ public class SuperUserController extends BaseController {
     @RequestMapping("/su/index")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("superuser/index");
-        mav.addObject("pageDescription", context.getMessage("page.description.superuser.index", null, Locale.getDefault()));
         return mav;
     }
     @HasPermission(to = {PermissionConstants.SystemManagement})

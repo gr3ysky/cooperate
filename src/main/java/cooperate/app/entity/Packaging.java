@@ -2,13 +2,11 @@ package cooperate.app.entity;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "packaging")
 public class Packaging extends EntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

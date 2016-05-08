@@ -38,7 +38,6 @@ public class SuProductCategoryController extends BaseController {
     @RequestMapping("/su/product-categories")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("superuser/productCategories/index");
-        mav.addObject("pageDescription", context.getMessage("page.description.productcategories.index", null, Locale.getDefault()));
         return mav;
     }
 

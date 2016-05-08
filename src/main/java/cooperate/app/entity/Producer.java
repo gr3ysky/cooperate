@@ -3,12 +3,10 @@ package cooperate.app.entity;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "producer")
 public class Producer extends EntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -47,6 +47,13 @@
                     </li>
 
                 </ul>
+                <%} else {%>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/login">Giriş Yap</a>
+                    </li>
+                </ul>
+
                 <%}%>
                 <div class="collapse navbar-collapse" id="menu-content">
                 </div>
@@ -78,7 +85,7 @@
             <div class="col-lg-12 hidden-lg hidden-md">
                 <h4 class="page-header">
                     <sitemesh:write property='title' default="Website"/>
-                    <small>${pageDescription} </small>
+
                 </h4>
 
 

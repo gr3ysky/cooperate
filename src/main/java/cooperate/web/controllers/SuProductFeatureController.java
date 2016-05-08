@@ -41,7 +41,6 @@ public class SuProductFeatureController extends BaseController {
     @RequestMapping("/su/product-feature")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("superuser/productFeature/index");
-        mav.addObject("pageDescription", context.getMessage("page.description.productFeature.index", null, Locale.getDefault()));
         return mav;
     }
 
