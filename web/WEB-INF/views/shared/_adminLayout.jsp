@@ -1,6 +1,7 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="cooperate.app.business.user.login.LoginDto" %>
 <%@ page import="cooperate.infrastructure.constant.SessionConstants" %>
+<%@ page import="java.util.Calendar" %>
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <% LoginDto login = (LoginDto) request.getSession().getAttribute(SessionConstants.User);
@@ -80,7 +81,10 @@
                 </div>
             </div>
         </div>
-
+        <div>
+            Copyright<span>&copy;</span> <spring:message
+                code="label.siteName"/> <%= Calendar.getInstance().get(Calendar.YEAR)%>
+        </div>
     </div>
 
 </div>

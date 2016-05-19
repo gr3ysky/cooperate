@@ -70,8 +70,6 @@
             <th><spring:message
                     code="label.tags"/></th>
             <th><spring:message
-                    code="label.isPrePayed"/></th>
-            <th><spring:message
                     code="label.isActive"/></th>
         </tr>
         </thead>
@@ -90,7 +88,6 @@
                     {data: "producer"},
                     {data: "stockCount"},
                     {data: "tags"},
-                    {data: "isPrePayed", type: "bool"},
                     {data: "isActive", type: "bool"}
                 ],
                 filterForm: "frmSearchProducts",

@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "producer")
@@ -16,8 +17,10 @@ public class Producer extends EntityBase {
     private String name;
     private String description;
     private java.sql.Date memberSince;
-    private Double latitude;
-    private Double longitude;
+    @Column(precision = 10, scale = 8)
+    private BigDecimal latitude;
+    @Column(precision = 11, scale = 8)
+    private BigDecimal longitude;
     private boolean isActive;
     private int createUserId;
     private java.sql.Timestamp createDate;
@@ -52,19 +55,19 @@ public class Producer extends EntityBase {
         this.memberSince = membersince;
     }
 
-    public Double getLatitude() {
+    public BigDecimal getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
     }
 
-    public Double getLongitude() {
+    public BigDecimal getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
 

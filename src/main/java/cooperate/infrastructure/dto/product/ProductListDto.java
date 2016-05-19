@@ -1,5 +1,7 @@
 package cooperate.infrastructure.dto.product;
 
+import cooperate.infrastructure.dto.NotMapped;
+
 import java.math.BigDecimal;
 
 public class ProductListDto {
@@ -13,6 +15,7 @@ public class ProductListDto {
     private int stockCount;
     private java.math.BigDecimal unitPrice;
     private String tags;
+    @NotMapped
     private boolean isPrePayed;
     private boolean isActive;
 

@@ -1,5 +1,6 @@
 <%@ page import="cooperate.app.business.user.login.LoginDto" %>
 <%@ page import="cooperate.infrastructure.constant.SessionConstants" %>
+<%@ page import="java.util.Calendar" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -96,9 +97,11 @@
         <div id="page-content">
             <sitemesh:write property='body'/>
         </div>
-
+        <div>
+            Copyright<span>&copy;</span> <spring:message
+                code="label.siteName"/> <%= Calendar.getInstance().get(Calendar.YEAR)%>
+        </div>
     </div>
-
 </div>
 
 <div id="loaded-content" style="display:none"></div>

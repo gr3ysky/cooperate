@@ -5,6 +5,7 @@ import cooperate.infrastructure.mediation.IHandleCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Component
@@ -15,8 +16,8 @@ public class UpdateProducerCommand implements ICommand {
     private String name;
     private String description;
     private Date memberSince;
-    private Double latitude;
-    private Double longitude;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
     private boolean isActive;
     private int updateUserId;
 
@@ -60,19 +61,19 @@ public class UpdateProducerCommand implements ICommand {
         this.memberSince = memberSince;
     }
 
-    public Double getLatitude() {
+    public BigDecimal getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
     }
 
-    public Double getLongitude() {
+    public BigDecimal getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
 
