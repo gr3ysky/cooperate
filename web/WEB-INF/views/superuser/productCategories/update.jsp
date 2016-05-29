@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<title><spring:message code="title.productCategory.create"/></title>
+<title>Ürün Kategorisi Güncelleme</title>
 <body>
 <content tag="page_header">
     <div class="row">
@@ -15,7 +15,7 @@
     </div>
 </content>
 <div class="row">
-    <form:form modelAttribute="productCategory" action="/su/product-categories/updateProductFeature" method="post"
+    <form:form modelAttribute="productCategory" action="/su/product-categories/update" method="post"
                class="form-horizontal">
 
         <form:hidden path="productCategoryId"/>
